@@ -1,0 +1,3 @@
+<% for user in @users %>
+<p><%= user.last_name || 'N/A' %>, <%= user.first_name || 'N/A' %>,  <%= user.login %> </p>
+<% end %>

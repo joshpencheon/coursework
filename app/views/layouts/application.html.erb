@@ -5,9 +5,26 @@
 		<title>SDU Knowledgebase</title>
 		
 		<%= javascript_include_tag :defaults %>
+		
+		<%= stylesheet_link_tag 'styles.css' %>
 	</head>
 	
 	<body>
-		<%= yield %>
+		
+		<%= render :partial => 'layouts/header' %>
+
+		<div id="content">
+			<%= yield %>
+		</div>
+		
+		<div id="sidebar">
+			Hi from sidebar
+		</div>
+		
+		<div id="footer" class="clear">
+			<!-- TODO: Style footer to float at bottom or page, subject to min-height, á la Blog project. -->
+			Hi from footer
+		</div>
+		
 	</body>
 </html>

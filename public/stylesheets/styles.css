@@ -1,0 +1,39 @@
+/************** ELEMENTS BY TAG **************/
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	min-width: 950px;
+	max-width: 1500px;
+}
+
+/************** GENERIC STYLES **************/
+
+.clear {
+	clear: both;
+}
+
+/************** ELEMENTS BY ID **************/
+
+#header {
+	background-color: #AAA;
+}
+
+#content {
+	float: left;
+	width: 70%;
+	background-color: #EEE;
+}
+
+#sidebar {
+	margin-left: 73%;
+	background-color: #DDD;
+}
+
+#footer {
+	
+}

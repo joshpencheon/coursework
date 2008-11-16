@@ -1,8 +1,12 @@
 /************** ELEMENTS BY TAG **************/
 
-html, body {
+html, body, div, p, span {
 	margin: 0;
 	padding: 0;
+}
+
+html, body {
+	height: 100%;
 }
 
 body {
@@ -17,7 +21,12 @@ body {
 	clear: both;
 }
 
-/************** ELEMENTS BY ID **************/
+.push {
+	height: 2em; /* footer height */
+	padding-bottom: 3em; /* footer separation */
+}
+
+/************** STRUCTURE ELEMENTS **************/
 
 #header {
 	background-color: #AAA;
@@ -34,6 +43,13 @@ body {
 	background-color: #DDD;
 }
 
+#site {
+	height: auto !important;
+	margin-bottom: -2em; /* footer height */
+	min-height: 100%;
+}
+
 #footer {
-	
+	height: 2em;
+	background-color: #BBB;
 }

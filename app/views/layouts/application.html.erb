@@ -10,15 +10,18 @@
 	</head>
 	
 	<body>
-		
-		<%= render :partial => 'layouts/header' %>
+		<div id="site">
+			<%= render :partial => 'layouts/header' %>
 
-		<div id="content">
-			<%= yield %>
-		</div>
+			<div id="content">
+				<%= yield %>
+			</div>
 		
-		<div id="sidebar">
-			Hi from sidebar
+			<div id="sidebar">
+				Hi from sidebar
+			</div>
+	
+			<div class="push clear"></div>
 		</div>
 		
 		<div id="footer" class="clear">

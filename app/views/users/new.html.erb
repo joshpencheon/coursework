@@ -1,13 +1,22 @@
-<h1>Register:</h1>
+<h1>Register</h1>
 
 <% form_for @user, :url => account_path do |f| %>
-	<%= f.label :login %><br />
-	<%= f.text_field :login %><br />
-	<br />
-	<%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
-	<%= f.password_field :password %><br />
-	<br />
-	<%= f.label :confirm_password%><br />
-	<%= f.password_field :confirm_password %><br />
-	<br />
+	<%= f.error_messages %>
+	<p>
+		<%= f.label :login %>
+		<%= f.text_field :login %>
+	</p>
+	<p>
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+	</p>
+	<p>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
+	</p>
+	<p>
+		<%= f.label :confirm_password %>
+		<%= f.password_field :confirm_password %>
+	</p>
+	<p><%= submit_tag 'Create Account' %></p>
 <% end %>

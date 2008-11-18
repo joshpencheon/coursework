@@ -11,8 +11,13 @@ html, body {
 
 body {
 	font-family: Arial, "MS Trebuchet", sans-serif;
+	background-color: #DDD;
 	min-width: 950px;
 	max-width: 1500px;
+}
+
+label {
+	display: block;
 }
 
 /************** GENERIC STYLES **************/
@@ -33,13 +38,15 @@ body {
 }
 
 #content {
+	padding: 10px;
+	margin: 10px;
 	float: left;
 	width: 70%;
 	background-color: #EEE;
 }
 
 #sidebar {
-	margin-left: 73%;
+	margin: 10px 10px 10px 73%;
 	background-color: #DDD;
 }
 
@@ -52,4 +59,10 @@ body {
 #footer {
 	height: 2em;
 	background-color: #BBB;
+}
+
+/************** FORM ELEMENTS **************/
+
+form p {
+	margin: 4px auto;
 }

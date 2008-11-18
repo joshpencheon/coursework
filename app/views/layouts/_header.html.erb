@@ -1,6 +1,12 @@
 <div id="header">
 	<% if logged_in? %>
-		<p>You're logged in</p>
+		<p>
+			You're logged in
+			(<%= link_to 'Sign out', signout_path %>)
+		</p>
+	<% else %>	
+		<%= link_to 'Sign in', signin_path %> or
+		<%= link_to 'Sign up', signup_path %>
 	<% end %>
 </div>
 

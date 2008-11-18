@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
+require 'mocha'
 
 class Test::Unit::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -35,4 +36,20 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def assert_invalid(object, msg="Object is valid when it should be invalid")
+    assert(!object.valid?, msg)
+  end
+  
+  def assert_errors_on(object, *attrs)
+    assert_invalid(object)
+    attrs.each do |a|
+      assert object.errors.on(a), "Expecting an error on #{object.class.to_s.downcase}'s #{a}, but attribute was valid."
+    end
+  end
+  
+  def assert_no_errors_on(object, *attrs)
+    attrs.each do |a|
+      assert object.errors.on(a).blank?, "Expecting #{object.class.to_s.downcase}'s #{a} to be valid, but raised '#{a} #{object.errors.on(a)}'"
+    end
+  end
 end

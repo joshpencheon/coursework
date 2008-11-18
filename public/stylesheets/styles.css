@@ -1,34 +1,6 @@
-/************** ELEMENTS BY TAG **************/
-
-html, body, div, p, span {
-	margin: 0;
-	padding: 0;
-}
-
+/************* ELEMENTS BY TAG ************/
 html, body {
 	height: 100%;
-}
-
-body {
-	font-family: Arial, "MS Trebuchet", sans-serif;
-	background-color: #DDD;
-	min-width: 950px;
-	max-width: 1500px;
-}
-
-label {
-	display: block;
-}
-
-/************** GENERIC STYLES **************/
-
-.clear {
-	clear: both;
-}
-
-.push {
-	height: 2em; /* footer height */
-	padding-bottom: 3em; /* footer separation */
 }
 
 /************** STRUCTURE ELEMENTS **************/
@@ -59,10 +31,4 @@ label {
 #footer {
 	height: 2em;
 	background-color: #BBB;
-}
-
-/************** FORM ELEMENTS **************/
-
-form p {
-	margin: 4px auto;
 }

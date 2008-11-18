@@ -1,0 +1,52 @@
+/*******ELEMENTS BY TAG********/
+
+body, html {
+	text-align: center;
+	min-width: 550px;
+	background: transparent url(/images/bg.png) repeat;
+}
+
+h1 {
+	text-align: center;
+}
+
+/*******STRUCTURAL ELEMENTS********/
+#content {
+	background: #EAFDD1;
+	border: 5px solid #77996F;
+	-webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+	width: 400px;
+	margin: 75px auto 0;
+	padding: 10px 40px 20px;
+	text-align: left;
+}
+
+/*********** FORMS ************/
+
+form p {
+	margin: 6px auto;
+}
+
+form input {
+	padding: 3px 5px;
+	font-size: 1.2em;
+}
+
+form input[type=text],
+form input[type=password] {
+	width: 96%;
+}
+
+form input[type=submit] {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #AAA;
+	padding: 5px 15px;
+	background-color: #E5E5E5;
+}
+
+form input[type=submit]:hover {
+	border-color: #A1C4E1;
+	background-color: #E5F3FF;
+}

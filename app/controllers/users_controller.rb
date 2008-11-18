@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  layout "basic"
+  
   before_filter :find_user, :except => [ :index, :new, :create ]
 
   def index

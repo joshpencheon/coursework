@@ -1,8 +1,13 @@
-<h1>Login</h1>
+<h1>Log in</h1>
  
 <% form_for @user_session, :url => user_session_path do |f| %>
   <%= f.error_messages %>
+
 	<p>
+		<span class="note right ride_up">
+			<%= f.check_box :remember_me %>
+			<%= f.label :remember_me, nil, :style => 'display:inline' %>		
+		</span>
 		<%= f.label :login %>
 		<%= f.text_field :login %>
 	</p>
@@ -10,9 +15,10 @@
 		<%= f.label :password %>
 		<%= f.password_field :password %>
 	</p>
-	<p>
-		<%= f.check_box :remember_me %>
-		<%= f.label :remember_me, nil, :style => 'display:inline' %>
-	</p>
-	<p><%= f.submit "Login" %></p>
+	<div>
+		<%= submit_tag 'Log in' %>
+		<span class="note">
+			Don't have an account? <%= link_to 'Sign up', signup_path %> in seconds.
+		</span>
+	</div>
 <% end %>

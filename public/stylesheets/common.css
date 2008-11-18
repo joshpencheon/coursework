@@ -1,0 +1,70 @@
+/************** ELEMENTS BY TAG **************/
+
+html, body, div, p, span {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	background-color: #DDD;
+	min-width: 950px;
+	max-width: 1500px;
+}
+
+a {
+	color: #000;
+}
+
+a:hover {
+	color: #300D02;
+}
+
+label {
+	display: block;
+}
+
+/************** GENERIC STYLES **************/
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.push {
+	height: 2em; /* footer height */
+	padding-bottom: 3em; /* footer separation */
+}
+
+.ride_up {
+	position: relative;
+	top: -5px;
+}
+
+.ride_down {
+	position: relative;
+	top: 3px;
+}
+
+.spacer {
+	margin: 15px auto;
+}
+
+.note {
+	padding: 0 5px;
+	font-family: "MS Trebuchet", sans-serif;
+	font-size: 0.8em;
+}
+
+.note a {
+	font-weight: bold;
+}
+
+/************** FORM ELEMENTS **************/
+
+form p {
+	margin: 4px auto;
+}

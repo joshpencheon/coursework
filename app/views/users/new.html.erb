@@ -1,4 +1,6 @@
-<h1>Register</h1>
+<h1>Sign up</h1>
+
+<p class="note right"><em>All fields are required</em></p>
 
 <% form_for @user, :url => account_path do |f| %>
 	<%= f.error_messages %>
@@ -18,5 +20,10 @@
 		<%= f.label :confirm_password %>
 		<%= f.password_field :confirm_password %>
 	</p>
-	<p><%= submit_tag 'Create Account' %></p>
+	<div class="ride_down">
+		<%= submit_tag 'Create Account' %>
+		<span class="note">
+			Already got an account? <%= link_to 'Sign in', signin_path %>.
+		</span>
+	</div>
 <% end %>

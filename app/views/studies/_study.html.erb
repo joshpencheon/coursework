@@ -1,2 +1,3 @@
 <h1><%= study.title %></h1>
-<%= study.description %>
+<p>Posted: <%= study.created_at %> by <%= study.user.login %></p>
+<p><%= study.description %></p>

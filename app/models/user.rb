@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   acts_as_authentic
   before_validation :generate_login_if_blank
   
+  has_many :studies
+  
   private
   
   def generate_login_if_blank

@@ -11,15 +11,16 @@ class StudiesController < ApplicationController
   end
 
   def new
-    @study = Study.new
+    @study = current_user.studies.new
   end
   
   def create
-    @study = Study.new(params[:study])
+    @study = current_user.studies.new(params[:study])
     if @study.save
       flash[:notice] = "Successfully created..."
       redirect_to @study
     else
+      flash[:notice] = "Something went wrong..."
       render :action => "new"
     end
   end

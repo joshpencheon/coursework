@@ -3,7 +3,11 @@
 body, html {
 	text-align: center;
 	min-width: 550px;
-	background: transparent url(/images/bg.png) repeat;
+	background: transparent;
+}
+
+html {
+	background: url(/images/bg.png) repeat bottom right;
 }
 
 h1 {
@@ -12,8 +16,8 @@ h1 {
 
 /*******STRUCTURAL ELEMENTS********/
 #content {
-	background: #EAFDD1;
-	border: 5px solid #77996F;
+	background: #F3FDE3;
+	border: 5px solid #618F99;
 	-webkit-border-radius: 20px;
   -moz-border-radius: 20px;
 	width: 400px;
@@ -49,4 +53,17 @@ form input[type=submit] {
 form input[type=submit]:hover {
 	border-color: #A1C4E1;
 	background-color: #E5F3FF;
+}
+
+/******** OTHER ELEMENTS ID*********/
+
+#logo {
+	position: absolute;
+	bottom: 0%;
+	right: 0%;
+	opacity: 0.25;
+	z-index: -1;
+	background: transparent url(/images/logo.png) no-repeat;
+	width: 193px;
+	height: 97px;
 }

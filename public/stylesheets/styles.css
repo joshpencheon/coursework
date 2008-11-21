@@ -11,15 +11,21 @@ html, body {
 
 #content {
 	padding: 10px;
-	margin: 10px;
+	margin: 20px 10px;
 	float: left;
 	width: 70%;
-	background-color: #EEE;
+	background-color: #FFF;
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 #sidebar {
-	margin: 10px 10px 10px 73%;
-	background-color: #DDD;
+	margin: 20px 0 20px 74%;
+	background-color: #EEE;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
 }
 
 #site {

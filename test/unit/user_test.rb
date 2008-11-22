@@ -6,8 +6,8 @@ class UserTest < ActiveSupport::TestCase
   end
   
   def test_user_requires_valid_email_password_and_confirmation
-    @user = User.new :email => 'joe@bloggs.com', :password => 'secret', :confirm_password => 'secret'
-    errors = [:email, :password, :confirm_password].map {|attr| @user.errors.on(attr) }
+    @user = User.new :email => 'joe@bloggs.com', :password => 'secret', :password_confirmation => 'secret'
+    errors = [:email, :password, :password_confirmation].map {|attr| @user.errors.on(attr) }
     assert !errors.all?
   end
   
@@ -43,9 +43,9 @@ class UserTest < ActiveSupport::TestCase
   private 
   
   def valid_user
-    User.new(:login            => 'joe',
-             :email            => 'joe@bloggs.com',
-             :password         => 'secret',
-             :confirm_password => 'secret' )
+    User.new(:login                 => 'joe',
+             :email                 => 'joe@bloggs.com',
+             :password              => 'secret',
+             :password_confirmation => 'secret' )
   end
 end

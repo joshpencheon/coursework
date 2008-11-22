@@ -1,12 +1,53 @@
 /************* ELEMENTS BY TAG ************/
 html, body {
 	height: 100%;
+	font-size: 13px;
 }
 
 /************** STRUCTURE ELEMENTS **************/
 
 #header {
-	background-color: #AAA;
+	background: #70BB2C;
+	border-bottom: 4px solid #14388E;
+	height: 100px;
+	position: relative;
+}
+
+#menu {
+	width: 70%;
+	clear: both;
+}
+
+#menu ul {
+	margin: 0px 0px 2px 10px;
+}
+
+#menu, #menu ul {
+	line-height: 100%;
+}
+
+#menu li {
+	float: left;
+	margin-right: 6px;
+}
+
+#menu ul, #menu li {
+	list-style: none;
+	list-style-position: outside;
+	list-style-image: none;
+}
+
+#menu a {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-topleft: 5px;
+	text-decoration: none;
+	font-weight: bold;
+	display: block;
+	background-color: #14388E;
+	color: #FFF;
+	padding: 8px 10px;
 }
 
 #content {
@@ -15,11 +56,10 @@ html, body {
 	float: left;
 	width: 70%;
 	background-color: #FFF;
-	-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
 }
 
 #sidebar {
+	padding: 10px;
 	margin: 20px 0 20px 74%;
 	background-color: #EEE;
 	-webkit-border-bottom-left-radius: 5px;
@@ -30,11 +70,42 @@ html, body {
 
 #site {
 	height: auto !important;
-	margin-bottom: -2em; /* footer height */
+	margin-bottom: -4em; /* footer height */
 	min-height: 100%;
 }
 
 #footer {
-	height: 2em;
+	margin: 0 10px;
+	padding: 1em 10px;
+	width: 70%;
+	height: 1em;
 	background-color: #BBB;
+}
+
+#content, #footer {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+/*********ELEMENTS BY ID*********/
+
+#logo {
+	padding: 10px 0 10px 10px;
+}
+
+#logo img {
+	width: 114px;
+	height: 46px;
+}
+
+#menu a {
+
+}
+
+#menu a:hover {
+
+}
+
+#menu a.current, #menu a.current:hover {
+
 }

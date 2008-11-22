@@ -3,11 +3,16 @@
 body, html {
 	text-align: center;
 	min-width: 550px;
-	background: transparent;
 }
 
 html {
-	background: url(/images/bg.png) repeat bottom right;
+	background: transparent url(/images/bg.png) repeat top center;
+	min-height: 500px;
+}
+
+body {
+	padding-top: 100px;
+	background: transparent url(/images/logo_watermarked.png) no-repeat top center;
 }
 
 h1 {
@@ -16,12 +21,12 @@ h1 {
 
 /*******STRUCTURAL ELEMENTS********/
 #content {
-	background: #F3FDE3;
+	background: #FFF;
 	border: 5px solid #618F99;
 	-webkit-border-radius: 20px;
   -moz-border-radius: 20px;
 	width: 400px;
-	margin: 75px auto 0;
+	margin: 0 auto;
 	padding: 10px 40px 20px;
 	text-align: left;
 }
@@ -56,14 +61,3 @@ form input[type=submit]:hover {
 }
 
 /******** OTHER ELEMENTS ID*********/
-
-#logo {
-	position: absolute;
-	bottom: 0%;
-	right: 0%;
-	opacity: 0.25;
-	z-index: -1;
-	background: transparent url(/images/logo.png) no-repeat;
-	width: 193px;
-	height: 97px;
-}

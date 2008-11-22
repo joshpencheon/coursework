@@ -1,12 +1,20 @@
 <div id="header">
-	<% if logged_in? %>
-		<p>
-			You're logged in
-			(<%= link_to 'Sign out', signout_path %>)
-		</p>
+<p class="right">	<% if logged_in? %>
+		You're logged in (<%= link_to 'Sign out', signout_path %>)
 	<% else %>	
 		<%= link_to 'Sign in', signin_path %> or
 		<%= link_to 'Sign up', signup_path %>
-	<% end %>
+	<% end %></p>
+	
+	<div id="logo">
+		<%= link_to image_tag('logo_b&w.png'), root_url %>
+	</div>
+	
+	<div id="menu" class="clear">
+		<ul>
+			<li><%= menu_link 'Studies', studies_path %></li>
+    	<li><%= menu_link 'People', 'uploads_path' %></li>
+		</ul>
+  </div>
 </div>
 

@@ -1,6 +1,8 @@
 /************** ELEMENTS BY TAG **************/
 
-html, body, div, p, span {
+html, body, div, p, span,
+h1, h2, h3, h4, h5, h6,
+ul, li {
 	margin: 0;
 	padding: 0;
 }
@@ -20,6 +22,15 @@ a:hover {
 	color: #300D02;
 }
 
+a:active {
+	/* FF links */
+	outline: none;
+}
+
+a img {
+	border: 0;
+}
+
 label {
 	display: block;
 }
@@ -32,11 +43,12 @@ label {
 
 .clear {
 	clear: both;
+	display: block;
 }
 
 .push {
-	height: 2em; /* footer height */
-	padding-bottom: 3em; /* footer separation */
+	height: 4em; /* footer height */
+	padding-bottom: 1em; /* footer separation */
 }
 
 .ride_up {

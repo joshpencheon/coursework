@@ -64,10 +64,8 @@ form input[type=submit] {
 	padding: 5px 15px;
 	background-color: #E5E5E5;
 }
-
 form input[type=submit]:hover {
-/*	border-color: #A1C4E1;
-	background-color: #E5F3FF;*/
+
 	border-color: #ACE562;
 	background-color: #E0FDD4;
 }

@@ -40,6 +40,25 @@ class UserTest < ActiveSupport::TestCase
     assert @user.login, 'joe123'
   end
   
+  def test_name_concatanation_with_only_first_name
+    @user = User.new :first_name => 'Josh'
+    assert_equal @user.name, 'Josh'
+  end
+  
+  def test_name_concatanation_with_only_last_name
+    @user = User.new :last_name => 'Pencheon'
+    assert_equal @user.name, 'Pencheon'    
+  end
+  
+  def test_name_concatanation_with_both_name_parts_and_lowercase
+    @user = User.new :first_name => 'josh', :last_name => 'pencheon'
+    assert_equal @user.name, 'Josh Pencheon'
+    @user.last_name = 'blythington-smythe'
+    assert_equal @user.name, 'Josh Blythington-Smythe'
+    @user.last_name = 'mcdonald'
+    assert_equal @user.name, 'Josh McDonald'
+  end
+  
   private 
   
   def valid_user

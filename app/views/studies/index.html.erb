@@ -1,4 +1,4 @@
-<% if show_welcome_message? || true %>
+<% if current_user && (show_welcome_message? || true) %>
 	<%= render :partial => "shared/welcome" %>
 <% end %>
 

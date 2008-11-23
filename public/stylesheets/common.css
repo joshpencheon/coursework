@@ -70,8 +70,31 @@ label {
 	font-weight: bold;
 }
 
+ul.indented {
+	list-style-position: inside;
+	padding-left: 20px;
+}
+
 /************** FORM ELEMENTS **************/
 
 form p {
-	margin: 4px auto;
+	margin: 6px auto;
+}
+
+form input {
+	padding: 3px 5px;
+	font-size: 1.2em;
+}
+
+form input[type=submit] {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #AAA;
+	padding: 5px 15px;
+	background-color: #E5E5E5;
+}
+form input[type=submit]:hover {
+
+	border-color: #ACE562;
+	background-color: #E0FDD4;
 }

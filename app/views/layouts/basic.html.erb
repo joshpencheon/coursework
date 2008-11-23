@@ -5,14 +5,19 @@
 	<head>
 		<title>SDU Knowledgebase</title>
 
-		<%= javascript_include_tag %w( jquery facebox lowpro application ) %>
+		<%= javascript_include_tag %w( jquery jquery-ui facebox lowpro application ) %>
 		<%= yield(:head) %>
-		<%= stylesheet_link_tag %w( facebox common basic ) %>
+		<%= stylesheet_link_tag %w( facebox facebox_custom common basic ) %>
 	</head>
 	
 	<body>
+		<h1>NHS SDU</h1>
+		
 		<div id="content">
-			<%= yield %>
+			<h5><%= yield(:title) %></h5>
+			<div class="padded">
+				<%= yield %>
+			</div>
 		</div>
 		
 	</body>

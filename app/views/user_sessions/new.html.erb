@@ -1,5 +1,7 @@
-<h1>Log in</h1>
- 
+<% content_for :title do %>
+	Sign into the NHS SDU Knowledge Base
+<% end %>
+
 <% form_for @user_session, :url => user_session_path do |f| %>
   <%= f.error_messages %>
 

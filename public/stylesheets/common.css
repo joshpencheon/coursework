@@ -1,13 +1,12 @@
 /************** ELEMENTS BY TAG **************/
 
-html, body, div, p, span,
-h1, h2, h3, h4, h5, h6,
-ul, li {
+* {
 	margin: 0;
 	padding: 0;
 }
 
 body {
+	color: #222;
 	font-family: Arial, "MS Trebuchet", sans-serif;
 	background-color: #DDD;
 	min-width: 950px;
@@ -15,16 +14,12 @@ body {
 }
 
 a {
-	color: #000;
+	outline: none;
+	color: #222;
 }
 
 a:hover {
 	color: #300D02;
-}
-
-a:active {
-	/* FF links */
-	outline: none;
 }
 
 a img {

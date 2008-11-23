@@ -3,32 +3,42 @@
 body, html {
 	text-align: center;
 	min-width: 550px;
-}
-
-html {
-	background: transparent url(/images/bg.png) repeat top center;
-	min-height: 500px;
+	
 }
 
 body {
-	padding-top: 100px;
-	background: transparent url(/images/logo_watermarked.png) no-repeat top center;
+	padding-top: 40px;
 }
 
 h1 {
+	color: #AAA;
+	margin-bottom: 20px;
 	text-align: center;
+}
+
+h5 {
+	color: #FFF;
+	padding: 10px 22px;
+	background-color: #416F1A;
+	-webkit-border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+	-webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
 }
 
 /*******STRUCTURAL ELEMENTS********/
 #content {
 	background: #FFF;
-	border: 5px solid #618F99;
-	-webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-	width: 400px;
+	border: 2px solid #D6D6D6;
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+	width: 500px;
 	margin: 0 auto;
-	padding: 10px 40px 20px;
 	text-align: left;
+}
+
+.padded {
+	padding: 10px 40px 20px;
 }
 
 /*********** FORMS ************/
@@ -56,8 +66,10 @@ form input[type=submit] {
 }
 
 form input[type=submit]:hover {
-	border-color: #A1C4E1;
-	background-color: #E5F3FF;
+/*	border-color: #A1C4E1;
+	background-color: #E5F3FF;*/
+	border-color: #ACE562;
+	background-color: #E0FDD4;
 }
 
 /******** OTHER ELEMENTS ID*********/

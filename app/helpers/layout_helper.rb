@@ -6,7 +6,7 @@ module LayoutHelper
   def javascript(*args)
     args = args.map { |arg| arg == :defaults ? arg : arg.to_s }
     content_for(:head) { javascript_include_tag(*args) }
-  end 
+  end
   
   def menu_link(name, path)
     html_options = (path =~ %r(#{controller.controller_name})) ? {:class => 'current'} : nil

@@ -1,9 +1,11 @@
-<h1>Sign up</h1>
-
-<p class="note right"><em>All fields are required</em></p>
+<% content_for :title do %>
+	Register to use the NHS SDU Knowledge Base
+<% end %>
 
 <% form_for @user, :url => account_path do |f| %>
 	<%= f.error_messages %>
+	
+	<p class="note right"><em>All fields are required</em></p>
 	<p>
 		<%= f.label :login %>
 		<%= f.text_field :login %>

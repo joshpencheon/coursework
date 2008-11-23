@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   
   has_many :studies
   
+  def should_be_shown_welcome_message?
+    login_count == 1 && true
+  end
+  
   private
   
   def generate_login_if_blank

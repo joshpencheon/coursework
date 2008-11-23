@@ -4,12 +4,13 @@
 	<head>
 		<title>SDU Knowledgebase</title>
 	
-		<%= javascript_include_tag %w( jquery facebox lowpro application ) %>
+		<%= javascript_include_tag %w( jquery jquery-ui facebox lowpro application ) %>
 		<%= yield(:head) %>
-		<%= stylesheet_link_tag %w( common styles facebox ) %>
+		<%= stylesheet_link_tag %w( common styles facebox facebox_custom ) %>
 	</head>
 	
 	<body>
+		
 		<div id="site">
 			<%= render :partial => 'layouts/header' %>
 

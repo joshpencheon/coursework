@@ -70,3 +70,7 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
 end
+
+# Replace <div> tags with <span> tags, as the form field will already be wrapped in a block element.
+ActionView::Base.field_error_proc = 
+  Proc.new{ |html_tag, instance| "<span class=\"field_with_errors\">#{html_tag}</span>" }

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout "basic"
   
   before_filter :find_user, :except => [ :index, :new, :create ]
 
@@ -12,15 +11,17 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    render :layout => "basic"
   end
   
   def create
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Successfully created..."
+      session[:welcome?] = true
       redirect_to root_url
     else
-      render :action => "new"
+      render :action => "new", :layout => "basic"
     end
   end
   

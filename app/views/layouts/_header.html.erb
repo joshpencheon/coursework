@@ -11,9 +11,13 @@
 	</div>
 	
 	<div id="menu" class="clear">
+		<ul class="right">
+			<li id="help_link"><%= link_to_facebox 'Help', :image => 'logo.png' %></li>
+    	<li id="search_link"><%= menu_link 'Search', users_path %></li>
+		</ul>
 		<ul>
-			<li><%= menu_link 'Studies', studies_path %></li>
-    	<li><%= menu_link 'People', 'uploads_path' %></li>
+			<li id="studies_link"><%= menu_link 'Studies', studies_path %></li>
+    	<li id="people_link"><%= menu_link 'People', users_path %></li>
 		</ul>
   </div>
 </div>

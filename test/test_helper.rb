@@ -37,6 +37,10 @@ class Test::Unit::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def assert_equal_sorted(object, other, message ="Objects don't have the same contents")
+    assert(object.sort == other.sort)
+  end
+  
   def assert_invalid(object, msg="Object is valid when it should be invalid")
     assert(!object.valid?, msg)
   end

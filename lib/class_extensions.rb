@@ -35,11 +35,15 @@ module ClassExtensions
         self.capitalize
       end
     end
-
+  end
+  
+  module Symbol   
+    def <=> other
+      self.to_s <=> other.to_s
+    end
   end
   
 end
 
-class String
-  include ClassExtensions::String
-end
+class String; include ClassExtensions::String end
+class Symbol; include ClassExtensions::Symbol end

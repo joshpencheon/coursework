@@ -19,7 +19,7 @@ class UserTest < ActiveSupport::TestCase
    
   def test_user_must_have_unqiue_login_and_email
     valid_user.save
-    @user = valid_user
+    @user = valid_user # Returns a new user
     assert_errors_on(@user, :email, :login)
     @user.login = valid_user.login.reverse
     assert_errors_on(@user, :email)
@@ -30,7 +30,7 @@ class UserTest < ActiveSupport::TestCase
   
   def test_login_auto_generated_if_blank
     @user = User.new :login => nil, :email => 'joe@bloggs.com'
-    @user.valid? #Force validation
+    @user.valid? # Force validation
     assert @user.login, 'joe'
   end
   

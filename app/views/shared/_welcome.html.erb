@@ -22,7 +22,10 @@
 	// without it. Must need a little time!
 	setTimeout(function(){
 		$(document).bind('reveal.facebox', function(){
-			$('#welcome_message .title').effect("highlight", {}, 5000);
+			box = $('#welcome_message .title');
+			box.effect("highlight", {}, 5000);
 		}).ready(function(){jQuery.facebox({div:'#welcome_message'});});
+		// Restore BG before callback.
+		box.css('backgroundImage', $.data(box[0], "ec.storage.backgroundImage"))
 	}, 100);
 </script>

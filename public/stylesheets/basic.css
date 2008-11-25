@@ -7,31 +7,24 @@ body, html {
 }
 
 body {
-	padding-top: 40px;
-}
-
-h1 {
-	color: #AAA;
-	margin-bottom: 20px;
-	text-align: center;
+	padding-top: 100px;
 }
 
 h5 {
 	color: #FFF;
 	padding: 10px 22px;
-	background-color: #416F1A;
-	-webkit-border-top-left-radius: 10px;
-  -moz-border-radius-topleft: 10px;
-	-webkit-border-top-right-radius: 10px;
-  -moz-border-radius-topright: 10px;
+	border-bottom: 2px solid #416F1A;
+	background: #70BB2C url(/images/leaves_slim.png) no-repeat top right;
 }
 
 /*******STRUCTURAL ELEMENTS********/
 #content {
 	background: #FFF;
-	border: 2px solid #D6D6D6;
-	-webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
+	border: 2px solid #CCC;
+	-webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
 	width: 500px;
 	margin: 0 auto;
 	text-align: left;
@@ -39,6 +32,24 @@ h5 {
 
 .padded {
 	padding: 10px 40px 20px;
+}
+
+/********FLASH ELEMENTS********/
+
+.flash {
+	padding: 4px 22px;
+	border-bottom-width: 1px;
+	border-style: solid;
+}
+
+.flash.notice {
+	background-color: #2FAF18;
+	border-color: #024915;
+}
+
+.flash.warn {
+	background-color: #D5020C;
+	border-color: #57030B;
 }
 
 /*********** FORMS ************/

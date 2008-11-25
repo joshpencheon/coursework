@@ -10,11 +10,12 @@
 		<%= stylesheet_link_tag %w( facebox facebox_custom common basic ) %>
 	</head>
 	
-	<body>
-		<h1>NHS SDU</h1>
-		
+	<body>		
 		<div id="content">
 			<h5><%= yield(:title) %></h5>
+			<% flash.each do |key, msg| %>
+				<%= content_tag :h5, msg, :class => "flash #{key}" %>
+			<% end %>
 			<div class="padded">
 				<%= yield %>
 			</div>

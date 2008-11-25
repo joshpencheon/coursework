@@ -1,5 +1,5 @@
 #facebox .body .title {
-	background-color: #DDD;
+	background: #DDD url(/images/leaves_slim.png) no-repeat top right;
 	color: #444;
 	padding: 5px;
 	margin-bottom: 10px;

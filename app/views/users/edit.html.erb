@@ -1,4 +1,5 @@
 <% form_for @user do |f| %>
+	<%= f.error_messages %>
 	<p>
 		<%= f.label :first_name %>
 		<%= f.text_field :first_name %>
@@ -6,6 +7,10 @@
 	<p>
 		<%= f.label :last_name %>
 		<%= f.text_field :last_name %>
+	</p>
+	<p>
+		<%= f.label :email %>
+		<%= f.text_field :email %>
 	</p>
 	<p class="button"><%= f.submit 'Save my profile' %></p>
 <% end %>

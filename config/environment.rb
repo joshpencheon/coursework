@@ -27,9 +27,12 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3" 
   config.gem :authlogic, :version => '>=1.3.0'
   
-  # Gems required for testng
+  # Gems required for testing
   config.gem :ZenTest
   config.gem :mocha
+  # RSpec should will load itself when tests are run
+  # config.gem 'rspec-rails', :lib => 'spec/rails'
+  # config.gem 'rspec', :lib => 'spec'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.

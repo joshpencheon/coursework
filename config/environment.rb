@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3" 
   config.gem :authlogic, :version => '>=1.3.0'
+  config.gem :paperclip
   
   # Gems required for testing
   config.gem :ZenTest

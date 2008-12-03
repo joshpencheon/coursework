@@ -1,9 +1,21 @@
+<% form_for @study, :html => { :multipart => true } do |f| %>
 	<%= f.error_messages %>
 	<p>
 		<%= f.label :title %>
-		<%= f.text_field :title %>
+		<%= f.text_field :title, :class => 'bold' %>
 	</p>
 	<p>
 		<%= f.label :description %>
 		<%= f.text_area :description %>
 	</p>
+	
+	<% if @study.saved_attachments.any? %>
+		<label>Attached Documents</label>	
+		<%= saved_attachments_for @study %>
+	<% end %>
+
+	<label>Attach</label>
+	<%= new_attachments_for @study %>
+	
+	<p class="right"><%= f.submit 'Update' %></p>
+<% end %>

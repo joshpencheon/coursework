@@ -48,5 +48,4 @@ class StudiesController < ApplicationController
   def find_study
     @study = Study.find(params[:id])
   end
-
 end

@@ -8,6 +8,12 @@ module LayoutHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
   
+  def javascript_block(&block)
+    content_for(:head) do
+      javascript_tag { concat capture(&block), block.binding }
+    end
+  end
+  
   def menu_link(name, path)
     html_options = (path =~ %r(#{controller.controller_name})) ? {:class => 'current'} : nil
     link_to name, path, html_options

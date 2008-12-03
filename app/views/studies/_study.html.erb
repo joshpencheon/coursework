@@ -1,3 +1,4 @@
 <h1><%= study.title %></h1>
 <p>Posted: <%= study.created_at %> by <%= study.user.login %></p>
 <p><%= study.description %></p>
+<p><em><%= pluralize( study.attached_files.length, 'Attached File') %></em></p>

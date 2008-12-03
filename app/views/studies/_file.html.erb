@@ -1,0 +1,15 @@
+<p class="file">
+	<% if file.new_record? %>
+		<% @att = file %>
+		<%= error_messages_for :att %>
+		<% fields_for_attachment(file) do |file_form| %>
+			<%= file_form.file_field :document %>		
+		<% end %>
+	<% else %>	
+		<% if file.image? %>
+			<strong><%= link_to_facebox file.document_file_name, :image => file.document.url %></strong>
+		<% else %>
+			<strong><%= file.document_file_name %></strong>
+		<% end %>
+	<% end %>
+</p>

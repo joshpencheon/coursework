@@ -81,20 +81,37 @@ form p {
 	margin: 6px auto;
 }
 
-form input {
-	padding: 3px 5px;
+input {
+	padding: 3px;
+}
+
+input[type=text],
+input[type=password],
+textarea {
+	border: 1px solid #999;
+	width: 99%;
+}
+
+textarea {
+	padding: 5px 3px;
+	font-size: 1.1em;
+	height: 100px;
+}
+
+form.bold, input.bold,
+input[type=submit]  {
 	font-size: 1.2em;
 }
 
-form input[type=submit] {
+input[type=submit] {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #AAA;
 	padding: 5px 15px;
 	background-color: #E5E5E5;
 }
-form input[type=submit]:hover {
 
+input[type=submit]:hover {
 	border-color: #ACE562;
 	background-color: #E0FDD4;
 }

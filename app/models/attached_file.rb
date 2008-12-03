@@ -17,7 +17,7 @@ class AttachedFile < ActiveRecord::Base
   has_attached_file :document
   
   # Temp.
-  before_validation :validate_document
+  # before_validation :validate_document
   
   validates_attachment_presence :document
   validates_attachment_content_type :document, 
@@ -46,6 +46,6 @@ class AttachedFile < ActiveRecord::Base
   
   # Hopefully only a temporary fix until Paperclip 2.1.4 is released as a gem.
   def validate_document
-    document.send(:validate)
+    #document.send(:validate) unless untouched?
   end
 end

@@ -72,10 +72,20 @@ label {
 
 ul.indented {
 	list-style-position: inside;
-	padding-left: 20px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 /************** FORM ELEMENTS **************/
+
+.error_description {
+	color: red;
+}
+
+.field_with_errors input,
+.field_with_errors textarea {
+	background-color: #FFD4BF;
+}
 
 form p {
 	margin: 6px auto;

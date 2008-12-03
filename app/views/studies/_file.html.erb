@@ -1,7 +1,5 @@
 <p class="file">
 	<% if file.new_record? %>
-		<% @att = file %>
-		<%= error_messages_for :att %>
 		<% fields_for_attachment(file) do |file_form| %>
 			<%= file_form.file_field :document %>		
 		<% end %>

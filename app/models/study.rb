@@ -7,16 +7,12 @@ class Study < ActiveRecord::Base
   def saved_attachments
     @saved_attachments ||= attached_files.reject(&:new_record?)
   end
-  
-  # Effectively returns all attachments that haven't 
-  # made it to the database, plus another new instance.
+
   def unsaved_attachments
-    returning attached_files - saved_attachments do |unsaved|
-      unsaved << attached_files.build unless unsaved.detect(&:untouched?)
-    end 
-    # untouched, unsaved = (attached_files - saved_attachments).partition(&:untouched?)
-    # untouched = [untouched.any? ? untouched.first : attached_files.build] # Only need one.
-    # unsaved.any? ? unsaved + untouched : untouched
+    attached_files - saved_attachments
+    # returning attached_files - saved_attachments do |unsaved|
+    #   unsaved << attached_files.build unless unsaved.detect(&:untouched?)
+    # end 
   end
   
   def new_attached_file_attributes=(attached_file_attributes)

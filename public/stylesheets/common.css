@@ -79,12 +79,12 @@ ul.indented {
 /************** FORM ELEMENTS **************/
 
 .error_description {
-	color: red;
+	color: #FF8065;
 }
 
 .field_with_errors input,
 .field_with_errors textarea {
-	background-color: #FFD4BF;
+	background-color: #FCFFE7;
 }
 
 form p {
@@ -93,6 +93,12 @@ form p {
 
 input {
 	padding: 3px;
+}
+
+input[type=checkbox] {
+	position: relative;
+	top: 3px;
+	left: 1px;
 }
 
 input[type=text],

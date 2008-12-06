@@ -11,13 +11,10 @@ class AttachedFile < ActiveRecord::Base
     'text'          => 'txt'
   }
   APPLICATION_REGEXP = %r{^(x-)?application/x-png|jpg|pjpeg|#{ALLOWED_CONTENT_TYPES.values.join('|')}$}
-  IMAGE_REGEXP = %r{^image/(x-png|pjpeg|jpeg|jpg|png|gif)}
+  IMAGE_REGEXP = %r{^image/(x-png|pjpeg|jpeg|jpg|png|gif)$}
   
   belongs_to :study
   has_attached_file :document
-  
-  # Temp.
-  # before_validation :validate_document
   
   validates_attachment_presence :document
   validates_attachment_content_type :document, 
@@ -38,14 +35,7 @@ class AttachedFile < ActiveRecord::Base
   
   def untouched?
     return false unless new_record?
-    reference = study.attached_files.build
-    attributes.all? {|attr, value| value == reference.send(attr)}
+    attributes == study.attached_files.build.attributes
   end
-  
-  private
-  
-  # Hopefully only a temporary fix until Paperclip 2.1.4 is released as a gem.
-  def validate_document
-    #document.send(:validate) unless untouched?
-  end
+
 end

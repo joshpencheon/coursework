@@ -1,6 +1,8 @@
 class Study < ActiveRecord::Base
   validates_presence_of :title, :description
   
+  before_validation :remove_blank_attachments
+  
   has_many :attached_files, :dependent => :destroy
   belongs_to :user
   
@@ -10,9 +12,6 @@ class Study < ActiveRecord::Base
 
   def unsaved_attachments
     attached_files - saved_attachments
-    # returning attached_files - saved_attachments do |unsaved|
-    #   unsaved << attached_files.build unless unsaved.detect(&:untouched?)
-    # end 
   end
   
   def new_attached_file_attributes=(attached_file_attributes)
@@ -21,10 +20,13 @@ class Study < ActiveRecord::Base
     end
   end
   
-  def existing_attached_file_attibutes=(attached_file_attributes)
+  def existing_attached_file_attributes=(attached_file_attributes)
     saved_attachments.each do |attachment|
       attributes = attached_file_attributes[attachment.id.to_s]
       if attributes
+        logger.info(
+        "UPDATING ##{attachment.id.to_s}: #{attributes.inspect}"
+        )
         attachment.attributes = attributes
       else
         attached_files.delete(attachment)
@@ -32,4 +34,9 @@ class Study < ActiveRecord::Base
     end
   end
   
+  private 
+  
+  def remove_blank_attachments
+    attached_files.delete( attached_files.select(&:untouched?) )
+  end
 end

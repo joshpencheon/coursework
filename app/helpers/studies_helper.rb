@@ -4,8 +4,8 @@ module StudiesHelper
     render(:partial => 'file', :collection => study.saved_attachments)
   end
 
-  def new_attachments_for(study)
-    render(:partial => "file", :collection => study.unsaved_attachments)
+  def unsaved_attachments_for(study)
+    render(:partial => 'file', :collection => study.unsaved_attachments)
   end
   
   def fields_for_attachment(attachment, &block)
@@ -16,11 +16,9 @@ module StudiesHelper
   def errors_for_study(study)
     s.errors.reject { |key, value| key == 'attached_files' }
   end
-  
+   
   def errors_for_study_attachments(study)
     s.attached_files.map { |att| [att.id, att.errors] }
   end
   
-  
-
 end

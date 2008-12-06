@@ -1,0 +1,9 @@
+$('.file_delete_link').click(function(event){
+	event.preventDefault(); 
+	if(($(this).hasClass('deleted'))) {
+		$(this).removeClass('deleted').parent().fadeTo('slow', 1.0).find('span').remove();
+	} else {
+		$(this).addClass('deleted').parent().fadeTo('slow', 0.5).append(
+			'<span>will be deleted when you save this study. Click again to undelete.</span>').find('input').remove()
+	};
+});

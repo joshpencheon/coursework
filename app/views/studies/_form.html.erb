@@ -1,12 +1,18 @@
+<% require_jquery %w(add_attachment remove_attachment) %>
+
 <% form_for @study, :html => { :multipart => true } do |f| %>
 
   <%= f.text_field :title, :class => 'bold' %>
 
   <%= f.text_area :description %>
 
-  <%= saved_attachments_for @study %>
+	<div id="attachments">
+		<%= saved_attachments_for @study %>
 
-	<%= new_attachments_for @study %>
+		<%= unsaved_attachments_for @study %>
+	</div>
 	
-	<p class="right"><%= f.submit 'Update' %></p>
+	<%= jquery_link 'Attach a file', :id => 'add_attachment' %>
+	
+	<p><%= f.submit 'Save Study' %></p>
 <% end %>

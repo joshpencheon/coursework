@@ -1,0 +1,7 @@
+$('#add_attachment').click(function(event){
+	event.preventDefault();
+	$('#attachments').append('<div class="file"><input \
+	   id="study_new_attached_file_attributes__document" \
+		 name="study[new_attached_file_attributes][][document]" size="30" type="file" /></div>');
+	$(this).text('Attach another file')
+});

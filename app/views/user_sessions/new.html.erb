@@ -2,7 +2,7 @@
 	Sign into the NHS SDU Knowledge Base
 <% end %>
 
-<% form_for @user_session, :url => user_session_path do |f| %>
+<% form_for @user_session, :url => user_session_path, :html => { :class => 'bold' } do |f| %>
 
 	<span class="note right ride_up">
 		<%= f.label :remember_me, 'remember me', :style => 'display:inline' %>

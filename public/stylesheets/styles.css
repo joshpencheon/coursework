@@ -81,7 +81,8 @@ li#help_link a {
 }
 
 #sidebar {
-	padding: 10px;
+	color: #444;
+	padding: 20px 10px 20px 20px;
 	margin: 20px 0 20px 74%;
 	background-color: #EEE;
 	-webkit-border-bottom-left-radius: 5px;
@@ -139,4 +140,45 @@ li#help_link a {
 #login a:hover {
 	color: #FFF;
 	text-decoration: underline;
+}
+
+/****** SIDEBAR ******/
+
+#sidebar ul {
+	list-style-type: none;
+}
+
+#sidebar li {
+	font-weight: bold;
+	padding: 10px 0 10px 20px;
+	border-top: 1px solid #CCC;
+}
+
+#sidebar li:hover {
+	background-color: #DDD; 
+}
+
+
+/****** ADDING ATTACHMENTS ******/
+
+#avatar_upload_container {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	padding: 15px;
+	background-color: #EAF0F8;
+	width: 40%;
+	float: right;
+}
+
+#add_attachment {
+	background: url(/images/icons/attach.png) no-repeat 0px 0px;
+	padding-left: 16px;
+}
+
+#attachments {
+	background-color: #EEE;
+}
+
+#attachments .style_wrapper {
+	padding: 15px;
 }

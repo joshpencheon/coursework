@@ -15,6 +15,7 @@ class AttachedFile < ActiveRecord::Base
   
   belongs_to :study
   has_attached_file :document
+  attr_accessible :document
   
   validates_attachment_presence :document
   validates_attachment_content_type :document, 

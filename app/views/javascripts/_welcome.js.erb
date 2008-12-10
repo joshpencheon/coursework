@@ -1,0 +1,17 @@
+setTimeout(function() {
+	$(document).bind('reveal.facebox', function(){
+		box = $('#welcome_message .title')
+		box.effect("highlight", {easing:  'jswing'}, 5000)
+	})
+	
+	$(document).ready(function() {
+		$.facebox({div:'#welcome_message'})
+	})
+	
+	// Restore BG before callback.
+	box.css('backgroundImage', $.data(box[0], "ec.storage.backgroundImage"))
+	
+	$('.hide_facebox').click(function(event) {
+		$(document).trigger('close.facebox')
+	})
+}, 100)

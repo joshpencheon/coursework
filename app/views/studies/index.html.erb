@@ -1,5 +1,9 @@
 <% if current_user && (show_welcome_message? || true) %>
-	<%= render :partial => "shared/welcome" %>
+	<% require_jquery 'welcome' %>
+
+	<div id="welcome_message" style="display:none;">
+		<%= render :partial => "help/welcome" %>		
+	</div>
 <% end %>
 
 <%= render :partial => @studies %>

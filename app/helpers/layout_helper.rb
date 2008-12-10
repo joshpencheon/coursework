@@ -10,6 +10,8 @@ module LayoutHelper
   
   # Loads partial into <head>, wrapping it in 
   # <script> tags and a jQuery dom:loaded statement
+  # This should only be used on special occasions - normally,
+  # custom jQuery should be added to the behaviours.js
   def require_jquery(partial_path)
     if partial_path.is_a?(Array) 
       partial_path.collect{ |path| require_jquery(path) }

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.help '/help', :controller => 'help'
   
   map.resources :studies
   

@@ -1,10 +1,15 @@
 class Study < ActiveRecord::Base
+  belongs_to :user
+
   validates_presence_of :title, :description
   
   before_validation :remove_blank_attachments
-  
   has_many :attached_files, :dependent => :destroy
-  belongs_to :user
+  
+  has_many :events, :as => :news_item
+  create_events :attached_files
+  
+  has_dirty_associations :attached_files
   
   def saved_attachments
     @saved_attachments ||= attached_files.reject(&:new_record?)
@@ -24,9 +29,6 @@ class Study < ActiveRecord::Base
     saved_attachments.each do |attachment|
       attributes = attached_file_attributes[attachment.id.to_s]
       if attributes
-        logger.info(
-        "UPDATING ##{attachment.id.to_s}: #{attributes.inspect}"
-        )
         attachment.attributes = attributes
       else
         attached_files.delete(attachment)

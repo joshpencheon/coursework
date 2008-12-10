@@ -7,10 +7,13 @@
 
 body {
 	color: #222;
-	font-family: Arial, "MS Trebuchet", sans-serif;
 	background-color: #DDD;
 	min-width: 950px;
 	max-width: 1500px;
+}
+
+body, textarea {
+	font-family: Arial, "MS Trebuchet", sans-serif;
 }
 
 a {
@@ -32,13 +35,33 @@ label {
 
 /************** GENERIC STYLES **************/
 
+.left {
+	float: left;
+}
+
 .right {
 	float: right;
+}
+
+.col {
+	width: 49%;
+}
+
+.small_col {
+	width: 30%;
+}
+
+.large_col {
+	width: 65%;
 }
 
 .clear {
 	clear: both;
 	display: block;
+}
+
+.inline {
+	display: inline;
 }
 
 .push {
@@ -55,6 +78,18 @@ label {
 	position: relative;
 	top: 3px;
 }
+
+.ride_left {
+	position: relative;
+	left: -7px;
+}
+
+.ride_right {
+	position: relative;
+	left: 7px;
+}
+
+
 
 .spacer {
 	margin: 15px auto;
@@ -83,6 +118,12 @@ ul.indented {
 	padding-bottom: 3px;
 }
 
+img.bordered {
+	padding: 4px;
+	border: 1px solid #BBB;
+	background-color: #F1F8FE;
+}
+
 /************** FORM ELEMENTS **************/
 
 .error_description {
@@ -96,6 +137,10 @@ ul.indented {
 
 form p {
 	margin: 6px auto;
+}
+
+form p.button {
+	padding-top: 10px; 
 }
 
 input {
@@ -121,21 +166,9 @@ textarea {
 	height: 100px;
 }
 
-form.bold input, input.bold {
+form.bold input[type=text],
+form.bold input[type=password], 
+input[type=text].bold,
+input[type=password].bold {
 	font-size: 1.3em;
-}
-
-form.bold input[type=submit],
-input[type=submit].bold {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #AAA;
-	padding: 5px 15px;
-	background-color: #E5E5E5;
-}
-
-form.bold input[type=submit]:hover,
-input[type=submit]:hover.bold {
-	border-color: #ACE562;
-	background-color: #E0FDD4;
 }

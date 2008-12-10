@@ -23,5 +23,3 @@ $.fn.fadeUp = function(customOptions) {
 	element = $(this)
 	element.animate({height: 0, opacity: 0}, options)
 }
-
-jQuery.easing.def = "easeOutBounce";

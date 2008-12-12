@@ -1,0 +1,15 @@
+<div class="title">Knowledge Base Help</div>
+
+<p>
+	Are you having problems? You might like to view the 
+	<%= link_to_facebox 'welcome message', :ajax => help_path(:topic => 'welcome') %>
+	again.
+	
+	<% form_tag :controller => 'help', :action => 'search' do %>
+		<p style="padding: 10px 0;text-align: center">
+			<%= text_field_tag :search, nil, :style => 'width:180px;'%>
+			<%= submit_tag 'Search Help' %>
+		</p>
+	<% end %>
+	
+</p>

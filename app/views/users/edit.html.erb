@@ -1,8 +1,33 @@
 <h2>Your Profile</h2>
 
-<% form_for @user do |f| %>
-	<%= f.text_field :first_name %>
-	<%= f.text_field :last_name %>
-	<%= f.text_field :email %>
-	<p class="button"><%= f.submit 'Save my profile' %></p>
+<% form_for @user, :html => { :multipart => true, :class => 'bold' } do |f| %>
+	<div class="left col">
+			<%= f.text_field :first_name %>
+			<%= f.text_field :last_name %>
+			<%= f.text_field :email %>
+	</div>
+
+	<div id="avatar_upload_container" style="width:50%">
+		<h3 class="ride_up center">Attach an avatar</h3>
+		<div class="left center">
+			<span id="avatar"><%= avatar_for @user %></span>
+			<% if @user.avatar? %>
+				<p class="small">
+					Delete avatar:
+					<%= f.check_box :destroy_avatar, :no_label => true %>
+				</p>
+			<% end %>
+		</div>
+		<div id="avatar_fields" class="right" style="width:75%">
+			<% if @user.avatar? %>
+				<%= f.file_field :avatar, :no_label => true, :style => 'display:none' %>
+				<%= jquery_link 'Change my avatar', :id => 'replace_avatar' %>
+			<% else %>
+				If you like, you can upload a photo to be displayed by your name.
+				<%= f.file_field :avatar, :no_label => true %>
+			<% end %>
+		</div>		
+	</div>
+
+	<p class="button clear"><%= f.submit 'Save my profile' %></p>
 <% end %>

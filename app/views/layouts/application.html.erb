@@ -4,8 +4,12 @@
 	<head>
 		<title>SDU Knowledgebase</title>
 	
-		<%= javascript_include_tag %w( jquery jquery-ui facebox lowpro application ) %>
+		<%= javascript_include_tag %w( jquery jquery-ui ) %>
+		<%= javascript_include_tag %w( jquery.livequery ) %>
+		<%= javascript_include_tag %w( facebox  lowpro application behaviours ) %>
+		
 		<%= yield(:head) %>
+		
 		<%= stylesheet_link_tag %w( common styles facebox facebox_custom ) %>
 	</head>
 	
@@ -23,7 +27,7 @@
 			</div>
 		
 			<div id="sidebar">
-				This is text in the side bar
+				<%= render :partial => 'layouts/sidebar' %>
 			</div>
 	
 			<div class="push clear"></div>

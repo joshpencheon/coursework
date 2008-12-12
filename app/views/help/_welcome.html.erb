@@ -1,0 +1,15 @@
+<div class="title">Thanks for signing up!</div>
+<strong>Welcome to the NHS SDU Knowledge Base</strong>
+<p>
+	The purpose of this site it to gather together a number of case studies to form a sustainability best-practice guide. Much of this site's content is user-driven, meaning that it's people like you that contribute!
+</p>
+<p>
+	At some point, it would be great if you'd fill in some more details about yourself. This is to create a profile of you for other people who use the site - we will <em>never</em> share any of your details with a 3rd party, and you have the option to keep them hidden from other users too.
+</p>
+<p>
+	<strong>What would you like to do now?</strong>
+	<ul class="indented">
+		<li><%= link_to "Create my profile now", edit_user_path(current_user) %></li>
+		<li><%= jquery_link 'just start using the site', :class => 'hide_facebox' %></li>
+	</ul>
+</p>

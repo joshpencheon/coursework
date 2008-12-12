@@ -1,7 +1,8 @@
 <div id="header">
 	<p id="login" class="right">	
 	<% if logged_in? %>
-		You're logged in (<%= link_to 'Sign out', signout_path %>)
+		You're logged in (<%= link_to 'Settings', edit_user_path(current_user) %>,
+		<%= link_to 'Sign out', signout_path %>)
 	<% else %>	
 		<%= link_to 'Sign in', signin_path %> /
 		<%= link_to 'Sign up', signup_path %>
@@ -14,7 +15,7 @@
 	
 	<div id="menu" class="clear">
 		<ul class="right">
-			<li id="help_link"><%= link_to_facebox 'Help', :text => 'Oh no - an error occured!', :class => 'error' %></li>
+			<li id="help_link"><%= link_to_facebox 'Help', :ajax => help_path %></li>
     	<li id="search_link"><%= menu_link 'Search', users_path %></li>
 		</ul>
 		<ul>

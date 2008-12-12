@@ -7,10 +7,13 @@
 
 body {
 	color: #222;
-	font-family: Arial, "MS Trebuchet", sans-serif;
 	background-color: #DDD;
 	min-width: 950px;
 	max-width: 1500px;
+}
+
+body, textarea {
+	font-family: Arial, "MS Trebuchet", sans-serif;
 }
 
 a {
@@ -32,13 +35,37 @@ label {
 
 /************** GENERIC STYLES **************/
 
+.left {
+	float: left;
+}
+
 .right {
 	float: right;
+}
+
+.center {
+	text-align: center;
+}
+
+.col {
+	width: 40%;
+}
+
+.small_col {
+	width: 30%;
+}
+
+.large_col {
+	width: 65%;
 }
 
 .clear {
 	clear: both;
 	display: block;
+}
+
+.inline {
+	display: inline;
 }
 
 .push {
@@ -56,8 +83,31 @@ label {
 	top: 3px;
 }
 
+.ride_left {
+	position: relative;
+	left: -7px;
+}
+
+.ride_right {
+	position: relative;
+	left: 7px;
+}
+
+
+
 .spacer {
 	margin: 15px auto;
+}
+
+.icon {
+	height: 12px;
+	width: 12px;
+	position: relative;
+	top: 1px;
+}
+
+.small {
+	font-size: 0.8em;
 }
 
 .note {
@@ -76,6 +126,12 @@ ul.indented {
 	padding-bottom: 3px;
 }
 
+img.bordered {
+	padding: 4px;
+	border: 1px solid #BBB;
+	background-color: #F1F8FE;
+}
+
 /************** FORM ELEMENTS **************/
 
 .error_description {
@@ -91,14 +147,22 @@ form p {
 	margin: 6px auto;
 }
 
+form p.button {
+	padding-top: 10px; 
+}
+
 input {
 	padding: 3px;
 }
 
+input[type=file] {
+	width: 200px;
+}
+
 input[type=checkbox] {
 	position: relative;
-	top: 1px;
-	left: 1px;
+	top: 0.25em;
+	left: 0.1em;
 }
 
 input[type=text],
@@ -114,20 +178,9 @@ textarea {
 	height: 100px;
 }
 
-form.bold, input.bold,
-input[type=submit]  {
-	font-size: 1.2em;
-}
-
-input[type=submit] {
-	border-style: solid;
-	border-width: 1px;
-	border-color: #AAA;
-	padding: 5px 15px;
-	background-color: #E5E5E5;
-}
-
-input[type=submit]:hover {
-	border-color: #ACE562;
-	background-color: #E0FDD4;
+form.bold input[type=text],
+form.bold input[type=password], 
+input[type=text].bold,
+input[type=password].bold {
+	font-size: 1.3em;
 }

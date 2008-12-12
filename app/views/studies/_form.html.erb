@@ -4,9 +4,22 @@
 
   <%= f.text_area :description %>
 
-  <%= saved_attachments_for @study %>
-
-	<%= new_attachments_for @study %>
+	<% if @study.saved_attachments.any? %>
+		<%= jquery_link 'Manage existing attachments >>', :id => 'manage_attachments' %>
+		<div id="attachments" style="display:none;">
+			<div class="style_wrapper"><%= saved_attachments_for @study %></div>
+		</div>
+	<% else %>
+		<div id="attachments" style="display:none">
+		
+		</div>
+	<% end %>
 	
-	<p class="right"><%= f.submit 'Update' %></p>
+	<div>
+		<%= unsaved_attachments_for @study %>
+	
+		<%= jquery_link 'Attach a file', :id => 'add_attachment' %>
+	</div>
+	
+	<p><%= f.submit 'Save Study' %></p>
 <% end %>

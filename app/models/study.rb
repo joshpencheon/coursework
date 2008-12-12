@@ -1,8 +1,15 @@
 class Study < ActiveRecord::Base
+  belongs_to :user
+
   validates_presence_of :title, :description
   
+  before_validation :remove_blank_attachments
   has_many :attached_files, :dependent => :destroy
-  belongs_to :user
+  
+  has_many :events, :as => :news_item
+  create_events :attached_files
+  
+  has_dirty_associations :attached_files
   
   def saved_attachments
     @saved_attachments ||= attached_files.reject(&:new_record?)
@@ -10,9 +17,6 @@ class Study < ActiveRecord::Base
 
   def unsaved_attachments
     attached_files - saved_attachments
-    # returning attached_files - saved_attachments do |unsaved|
-    #   unsaved << attached_files.build unless unsaved.detect(&:untouched?)
-    # end 
   end
   
   def new_attached_file_attributes=(attached_file_attributes)
@@ -21,7 +25,7 @@ class Study < ActiveRecord::Base
     end
   end
   
-  def existing_attached_file_attibutes=(attached_file_attributes)
+  def existing_attached_file_attributes=(attached_file_attributes)
     saved_attachments.each do |attachment|
       attributes = attached_file_attributes[attachment.id.to_s]
       if attributes
@@ -32,4 +36,9 @@ class Study < ActiveRecord::Base
     end
   end
   
+  private 
+  
+  def remove_blank_attachments
+    attached_files.delete( attached_files.select(&:untouched?) )
+  end
 end

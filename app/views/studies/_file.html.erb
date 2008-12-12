@@ -1,13 +1,18 @@
-<p class="file">
-	<% if file.new_record? %>
-		<% fields_for_attachment(file) do |file_form| %>
-			<%= file_form.file_field :document %>		
-		<% end %>
-	<% else %>	
-		<% if file.image? %>
-			<strong><%= link_to_facebox file.document_file_name, :image => file.document.url %></strong>
+<div class="file">	
+	<%= jquery_link(icon('delete.png'), :class => 'file_delete_link') unless file.new_record? %>
+	
+	<% fields_for_attachment(file) do |file_form| %>
+		<% if file.new_record? %>
+			<%= file_form.file_field :document, :no_label => true %>		
 		<% else %>
-			<strong><%= file.document_file_name %></strong>
+			<%# provide a hook for removing a document in the Study model %>
+			<%= file_form.hidden_field :id %>
 		<% end %>
 	<% end %>
-</p>
+	
+	<% if file.image? %>
+		<strong><%= link_to_facebox file.document_file_name, :image => file.document.url %></strong>
+	<% else %>
+		<strong><%= file.document_file_name %></strong>
+	<% end unless file.new_record? %>
+</div>

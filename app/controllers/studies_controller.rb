@@ -20,7 +20,6 @@ class StudiesController < ApplicationController
       flash[:notice] = "Successfully created..."
       redirect_to @study
     else
-      flash[:notice] = "Something went wrong..."
       render :action => "new"
     end
   end

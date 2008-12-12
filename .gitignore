@@ -2,3 +2,6 @@ log/*.log
 .DS_Store
 tmp/*
 */.DS_Store
+public/documents/*
+public/images/icons/*
+vendor/*

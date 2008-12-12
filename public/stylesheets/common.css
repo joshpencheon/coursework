@@ -43,8 +43,12 @@ label {
 	float: right;
 }
 
+.center {
+	text-align: center;
+}
+
 .col {
-	width: 49%;
+	width: 40%;
 }
 
 .small_col {
@@ -102,6 +106,10 @@ label {
 	top: 1px;
 }
 
+.small {
+	font-size: 0.8em;
+}
+
 .note {
 	padding: 0 5px;
 	font-family: "MS Trebuchet", sans-serif;
@@ -147,10 +155,14 @@ input {
 	padding: 3px;
 }
 
+input[type=file] {
+	width: 200px;
+}
+
 input[type=checkbox] {
 	position: relative;
-	top: 1px;
-	left: 1px;
+	top: 0.25em;
+	left: 0.1em;
 }
 
 input[type=text],

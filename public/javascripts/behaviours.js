@@ -26,4 +26,30 @@ $(document).ready(function() {
 		}
 		$(this).toggleClass('deleted')
 	})
+	
+	//******** USER ********//
+	
+	$('#user_destroy_avatar').change(function() {
+		
+		if ($(this).attr("checked")) {
+			$('#avatar_fields').fadeOut('fast')
+			$('#avatar').fadeTo('fast', 0.5, function(){
+				$('#avatar_upload_container').animate({width:'20%'}, 'fast')
+			})
+		} else {
+			$('#avatar_upload_container').animate({width:'50%'}, 'fast', function(){
+				$('#avatar_fields').fadeIn('fast')				
+			})
+			$('#avatar').fadeTo('fast', 1)
+		}
+	})
+	
+	$('#replace_avatar').click(function() {
+		$('#user_avatar').toggle('fast')
+		if ($(this).text().match(/change/i))
+			$(this).text('Cancel')
+		else 
+			$(this).text('Change my avatar') 
+	})
+	
 })

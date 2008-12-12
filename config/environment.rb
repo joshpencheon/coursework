@@ -84,3 +84,6 @@ ActionView::Base.field_error_proc =
 # A field now follows a corresponding label, and it is all wrapped in a paragraph tag.
 # if the :no_label option evaluates to true, the field reverts to the default FormBuilder.
 ActionView::Base.default_form_builder = ::ActionView::Helpers::LabellingFormBuilder
+
+# Paperclip needs to know where ImageMagick's +identity+ command is:
+Paperclip.options[:image_magick_path] = '/opt/local/bin'

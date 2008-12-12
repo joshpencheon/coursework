@@ -1,21 +1,31 @@
 <h2>Your Profile</h2>
 
-<% form_for @user, :html => { :class => 'bold' } do |f| %>
-
+<% form_for @user, :html => { :multipart => true, :class => 'bold' } do |f| %>
 	<div class="left col">
 			<%= f.text_field :first_name %>
 			<%= f.text_field :last_name %>
 			<%= f.text_field :email %>
 	</div>
 
-	<div id="avatar_upload_container">
-		<h3 class="ride_up">Attach an avatar</h3>
-		<div class="left small_col">
-			<%= image_tag 'user_placeholder.png', :class => 'bordered ride_right' %>
+	<div id="avatar_upload_container" style="width:50%">
+		<h3 class="ride_up center">Attach an avatar</h3>
+		<div class="left center">
+			<span id="avatar"><%= avatar_for @user %></span>
+			<% if @user.avatar? %>
+				<p class="small">
+					Delete avatar:
+					<%= f.check_box :destroy_avatar, :no_label => true %>
+				</p>
+			<% end %>
 		</div>
-		<div class="right large_col">
-			<p>If you like, you can upload a photo to be displayed by your name.</p>
-			<%= f.file_field :avatar, :no_label => true %>
+		<div id="avatar_fields" class="right" style="width:75%">
+			<% if @user.avatar? %>
+				<%= f.file_field :avatar, :no_label => true, :style => 'display:none' %>
+				<%= jquery_link 'Change my avatar', :id => 'replace_avatar' %>
+			<% else %>
+				If you like, you can upload a photo to be displayed by your name.
+				<%= f.file_field :avatar, :no_label => true %>
+			<% end %>
 		</div>		
 	</div>
 

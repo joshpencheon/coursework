@@ -29,6 +29,8 @@ class UsersController < ApplicationController
   end
   
   def update
+    params[:user][:avatar] = nil if (params[:user][:destroy_avatar] == '1' && params[:user][:avatar].blank?)
+    
     if @user.update_attributes(params[:user])
       flash[:notice] = "Successfully updated..."
       redirect_to @user

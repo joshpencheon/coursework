@@ -8,18 +8,6 @@ jQuery(document).ready(function($) {
 	})
 })
 
-$.fn.appearDown = function(customOptions) {
-	options = { duration:750 }
-	$.extend(options, customOptions || {})
-	element = $(this)
-	var elementHeight = element.height()
-	element.height(0).css({opacity:0})
-	element.animate({height: elementHeight, opacity: 1}, options)
-}
-
-$.fn.fadeUp = function(customOptions) {
-	options = { duration:750 }
-	$.extend(options, customOptions || {})
-	element = $(this)
-	element.animate({height: 0, opacity: 0}, options)
+$.fn.spin = function() {
+	$(this).after('<img src="/images/spinner.gif"/>')
 }

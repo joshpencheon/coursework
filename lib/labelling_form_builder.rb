@@ -23,12 +23,6 @@ class LabellingFormBuilder < ActionView::Helpers::FormBuilder
         end
     @template.label_tag(field, label_contents)
   end
-  
-  private
-  
-  def label_tag(field, text)
-    content_tag :label, label_contents, :for => field
-  end
     
 end
 

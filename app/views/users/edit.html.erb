@@ -1,33 +1,58 @@
 <h2>Your Profile</h2>
 
 <% form_for @user, :html => { :multipart => true, :class => 'bold' } do |f| %>
-	<div class="left col">
-			<%= f.text_field :first_name %>
-			<%= f.text_field :last_name %>
-			<%= f.text_field :email %>
-	</div>
 
-	<div id="avatar_upload_container" style="width:50%">
-		<h3 class="ride_up center">Attach an avatar</h3>
-		<div class="left center">
-			<span id="avatar"><%= avatar_for @user %></span>
-			<% if @user.avatar? %>
-				<p class="small">
+	<div id="avatar_upload_container">
+		<h3 class="ride_up center">Avatar</h3>
+		
+		<div id="avatar_display" class="left center">
+			<div id="avatar"><%= avatar_for @user %></div>
+			
+			<p class="small">
+				<% if @user.avatar? %>
 					Delete avatar:
-					<%= f.check_box :destroy_avatar, :no_label => true %>
-				</p>
-			<% end %>
+				<% else %>
+					Use default:
+				<% end %>
+				
+				<%= f.check_box :destroy_avatar, :no_label => true %>
+			</p>
 		</div>
-		<div id="avatar_fields" class="right" style="width:75%">
-			<% if @user.avatar? %>
-				<%= f.file_field :avatar, :no_label => true, :style => 'display:none' %>
-				<%= jquery_link 'Change my avatar', :id => 'replace_avatar' %>
-			<% else %>
-				If you like, you can upload a photo to be displayed by your name.
-				<%= f.file_field :avatar, :no_label => true %>
-			<% end %>
-		</div>		
+		
+		<div id="avatar_fields">
+			<p class="note">
+				<% if @user.avatar? %>
+					If you want to change your avatar, can overwrite you existing one by uploading another image.
+				<% else %>
+					If you like, you can upload a photo to be displayed by your name.
+				<% end %>
+			</p>
+			
+			<p><%= f.file_field :avatar, :no_label => true %></p>			
+		</div>	
+	</div>
+	
+	<div id="user_fields">
+		<h3 class="ride_up center">Basic info</h3>
+		<%= f.text_field :first_name %>
+		<%= f.text_field :last_name %>
+	</div>
+	
+	<div class="clear"></div>
+	
+	<div id="email_fields">
+		<h3 class="ride_up center">Email address</h3>
+		<p>
+			<span class="note right ride_up">Keep my email private: <%= f.check_box :email_hidden, :no_label => true %></span>
+			<%= f.text_field :email %>
+		</p>
+		<div id="privacy_help" class="note bordered" style="display:none;">
+			<strong>- Your email address is private.</strong> This means that other users will have to make a request before they can get in contact.
+		</div>
 	</div>
 
-	<p class="button clear"><%= f.submit 'Save my profile' %></p>
+	<div class="button clear">
+		<%= f.submit 'Save my profile' %>
+		or <%= link_to 'cancel', @user %>
+	</div>
 <% end %>

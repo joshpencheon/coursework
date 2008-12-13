@@ -10,8 +10,8 @@ class AttachedFile < ActiveRecord::Base
     'PNG'           => 'png',
     'text'          => 'txt'
   }
-  APPLICATION_REGEXP = %r{^(x-)?application/x-png|jpg|pjpeg|#{ALLOWED_CONTENT_TYPES.values.join('|')}$}
-  IMAGE_REGEXP = %r{^image/(x-png|pjpeg|jpeg|jpg|png|gif)$}
+  APPLICATION_REGEXP = %r{^(x-)?application/#{ALLOWED_CONTENT_TYPES.values.join('|')}$}
+  IMAGE_REGEXP = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
   
   belongs_to :study
   has_attached_file :document

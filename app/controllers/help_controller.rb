@@ -12,6 +12,9 @@ class HelpController < ApplicationController
   def welcome
   end
   
+  def private_details
+  end
+  
   private
   
   def get_partial

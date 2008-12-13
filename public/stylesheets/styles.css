@@ -4,6 +4,16 @@ html, body {
 	font-size: 13px;
 }
 
+h2 {
+	text-align: center;
+	-webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+	padding: 10px;
+	background-color: #E9E9E9;
+	margin-bottom: 12px;
+	
+}
+
 /************** STRUCTURE ELEMENTS **************/
 
 #header {
@@ -161,12 +171,45 @@ li#help_link a {
 
 /****** ADDING ATTACHMENTS ******/
 
-#avatar_upload_container {
+div.button {
 	-webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-	padding: 15px;
-	background-color: #EAF0F8;
+	margin-top: 1em;
+	padding: 15px 25px;
+	background-color: #E0F7DB;	
+}
+
+#user_fields {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	padding: 15px 25px 23px 25px;
+	background-color: #FCF2E6;
+	margin-right: 55%;
+}
+
+#email_fields {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	margin-top: 1em;
+	padding: 15px 25px;
+	background-color: #EEFAE1;	
+}
+
+#avatar_upload_container {
 	float: right;
+	width: 47%;
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	padding: 15px 25px;
+	background-color: #EAF0F8;
+}
+
+#avatar_display {
+	padding: 0 10px;
+}
+
+#avatar_fields a {
+	line-height: 2em;
 }
 
 #add_attachment {

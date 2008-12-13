@@ -10,7 +10,7 @@ $(document).ready(function() {
 	// Shows existing files attached to a study
 	$('#manage_attachments').click(function(event) {
 		event.preventDefault()
-		$('#attachments').toggle('blind', {}, 'slow', null, 'EaseOutBounce')
+		$('#attachments').toggle('blind')
 	})
 
 	// Removes an existing file from a study
@@ -18,8 +18,7 @@ $(document).ready(function() {
 		event.preventDefault()
 		var parent = $(this).parent()
 		if ($(this).hasClass('deleted')) {
-			parent.fadeTo('slow', 1.0, function() {
-				$(this).find('span').remove() })
+			parent.fadeTo('slow', 1.0, function() { $(this).find('span').remove() })
 		} else {
 			parent.fadeTo('slow', 0.5).find('input').remove().end()
 			.append('<span>will be deleted when you save this study. Click again to undelete.</span>')
@@ -28,28 +27,43 @@ $(document).ready(function() {
 	})
 	
 	//******** USER ********//
-	
-	$('#user_destroy_avatar').change(function() {
+
+	toggleAvatar = function() {
+		var fields = $('#user_fields')
+		var box = $('#avatar_upload_container')
+		var avatar = $('#avatar')
+		var leftSide = $('#avatar_display')		
+		var rightSide = $('#avatar_fields')
 		
-		if ($(this).attr("checked")) {
-			$('#avatar_fields').fadeOut('fast')
-			$('#avatar').fadeTo('fast', 0.5, function(){
-				$('#avatar_upload_container').animate({width:'20%'}, 'fast')
+		if (!rightSide.is(':hidden')) {
+			avatar.fadeTo('slow', 0.5)
+			rightSide.fadeOut('fast', function() {
+				box.animate({ width: leftSide.outerWidth() + 5 + 'px' })
+				fields.animate({ marginRight: leftSide.outerWidth() + 70 + 'px' })
 			})
 		} else {
-			$('#avatar_upload_container').animate({width:'50%'}, 'fast', function(){
-				$('#avatar_fields').fadeIn('fast')				
-			})
-			$('#avatar').fadeTo('fast', 1)
+			avatar.fadeTo('fast', 1)
+			box.css({width: box.width() + 'px'})
+			box.animate({ width:'47%' }, function() { rightSide.fadeIn() })
+			fields.animate({ marginRight:'55%' })
 		}
-	})
+	}
 	
-	$('#replace_avatar').click(function() {
-		$('#user_avatar').toggle('fast')
-		if ($(this).text().match(/change/i))
-			$(this).text('Cancel')
-		else 
-			$(this).text('Change my avatar') 
+	$('#user_destroy_avatar').attr("checked", null)
+	
+	$('#user_destroy_avatar').change(function() { toggleAvatar() })
+	
+	$('#hide_avatar').click(function() {
+		toggleAvatar()
+		return false
+	})
+
+	if ($('#user_email_hidden').attr("checked")) $('#privacy_help').show()
+	
+	$('#user_email_hidden').change(function() {
+		var container = $('#privacy_help')
+		if ($(this).attr("checked")) container.show('blind')
+		else container.hide('blind')
 	})
 	
 })

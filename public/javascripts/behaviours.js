@@ -1,4 +1,16 @@
 $(document).ready(function() {
+	
+	//*********** VIEW A STUDY *************
+	
+	$('#watch_study_link').livequery(function() {
+		$(this).click(function(event) {
+			$.post($(this).attr('href'), {}, null, 'script')
+			return false			
+		})
+	})
+	
+	//********* EDITING A STUDY ************
+	
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
 		event.preventDefault()
@@ -62,8 +74,9 @@ $(document).ready(function() {
 	
 	$('#user_email_hidden').change(function() {
 		var container = $('#privacy_help')
-		if ($(this).attr("checked")) container.show('blind')
-		else container.hide('blind')
+		if ($(this).attr("checked")) container.fadeTo(1, 0.001).show('blind', {}, 200, function(){ 
+			container.fadeTo(200, 1) })
+		else container.fadeTo(200, 0.001, function(){container.hide('blind',{}, 200)})
 	})
 	
 })

@@ -1,15 +1,24 @@
 class Study < ActiveRecord::Base
   belongs_to :user
+  
+  with_options :dependent => :destroy do |study|
+    study.has_many :watchings
+    study.has_many :attached_files
+    study.has_many :events, :as => :news_item    
+  end
+  
+  has_many :watchers, :through => :watchings, :source => :user
+  
+  before_validation :remove_blank_attachments
 
   validates_presence_of :title, :description
   
-  before_validation :remove_blank_attachments
-  has_many :attached_files, :dependent => :destroy
-  
-  has_many :events, :as => :news_item
-  create_events :attached_files
-  
   has_dirty_associations :attached_files
+  
+  
+  def watched_by?(user)
+    watchers.include? user
+  end
   
   def saved_attachments
     @saved_attachments ||= attached_files.reject(&:new_record?)

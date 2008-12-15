@@ -36,7 +36,8 @@ class AttachedFile < ActiveRecord::Base
   
   def untouched?
     return false unless new_record?
-    attributes == study.attached_files.build.attributes
+    (attributes == self.class.new.attributes) ||
+      (attributes == study.attached_files.build.attributes)
   end
 
 end

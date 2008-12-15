@@ -28,11 +28,16 @@ module LayoutHelper
     content_for(:head) { javascript_tag { concat js, block.binding } }
   end
   
+  def sidebar_link(*args)
+    content_for(:sidebar) { content_tag :li, link_to(*args) }
+  end
+  
   def menu_link(name, path, options = {})
     current = (path =~ %r(#{controller.controller_name})) ? {:class => 'current'} : {}
     link_to name, path, options.merge(current)
   end 
   
+  # TODO: Remove - this is bad as it doesn't allow for a fallback behaviour.
   def jquery_link(name, options = {})
     content_tag :a, name, options.merge({:href => 'javascript:;'})
   end

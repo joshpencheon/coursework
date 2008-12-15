@@ -160,11 +160,18 @@ li#help_link a {
 
 #sidebar li {
 	font-weight: bold;
-	padding: 10px 0 10px 20px;
 	border-top: 1px solid #CCC;
 }
 
-#sidebar li:hover {
+#sidebar li a {
+	display: block;
+	color: #444;
+	padding: 10px 0 10px 20px;
+	text-decoration: none;
+} 
+
+#sidebar li a:hover {
+	text-decoration: underline;
 	background-color: #DDD; 
 }
 

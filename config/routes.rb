@@ -2,9 +2,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.help '/help', :controller => 'help'
   
-  map.resources :studies
+  map.resources :studies, :member => { :watch => :post, :unwatch => :post }
   
   map.resources :users
+  
   map.with_options :controller => "users" do |user|
     user.resource :account
     user.signup "/signup", :action => "new"

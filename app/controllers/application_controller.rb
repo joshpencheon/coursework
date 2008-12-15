@@ -9,17 +9,3 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
 end
-
-class ActiveRecord::Base
-  def self.create_events(included_assocations)
-    class_eval <<-END 
-      attr_accessor  :dumped_event_data 
-      attr_protected :dumped_event_data
-    END
- 
-    news = EventCreator.new(included_assocations)
-    
-    before_save news
-    after_save  news
-  end
-end

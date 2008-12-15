@@ -1,3 +1,15 @@
+<% if logged_in? %>
+	<% content_for :sidebar do %>
+		<li>
+			<% if @study.watched_by? current_user %>
+				<%= link_to 'Stop watching this study', unwatch_study_path(@study), :id => 'watch_study_link'  %>				
+			<% else %>
+				<%= link_to 'Watch this study', watch_study_path(@study), :id => 'watch_study_link'  %>				
+			<% end %>
+		</li>
+	<% end %>
+<% end %>
+
 <%= render :partial => @study %>
 
 <%= link_to "Edit", edit_study_path(@study) %>

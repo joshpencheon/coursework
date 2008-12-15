@@ -9,10 +9,19 @@ class User < ActiveRecord::Base
   attr_accessor :destroy_avatar  
   attr_protected :avatar_content_type, :avatar_file_name, :avatar_size
   
-  has_many :studies, :dependent => :destroy
+  with_options :dependent => :destroy do |user|
+    user.has_many :studies
+    user.has_many :watchings
+  end
+  
+  has_many :watched_studies, :through => :watchings, :source => :study
   
   def name
     [first_name, last_name].reject(&:blank?).join(' ')
+  end
+  
+  def watching?(study)
+    watched_studies.include? study
   end
 
 end

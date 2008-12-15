@@ -1,5 +1,5 @@
 class StudiesController < ApplicationController
-  before_filter :find_study, :only  => [ :show, :edit, :update, :destroy ]
+  before_filter :find_study, :only  => [ :show, :watch, :unwatch, :edit, :update, :destroy ]
   before_filter :authorize, :except => [ :index, :show ]
   
   def index
@@ -10,6 +10,14 @@ class StudiesController < ApplicationController
   
   end
 
+  def watch
+    Watching.link(@study, current_user)
+  end
+
+  def unwatch
+    Watching.unlink(@study, current_user)
+  end
+  
   def new
     @study = current_user.studies.new
   end

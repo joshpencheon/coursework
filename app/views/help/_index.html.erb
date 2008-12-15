@@ -1,9 +1,7 @@
 <div class="title">Knowledge Base Help</div>
 
 <p>
-	Are you having problems? You might like to view the 
-	<%= link_to_facebox 'welcome message', :ajax => help_path(:topic => 'welcome') %>
-	again.
+	Having problems? Use the box below to search help topics.
 	
 	<% form_tag :controller => 'help', :action => 'search' do %>
 		<p style="padding: 10px 0;text-align: center">

@@ -17,7 +17,7 @@ module LayoutHelper
       partial_path.collect{ |path| require_jquery(path) }
     else
       js = "$(document).ready(function(){" + render(:partial => 'javascripts/' + partial_path + '.js.erb') + "});"
-      content_for(:head) { javascript_tag { js }}
+      content_for(:head) { javascript_tag { js } }
     end
   end
   
@@ -25,7 +25,7 @@ module LayoutHelper
   # wrapping it in <script> tags and a jQuery dom:loaded statement  
   def jquery_block(&block)
     js = "$(document).ready(function(){" + capture(&block) + "});"
-    content_for(:head) { javascript_tag { concat js, block.binding } }
+    content_for(:head) { javascript_tag { concat js } }
   end
   
   def sidebar_link(*args)

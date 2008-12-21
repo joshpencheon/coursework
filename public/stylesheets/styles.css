@@ -31,7 +31,7 @@ h2 {
 }
 
 #menu ul {
-	margin: 0 0 2px 0;
+	margin: 0 0 1px 0;
 }
 
 #menu, #menu ul {
@@ -71,15 +71,18 @@ li#help_link a {
   -moz-border-radius-topright: 5px;
   -moz-border-radius-topleft: 5px;
 	text-decoration: none;
+	text-shadow: #333 1px 1px 2px;
 	font-weight: bold;
 	display: block;
 	background-color: #5F873B;
+	border: 1px solid #5F873B;
+	border-width: 1px 1px 0 1px;
 	color: #FFF;
 	padding: 8px 10px 8px 30px;
 }
 
 #menu a.current, #menu a:hover {
-	background-color: #6A9741;
+	background-color: #6C953C;
 }
 
 #content {
@@ -158,6 +161,13 @@ li#help_link a {
 	list-style-type: none;
 }
 
+#sidebar h5 {
+	position: relative;
+	left: -5px;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+}
+
 #sidebar li {
 	font-weight: bold;
 	border-top: 1px solid #CCC;
@@ -173,6 +183,12 @@ li#help_link a {
 #sidebar li a:hover {
 	text-decoration: underline;
 	background-color: #DDD; 
+}
+
+#sidebar li a.in_progress {
+	background-image: url(/images/spinner.gif);
+	background-position: 95%;
+	background-repeat: no-repeat;
 }
 
 

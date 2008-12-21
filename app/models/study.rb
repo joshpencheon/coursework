@@ -4,17 +4,16 @@ class Study < ActiveRecord::Base
   with_options :dependent => :destroy do |study|
     study.has_many :watchings
     study.has_many :attached_files
-    study.has_many :events, :as => :news_item    
+    study.has_many :events, :as => :news_item
   end
   
   has_many :watchers, :through => :watchings, :source => :user
   
   before_validation :remove_blank_attachments
-
   validates_presence_of :title, :description
   
   has_dirty_associations :attached_files
-  
+  before_save    EventCreator.new
   
   def watched_by?(user)
     watchers.include? user

@@ -14,7 +14,7 @@ class StudiesController < ApplicationController
     Watching.link(@study, current_user)
   end
 
-  def unwatch
+  def unwatch     
     Watching.unlink(@study, current_user)
   end
   
@@ -37,6 +37,8 @@ class StudiesController < ApplicationController
   end
   
   def update
+    1/0
+    
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
       redirect_to @study

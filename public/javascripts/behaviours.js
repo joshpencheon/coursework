@@ -2,11 +2,12 @@ $(document).ready(function() {
 	
 	//*********** VIEW A STUDY *************
 	
-	$('#watch_study_link').livequery(function() {
-		$(this).click(function(event) {
-			$.post($(this).attr('href'), {}, null, 'script')
-			return false			
-		})
+	$('#watch_study_link').click(function(event) {
+		$(this).addClass('in_progress')
+		$.post($(this).attr('href'), {}, function() {
+			$(event.target).removeClass('in_progress')				
+		}, 'script')
+		return false			
 	})
 	
 	//********* EDITING A STUDY ************
@@ -14,7 +15,10 @@ $(document).ready(function() {
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
 		event.preventDefault()
-		$('#attachments').after('<div class="file"><input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" /></div>');
+		$('#attachments').after('\
+			<div class="file"> \
+				<input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" /> \
+			</div>');
 		$('.file:last').hide().slideDown()
 		$(this).text('Attach another file')
 	})
@@ -29,13 +33,10 @@ $(document).ready(function() {
 	$('.file_delete_link').click(function(event) {
 		event.preventDefault()
 		var parent = $(this).parent()
-		if ($(this).hasClass('deleted')) {
-			parent.fadeTo('slow', 1.0, function() { $(this).find('span').remove() })
-		} else {
-			parent.fadeTo('slow', 0.5).find('input').remove().end()
-			.append('<span>will be deleted when you save this study. Click again to undelete.</span>')
-		}
-		$(this).toggleClass('deleted')
+		if (parent.hasClass('deleted')) return false
+		parent.fadeTo('slow', 0.5).addClass('deleted')
+			.append('<span>will be deleted when you save this study.</span>')
+		event.unbind()
 	})
 	
 	//******** USER ********//

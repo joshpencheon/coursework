@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   with_options :dependent => :destroy do |user|
     user.has_many :studies
     user.has_many :watchings
+    user.has_many :notifications
   end
   
   has_many :watched_studies, :through => :watchings, :source => :study

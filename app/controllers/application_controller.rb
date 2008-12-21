@@ -8,4 +8,12 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :confirm_password
   helper_method :current_user_session, :current_user
 
+  before_filter :add_delay_to_xhr_requests
+  
+  private
+  
+  def add_delay_to_xhr_requests
+    sleep 1 if request.xhr? 
+  end
+
 end

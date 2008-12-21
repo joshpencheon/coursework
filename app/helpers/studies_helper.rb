@@ -1,5 +1,16 @@
 module StudiesHelper
   
+  def watch_link_for(study)
+    options = if study.watched_by? current_user
+      [ 'Stop watching this study', unwatch_study_path(@study) ]
+    else
+      [ 'Watch this study', watch_study_path(@study) ]
+    end
+    options << { :id => 'watch_study_link'}
+    
+    sidebar_action(*options)
+  end
+  
   def saved_attachments_for(study)
     render(:partial => 'file', :collection => study.saved_attachments)
   end

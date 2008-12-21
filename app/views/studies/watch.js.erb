@@ -1,3 +1,6 @@
-$.facebox("You're now watching this study.")
+var link = $('#watch_study_link')
 
-$('#watch_study_link').replaceWith("<%= escape_javascript(link_to('Stop watching this study', unwatch_study_path(@study), :id => 'watch_study_link')) %>")
+link.attr('href','<%= escape_javascript(unwatch_study_path(@study)) %>')
+link.fadeTo(150, 0.001, function(){
+	link.text('Stop watching this study').fadeTo(150, 1)
+})

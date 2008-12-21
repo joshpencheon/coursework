@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081215194536) do
+ActiveRecord::Schema.define(:version => 20081221133521) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20081215194536) do
     t.text     "description"
     t.string   "news_item_type"
     t.integer  "news_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "notifications", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.boolean  "read"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

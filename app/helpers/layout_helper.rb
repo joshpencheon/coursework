@@ -16,20 +16,14 @@ module LayoutHelper
     if partial_path.is_a?(Array) 
       partial_path.collect{ |path| require_jquery(path) }
     else
-      js = "$(document).ready(function(){" + render(:partial => 'javascripts/' + partial_path + '.js.erb') + "});"
-      content_for(:head) { javascript_tag { js } }
+      partial = render(:partial => 'javascripts/' + partial_path + '.js.erb')
+      content_for(:head) { javascript_tag { "$(document).ready(function(){#{partial}});" } }
     end
   end
   
-  # Puts any enclosed javascript into the <head> of the document, 
-  # wrapping it in <script> tags and a jQuery dom:loaded statement  
-  def jquery_block(&block)
-    js = "$(document).ready(function(){" + capture(&block) + "});"
-    content_for(:head) { javascript_tag { concat js } }
-  end
-  
-  def sidebar_link(*args)
-    content_for(:sidebar) { content_tag :li, link_to(*args) }
+  def sidebar_action(*args)
+    @sidebar_action ||= []
+    @sidebar_action << content_tag(:li, link_to(*args))
   end
   
   def menu_link(name, path, options = {})

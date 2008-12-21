@@ -1,3 +1,5 @@
 <% for user in @users %>
-<p><%= user.name || 'anon.' %>  (<%= user.login %>) </p>
+<p>
+	<%= link_to "#{user.name || 'anon.'} (#{user.login})", user %>
+</p>
 <% end %>

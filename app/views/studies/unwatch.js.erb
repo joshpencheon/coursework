@@ -1,6 +1,0 @@
-var link = $('#watch_study_link')
-
-link.attr('href','<%= escape_javascript(watch_study_path(@study)) %>')
-link.fadeTo(150, 0.001, function(){
-	link.text('Watch this study').fadeTo(150, 1)
-})

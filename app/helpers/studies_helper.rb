@@ -1,15 +1,14 @@
 module StudiesHelper
   
-  def watch_link_for(study)
-    options = if study.watched_by? current_user
-      [ 'Stop watching this study', unwatch_study_path(@study) ]
-    else
-      [ 'Watch this study', watch_study_path(@study) ]
-    end
-    options << { :id => 'watch_study_link'}
-    
-    sidebar_action(*options)
+  def text_for_watch_link(study)
+    study.watched_by?(current_user) ? 'Stop watching this study' : 'Watch this study'    
   end
+  
+  def watch_link_for(study)
+    sidebar_action(text_for_watch_link(study), watch_study_path(study), :class => 'watch_study_link')
+  end
+  
+  
   
   def saved_attachments_for(study)
     render(:partial => 'file', :collection => study.saved_attachments)
@@ -18,6 +17,8 @@ module StudiesHelper
   def unsaved_attachments_for(study)
     render(:partial => 'file', :collection => study.unsaved_attachments)
   end
+
+  
   
   def fields_for_attachment(attachment, &block)
     prefix = attachment.new_record? ? 'new' : 'existing'

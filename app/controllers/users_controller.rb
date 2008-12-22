@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :authorize, :except => [ :new ]
-  before_filter :find_user, :except => [ :index, :new, :create ]
+  before_filter :authorize, :except => [ :new, :create ]
+  before_filter :find_user, :only => [ :show, :edit, :update, :destroy ]
 
   def index
     @users = User.all

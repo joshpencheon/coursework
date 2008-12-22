@@ -2,10 +2,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.help '/help', :controller => 'help'
   
-  # The members need to be made into POST requests
-  map.resources :notifications, :only => :index, :member => { :read => :get, :follow => :get }
+  map.resources :notifications, :only => :index, :member => { :read => :put, :follow => :post }
   
-  map.resources :studies, :member => { :watch => :post, :unwatch => :post }
+  map.resources :studies, :member => { :watch => :post }
   
   map.resources :users
   

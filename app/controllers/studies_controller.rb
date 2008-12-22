@@ -11,11 +11,12 @@ class StudiesController < ApplicationController
   end
 
   def watch
-    Watching.link(@study, current_user)
-  end
-
-  def unwatch     
-    Watching.unlink(@study, current_user)
+    Watching.toggle(@study, current_user)
+    
+    respond_to do |format|
+      format.html { redirect_to @study }
+      format.js   # Render the relevant template.
+    end
   end
   
   def new
@@ -36,9 +37,7 @@ class StudiesController < ApplicationController
     
   end
   
-  def update
-    1/0
-    
+  def update    
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
       redirect_to @study

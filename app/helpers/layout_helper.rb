@@ -22,8 +22,8 @@ module LayoutHelper
   end
   
   def sidebar_action(*args)
-    @sidebar_action ||= []
-    @sidebar_action << content_tag(:li, link_to(*args))
+    @sidebar_actions ||= []
+    @sidebar_actions << content_tag(:li, link_to(*args))
   end
   
   def menu_link(name, path, options = {})

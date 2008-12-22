@@ -3,13 +3,11 @@ class Watching < ActiveRecord::Base
   belongs_to :user
   belongs_to :study
   
-  def self.link(study, user)
-    unless study.watched_by? user
+  def self.toggle(study, user)
+    if study.watched_by? user
+      delete_all([ "study_id = ? AND user_id = ?", study.id, user.id ])
+    else
       create(:study_id => study.id, :user_id => user.id)
     end
-  end
-  
-  def self.unlink(study, user)
-    delete_all([ "study_id = ? AND user_id = ?", study.id, user.id ])
   end
 end

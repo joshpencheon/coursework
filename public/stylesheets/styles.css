@@ -51,6 +51,10 @@ li#people_link a {
 	background: #5F873B url(/images/people.png) no-repeat 12px 8px;
 }
 
+li#notification_link a {
+	background: #5F873B url(/images/notification.png) no-repeat 12px 8px;
+}
+
 li#search_link a {
 	background: #5F873B url(/images/search.png) no-repeat 12px 8px;
 }
@@ -191,6 +195,12 @@ li#help_link a {
 	background-repeat: no-repeat;
 }
 
+/********* NOTIFICATION *********/
+
+.notification {
+	border: 1px solid #DDD;
+	padding: 10px;
+}
 
 /****** ADDING ATTACHMENTS ******/
 

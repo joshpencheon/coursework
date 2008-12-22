@@ -1,7 +1,7 @@
 <ul>
-	<% if @sidebar_action && @sidebar_action.any? %>
+	<% if @sidebar_actions && @sidebar_actions.any? %>
 		<h5>Actions</h5>
-		<% for link in @sidebar_action %>
+		<% for link in @sidebar_actions %>
 			<%= link %>
 		<% end %>	
 	<% end %>

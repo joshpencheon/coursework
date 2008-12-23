@@ -1,0 +1,13 @@
+<% notification_div_for notification do %>
+  <div class="right" style="text-align:right">
+    <p><%= read_link(notification) %></p><br/>
+    <p><%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %></p>
+  </div>
+    
+  <p>
+    <%= notification.event.description %>
+    <span class="relative"><%= time_ago_in_words notification.created_at %> ago</span>
+  </p>
+  
+  <div class="clear"></div>
+<% end %>

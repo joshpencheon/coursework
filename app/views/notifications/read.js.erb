@@ -1,0 +1,5 @@
+<% partial = escape_javascript(render(:partial => 'notification.html.erb', :locals => {:notification => @notification })) %>
+
+$('#notification_<%= @notification.id %>').replaceThroughFade('100', '<%= partial %>')
+
+Notification.capsule.set('<%= @notification.user.notifications.unread.size %>')

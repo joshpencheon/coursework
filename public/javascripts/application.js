@@ -6,13 +6,7 @@ $(document).ready(function($) {
 		loadingImage : '/images/facebox/loading.gif',
 		closeImage   : '/images/facebox/closelabel.gif',
 		opacity      : 0.1 })
-	})
-	
-	// Initialise relative timestamps.
-	$('abbr[class*=timeago]').livequery(function(){ 
-		$(this).timeago();
-	})
-	
+	})	
 })
 
 $.fn.updateThroughFade = function(time, text, callback) {
@@ -55,3 +49,14 @@ jQuery.extend({
     return _ajax_request(url, data, callback, type, 'DELETE');
   }
 })
+
+var Notification = {
+	_create_capsule: function(value) {
+		tab = $('#notification_link').css({position: 'relative'})
+		
+		capsule = $('<span id="notification_count"></span>')
+		capsule.appendTo(tab).hide().text(value)
+		offset = tab.outerWidth() - capsule.outerWidth() / 2
+		capsule.css({left: offset + 'px'}).show()
+	}
+}

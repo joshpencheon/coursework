@@ -55,6 +55,17 @@ li#notification_link a {
 	background: #5F873B url(/images/notification.png) no-repeat 12px 8px;
 }
 
+#notification_count {
+	position: absolute;
+	top: -0.8em;
+	border: 2px solid white;
+	background-color: red;
+	color: white;
+	padding: 2px 5px;
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+
 li#search_link a {
 	background: #5F873B url(/images/search.png) no-repeat 12px 8px;
 }

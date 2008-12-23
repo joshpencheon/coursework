@@ -61,8 +61,10 @@ $(document).ready(function() {
 	})
 	
 	//******** USER ********//
-
-	toggleAvatar = function() {
+	
+	$('#user_destroy_avatar').attr("checked", null)
+	
+	$('#user_destroy_avatar').change(function() { 
 		var fields = $('#user_fields')
 		var box = $('#avatar_upload_container')
 		var avatar = $('#avatar')
@@ -80,16 +82,7 @@ $(document).ready(function() {
 			box.css({width: box.width() + 'px'})
 			box.animate({ width:'47%' }, function() { rightSide.fadeIn() })
 			fields.animate({ marginRight:'55%' })
-		}
-	}
-	
-	$('#user_destroy_avatar').attr("checked", null)
-	
-	$('#user_destroy_avatar').change(function() { toggleAvatar() })
-	
-	$('#hide_avatar').click(function() {
-		toggleAvatar()
-		return false
+		}	
 	})
 
 	if ($('#user_email_hidden').attr("checked")) $('#privacy_help').show()

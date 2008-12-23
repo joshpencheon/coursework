@@ -2,7 +2,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.help '/help', :controller => 'help'
   
-  map.resources :notifications, :only => :index, :member => { :read => :put, :follow => :post }
+  map.resources :notifications, :only => :index, 
+    :member => { :read => :put, :follow => :post },
+    :collection => { :count => :get }
   
   map.resources :studies, :member => { :watch => :post }
   

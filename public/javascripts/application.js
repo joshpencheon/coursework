@@ -50,13 +50,28 @@ jQuery.extend({
   }
 })
 
-var Notification = {
-	_create_capsule: function(value) {
-		tab = $('#notification_link').css({position: 'relative'})
-		
-		capsule = $('<span id="notification_count"></span>')
-		capsule.appendTo(tab).hide().text(value)
-		offset = tab.outerWidth() - capsule.outerWidth() / 2
-		capsule.css({left: offset + 'px'}).show()
+var Notification = {	
+	capsule: {
+		create: function(value) {
+			tab = $('#notification_link').css({position: 'relative'})
+			capsule = $('<span id="notification_count" class="notification_count"></span>')
+			this.element = capsule.appendTo(tab).hide().css({right: '-1em'})
+				.click(function() { Notification.capsule.updateRemotely() })
+			this.set(value)
+		},
+		set: function(value) {
+			if (value == null) value = $('<img src="/images/spinner_white_red.gif"/>')
+			if (this.element) {
+				if (parseInt(value) == 0) this.element.hide() 
+			  else this.element.html(value).show()
+			}
+			else this.create(value)
+		},
+		updateRemotely: function() {
+			this.create(null)
+			$.ajax({ url: "/notifications/count", type: "GET", dataType: "text",			
+			  success: function(count) { Notification.capsule.set(count) }
+			});
+		}	
 	}
 }

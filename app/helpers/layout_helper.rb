@@ -27,13 +27,18 @@ module LayoutHelper
   end
   
   def menu_link(name, path, options = {})
-    current = (path =~ %r(#{controller.controller_name})) ? {:class => 'current'} : {}
+    current = (url_for(path) =~ %r(#{controller.controller_name})) ? { :class => 'current' } : {}
     link_to name, path, options.merge(current)
   end 
   
   # TODO: Remove - this is bad as it doesn't allow for a fallback behaviour.
   def jquery_link(name, options = {})
     content_tag :a, name, options.merge({:href => 'javascript:;'})
+  end
+  
+  def jquery_block(&block)
+    # content_for(:head) { concat javascript_tag { "$(document).ready(function(){#{capture(&block)}});" } }
+    concat javascript_tag { "$(document).ready(function(){#{capture(&block)}});" }
   end
   
   def icon(name, options = {})

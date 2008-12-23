@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20081221133521) do
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "event_id"
-    t.boolean  "read"
+    t.boolean  "read",       :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

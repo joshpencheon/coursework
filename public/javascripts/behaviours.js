@@ -2,6 +2,8 @@ $(document).ready(function() {
 	
 	//*********** NOTIFICATIONS ************
 
+	Notification.capsule.updateRemotely()
+
 	$('.read_link').livequery(function() {
 		$(this).click(function(event) {
 			event.preventDefault()		

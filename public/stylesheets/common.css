@@ -16,6 +16,10 @@ body, textarea {
 	font-family: Arial, "MS Trebuchet", sans-serif;
 }
 
+ul {
+	list-style-type: none;
+}
+
 a {
 	outline: none;
 	color: #222;

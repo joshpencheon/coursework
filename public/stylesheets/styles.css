@@ -198,8 +198,42 @@ li#help_link a {
 /********* NOTIFICATION *********/
 
 .notification {
-	border: 1px solid #DDD;
+	border-top: 1px solid #CCC;
 	padding: 10px;
+	font-weight: bold;
+}
+
+.notification.read {
+	font-weight: normal;
+}
+
+.relative {
+	color: #666;
+	font-style: italic;
+}
+
+.read_link {
+	color: #FFF;
+	text-decoration: none;
+	background-color: #BBB;
+	padding: 5px 24px 5px 24px;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+.read_link:hover {
+	background-color: #E88D33;
+	color: #FFF;
+}
+
+.read_link.in_progress {
+	background-image: url(/images/spinner_white.gif);
+	background-position: 95%;
+	background-repeat: no-repeat;
+}
+
+.read_link.in_progress:hover {
+	background-image: url(/images/spinner_white_orange.gif);
 }
 
 /****** ADDING ATTACHMENTS ******/

@@ -1,28 +1,34 @@
 $(document).ready(function() {
 	
 	//*********** NOTIFICATIONS ************
-	
-	$('.read_link').click(function(event) {
-		event.preventDefault()		
-		$.put($(this).attr("href"), {}, function(js) {
-			$(event.target).text(eval(js))
-		}, 'script')
+
+	$('.read_link').livequery(function() {
+		$(this).click(function(event) {
+			event.preventDefault()		
+			$(this).addClass('in_progress')
+			$.put($(this).attr("href"), {}, function() {}, 'script')
+			
+			// Prevent double-click
+			$(this).attr("href", '#').unbind('click')
+		})
 	})
 
-	$('.follow_link').click(function(event) {
-		event.preventDefault()
-		$.post($(this).attr("href"),{}, function(){}, 'script')
+	$('.follow_link').livequery(function() {
+		$(this).click(function(event) {
+			event.preventDefault()
+			$.post($(this).attr("href"),{}, function(){}, 'script')
+		})
 	})
 	
 	//*********** VIEW A STUDY *************
 	
 	$('.watch_study_link').click(function(event) {
+		event.preventDefault()
 		$(this).addClass('in_progress')
 		$.post($(this).attr('href'), {}, function(js) {
 			$(event.target).removeClass('in_progress')
 				.updateThroughFade(150, eval(js))
-		}, 'script')
-		return false			
+		}, 'script')		
 	})
 	
 	//********* EDITING A STUDY ************

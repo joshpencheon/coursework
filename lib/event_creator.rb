@@ -1,4 +1,6 @@
 class EventCreator
+  # Need this for the pluralize method.
+  include ActionView::Helpers::TextHelper
   
   def before_save(model)
     model.changes_by_type.each_pair do |assoc, changeset|
@@ -7,8 +9,12 @@ class EventCreator
         model.events.build(:description => "The #{model.class.to_s.downcase} had it's #{model.changed.to_sentence} updated.")
       else
         if changeset.key?(:new)
-           model.events.build(:description => 
-             "A new #{assoc.to_s.humanize.downcase} was added to the #{model.class.to_s.downcase}.")
+          singular_name = assoc.to_s.humanize.downcase.singularize
+          count = changeset[:new].length
+          join = count == 1 ? 'was': 'were'
+          
+          model.events.build(:description => 
+             "#{pluralize(count, singular_name)} #{join} added to the #{model.class.to_s.downcase}.")
         elsif changeset.key?(:edited)
           model.events.build(:description => 
             "One of the #{model.class.to_s.downcase}'s #{assoc.to_s.humanize.downcase} was updated.")        

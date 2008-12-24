@@ -62,8 +62,8 @@ var Notification = {
 		set: function(value) {
 			if (value == null) value = $('<img src="/images/spinner_white_red.gif"/>')
 			if (this.element) {
-				if (parseInt(value) == 0) this.element.hide() 
-			  else this.element.html(value).show()
+				if (parseInt(value) == 0) this.element.fadeOut('slow') 
+			  else this.element.html(value).fadeIn('slow')
 			}
 			else this.create(value)
 		},

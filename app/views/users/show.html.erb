@@ -1,6 +1,21 @@
 <h1><%= h @user.name %></h1>
 <%= avatar_for @user %>
 
-<%= link_to "Edit", edit_user_path(@user) %>
+<% if @user.recent_events.any? %>
+  <p id="recent_activity">
+    <h3>Recent Activity:</h3>
+  
+    <% for notification in Notification.build_from_events(@user.recent_events) %>
+      <p class="title">
+        <%= event_title_for notification.event %>
+        <span class="relative"><%= time_ago_in_words notification.event.created_at %> ago</span>
+      </p>
 
+      <p><%= event_items_for notification.event %></p>
+    <% end %>    
+  </p>
+<% end %>
 
+<% if can_edit?(@user) %>
+  <%= link_to "Edit", edit_user_path(@user) %>  
+<% end %>

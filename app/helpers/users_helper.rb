@@ -1,7 +1,9 @@
 module UsersHelper
 
   def avatar_for(user, size = nil)
-    image_tag user.avatar.url(size), :class => 'bordered avatar' 
+    klass = 'avatar bordered'
+    klass += "_#{size}" if size
+    image_tag user.avatar.url(size), :class => klass
   end
 
 end

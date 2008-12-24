@@ -136,6 +136,12 @@ img.bordered {
 	background-color: #F1F8FE;
 }
 
+img.bordered_tiny {
+	padding: 2px;
+	border: 1px solid #BBB;
+	background-color: #F1F8FE;
+}
+
 /************** FORM ELEMENTS **************/
 
 .error_description {

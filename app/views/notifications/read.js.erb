@@ -2,4 +2,4 @@
 
 $('#notification_<%= @notification.id %>').replaceThroughFade('100', '<%= partial %>')
 
-Notification.capsule.set('<%= @notification.user.notifications.unread.size %>')
+Notification.capsule.set('<%= @notification.user.notifications.unread.count %>')

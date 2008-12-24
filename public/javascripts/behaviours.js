@@ -7,7 +7,8 @@ $(document).ready(function() {
 	$('.read_link').livequery(function() {
 		$(this).click(function(event) {
 			event.preventDefault()		
-			$(this).addClass('in_progress')
+			$(this).addClass('in_progress') // Removed by replacement
+			Notification.capsule.set(null);
 			$.put($(this).attr("href"), {}, function() {}, 'script')
 			
 			// Prevent double-click

@@ -17,12 +17,25 @@ class User < ActiveRecord::Base
   
   has_many :watched_studies, :through => :watchings, :source => :study
   
+  def admin?
+    true
+  end
+  
   def name
     [first_name, last_name].reject(&:blank?).join(' ')
   end
   
   def watching?(study)
     watched_studies.include? study
+  end
+  
+  # Experimental: provides activity, most recent first
+  def recent_events(limit = 5)
+    studies.map(&:events).flatten.sort {|a, b| b.created_at <=> a.created_at }.slice(0...limit)
+  end
+  
+  def to_param
+    "#{id}-#{login.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '_')}"
   end
 
 end

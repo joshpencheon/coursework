@@ -44,9 +44,41 @@ class Study < ActiveRecord::Base
     end
   end
   
+  def to_param
+    "#{id}-#{title.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '_')}"
+  end
+  
   private 
   
   def remove_blank_attachments
     attached_files.delete( attached_files.select(&:untouched?) )
+  end
+  
+  def changes_for_serialization
+    returning({}) do |serial|
+      changes_by_type.each do |assoc, changeset|
+        if assoc == :self
+          serial[:self] = changeset
+        else
+          serial[assoc] = {}
+          
+          if changeset.key?(:new)
+            serial[assoc][:new] = changeset[:new].map(&:id)
+          end
+          
+          if changeset.key?(:edited)
+            serial[assoc][:edited] = {}
+            
+            changeset[:edited].each_pair do |record, changes|
+              serial[assoc][:edited][record.id] = changes
+            end
+          end
+          
+          if changeset.key?(:deleted)
+            serial[assoc][:deleted] = changeset[:deleted].map(&:id)
+          end
+        end
+      end
+    end
   end
 end

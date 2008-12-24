@@ -1,5 +1,6 @@
 <% for user in @users %>
 <p>
+  <%= avatar_for(user, :tiny) %>
 	<%= link_to "#{user.name || 'anon.'} (#{user.login})", user %>
 </p>
 <% end %>

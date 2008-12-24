@@ -4,4 +4,6 @@
 
 <%= render :partial => @study %>
 
-<%= link_to "Edit", edit_study_path(@study) %>
+<% if can_edit? @study %>
+  <%= link_to "Edit", edit_study_path(@study) %>
+<% end %>

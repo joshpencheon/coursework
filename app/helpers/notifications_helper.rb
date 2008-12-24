@@ -13,4 +13,17 @@ module NotificationsHelper
     
     div_for(notification, options, &block)
   end
+  
+  def event_title_for(event)
+    user = event.news_item.user
+    [ link_to(user.name, user), 'edited their', event.title ].join(' ')
+  end
+  
+  def event_items_for(event)
+    html = ''
+    event.data.map do |pair|
+      html << content_tag(:li, pair.values.first, :class => pair.keys.first)
+    end
+    content_tag :ul, html, :class => 'notification_items'
+  end
 end

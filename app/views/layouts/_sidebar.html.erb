@@ -1,11 +1,22 @@
-<ul>
-	<% if @sidebar_actions && @sidebar_actions.any? %>
+<p>
+  The SDU knowledge base is a place where information concerning environmental best practices in the NHS can be collected and discussed.
+</p>
+
+
+<% if @sidebar_actions && @sidebar_actions.any? %>
+  <ul>
 		<h5>Actions</h5>
 		<% for link in @sidebar_actions %>
 			<%= link %>
 		<% end %>	
-	<% end %>
-	
-	<li><a href="about:blank">Click here to do something</a></li>
-	<li><a href="about:blank">A second thing on the menu</a></li>
-</ul>
+  </ul>
+<% end %>
+
+<% if @sidebar_blocks %>
+  <ul>	
+	  <% @sidebar_blocks.each_pair do |title, contents| %>
+      <h5><%= title %></h5>
+      <%= contents %>
+	  <% end %>
+    </ul>
+<% end %>

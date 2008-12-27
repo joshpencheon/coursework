@@ -17,6 +17,9 @@ class Study < ActiveRecord::Base
   
   attr_writer :publish_event
   
+  attr_accessor :attached_files_traversed
+  attr_protected :attached_files_traversed
+  
   before_save :destroy_attached_files_marked_for_deletion  # must come before EventCreator
   before_save EventCreator.new, :if => Proc.new { |record| record.publish_event? }
   
@@ -62,11 +65,9 @@ class Study < ActiveRecord::Base
         attachment.attributes = attributes
       else
         attachment.should_destroy = true
-        # This destroy is taking place, and then the model is being reloaded,
-        # So the event cannot be logged.
-        #attached_files.destroy(attachment)
       end
     end
+    @attached_files_traversed = true
   end
   
   def to_param
@@ -80,7 +81,13 @@ class Study < ActiveRecord::Base
   end
   
   def destroy_attached_files_marked_for_deletion
-    attached_files.select(&:should_destroy?).each(&:delete)
+    collection = if @attached_files_traversed
+      attached_files.select(&:should_destroy?)
+    else
+      attached_files
+    end
+    
+    collection.each(&:delete)
   end
   
   def changes_for_serialization

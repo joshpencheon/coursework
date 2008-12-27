@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :notifications, :only => :index, 
     :member => { :read => :put, :follow => :post },
-    :collection => { :count => :get }
+    :collection => { :count => :get, :discard => :delete }
   
   map.resources :studies, :member => { :watch => :post }
   

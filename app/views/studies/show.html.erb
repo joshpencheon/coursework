@@ -2,6 +2,13 @@
 	<% watch_link_for @study %>
 <% end %>
 
+<% if can_edit? @study %>
+  <% sidebar_block('This study') do %>
+    <li><%= link_to "Edit", edit_study_path(@study) %></li>
+    <li><%= link_to 'Destroy', @study, :confirm => 'Are you sure?', :method => :delete %></li>
+  <% end %>
+<% end %>
+
 <%= render :partial => @study %>
 
 <strong>Attached Files:</strong>
@@ -18,12 +25,6 @@
   <% end %>
 <div class="clear"></div>
 </div>
-
-
-
-<% if can_edit? @study %>
-  <%= link_to "Edit", edit_study_path(@study) %>
-<% end %>
 
 <div class="footnotes">
   Last updated <%= time_ago_in_words @study.updated_at %> ago

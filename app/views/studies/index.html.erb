@@ -1,9 +1,13 @@
-<% if current_user && (show_welcome_message? || true) %>
+<% if logged_in? && (show_welcome_message? || true) %>
 	<% require_jquery 'welcome' %>
 
 	<div id="welcome_message" style="display:none;">
 		<%= render :partial => "help/welcome" %>		
 	</div>
+<% end %>
+
+<% if logged_in? %>
+  <% sidebar_action('New Study', new_study_path) %>
 <% end %>
 
 <%= render :partial => @studies %>

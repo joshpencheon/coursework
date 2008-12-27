@@ -22,15 +22,16 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
-  # config.gem "bj"
-  # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  # config.gem "aws-s3", :lib => "aws/s3" 
   config.gem :authlogic, :version => '>=1.3.0'
-  config.gem :paperclip
+
+  config.gem "thoughtbot-paperclip", :lib => 'paperclip'
+  
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   
   # Gems required for testing
   config.gem :ZenTest
   config.gem :mocha
+  
   # RSpec should will load itself when tests are run
   # config.gem 'rspec-rails', :lib => 'spec/rails'
   # config.gem 'rspec', :lib => 'spec'
@@ -39,9 +40,6 @@ Rails::Initializer.run do |config|
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-  # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -84,6 +82,3 @@ ActionView::Base.field_error_proc =
 # A field now follows a corresponding label, and it is all wrapped in a paragraph tag.
 # if the :no_label option evaluates to true, the field reverts to the default FormBuilder.
 ActionView::Base.default_form_builder = ::ActionView::Helpers::LabellingFormBuilder
-
-# Paperclip needs to know where ImageMagick's +identity+ command is:
-Paperclip.options[:image_magick_path] = '/opt/local/bin'

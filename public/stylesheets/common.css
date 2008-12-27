@@ -130,6 +130,10 @@ ul.indented {
 	padding-bottom: 3px;
 }
 
+.padded_contents > * {
+	margin: 20px 10px;
+}
+
 img.bordered {
 	padding: 4px;
 	border: 1px solid #BBB;

@@ -29,8 +29,10 @@ module LayoutHelper
     @sidebar_actions << content_tag(:li, link_to(*args))
   end
   
-  def sidebar_block(&block)
-    @sidebar_blocks << capture(&block)
+  def sidebar_block(title, &block)
+    @sidebar_blocks ||= {}
+    @sidebar_blocks[title] ||= []
+    @sidebar_blocks[title] << capture(&block)
   end
   
   def menu_link(name, path, options = {})

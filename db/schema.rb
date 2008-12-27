@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(:version => 20081224110626) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
-    t.boolean  "serialized"
-    t.string   "type"
   end
 
   create_table "notifications", :force => true do |t|

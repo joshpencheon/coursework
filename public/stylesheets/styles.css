@@ -51,6 +51,10 @@ li#people_link a {
 	background: #5F873B url(/images/people.png) no-repeat 12px 8px;
 }
 
+li#notification_link {
+	position: relative;
+}
+
 li#notification_link a {
 	background: #5F873B url(/images/notification.png) no-repeat 12px 8px;
 }
@@ -58,6 +62,7 @@ li#notification_link a {
 #notification_count {
 	position: absolute;
 	top: -0.9em;
+	right: -1em;
 	border: 2px solid white;
 	background-color: #E00;
 	color: #FFF;
@@ -232,19 +237,23 @@ li#help_link a {
 }
 
 ul.notification_items {
-	list-style: disc inside;
+	list-style-type: none;
+}
+
+ul.notification_items li {
+	padding: 5px 0 5px 20px;
 }
 
 li.new {
-	list-style-image: url(/images/icons/add.png);
+	background: url(/images/icons/add.png) no-repeat 0 50%;
 }
 
 li.edited {
-	list-style-image: url(/images/icons/pencil.png);	
+	background: url(/images/icons/pencil.png) no-repeat 0 50%;	
 }
 
 li.deleted {
-	list-style-image: url(/images/icons/delete.png);	
+	background: url(/images/icons/delete.png) no-repeat 0 50%;	
 }
 
 .relative {
@@ -252,8 +261,8 @@ li.deleted {
 	font-style: italic;
 }
 
-.read_link, 
-.follow_link {
+a.read_link, 
+a.follow_link {
 	color: #FFF;
 	background-color: #BBB;
 	text-decoration: none;
@@ -264,25 +273,64 @@ li.deleted {
 	font-size: 0.7em;
 }
 
-.read_link:hover {
+a.read_link:hover {
 	background-color: #e88d33;
 	color: #FFF;
 }
 
-.follow_link:hover {
+a.follow_link:hover {
 	background-color: #5748CE;
 	color: #FFF;
 }
 
-.read_link.in_progress {
+a.read_link.in_progress {
 	background-image: url(/images/spinner_white.gif);
 	background-position: 95%;
 	background-repeat: no-repeat;
 	background-size: 1em 1em;
 }
 
-.read_link.in_progress:hover {
+a.read_link.in_progress:hover {
 	background-image: url(/images/spinner_white_orange.gif);
+}
+
+
+/********* VIEWING STUDY *********/
+
+.footnotes {
+	font-size: 0.7em;
+	color: #777;
+	text-align: center;
+}
+
+
+#attached_files {
+	background-color: #EEE;
+	-webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+	padding: 10px;
+}
+
+.attached_file {
+	position: relative;
+	margin: 10px 8px 2em 8px;
+	display: block;
+	float: left;
+}
+
+.attached_file,
+.attached_file:hover {
+	text-decoration: none;
+}
+
+.attached_file .info {
+	color: #888;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	left: 0;
+	font-size: 0.8em;
+	text-align: center;
 }
 
 /****** ADDING ATTACHMENTS ******/

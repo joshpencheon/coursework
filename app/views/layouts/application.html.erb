@@ -5,7 +5,7 @@
 		<title>SDU Knowledgebase</title>
 	
 		<%= javascript_include_tag %w( jquery jquery-ui ) %>
-		<%= javascript_include_tag %w( jquery.livequery ) %>
+		<%= javascript_include_tag %w( jquery.livequery jquery.form ) %>
 		<%= javascript_include_tag %w( facebox lowpro application ) %>
 		<%= javascript_include_tag %w( behaviours ) %>
 		
@@ -25,16 +25,14 @@
 				<% end %>
 				
 				<%= yield %>
+    		<h1 style="color:red">Attached file deletion/thumbnails</h1>
+    		<h1 style="color:red">Flash</h1>
 			</div>
 		
-			<div id="sidebar">
+		  <div id="sidebar">
 				<%= render :partial => 'layouts/sidebar' %>
 			</div>
-	
-  		<h1 style="color:red">Names in routes</h1>
-  		<h1 style="color:red">Attached file deletion/thumbnails</h1>
-  		<h1 style="color:red">Cache notification</h1>
-	
+
 			<div class="push clear"></div>
 		</div>
 		

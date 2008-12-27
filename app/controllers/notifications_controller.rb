@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_filter :find_notification, :only => [ :read, :follow ]
 
   def index
-    @notifications = current_user.notifications.most_recent_first
+    @notifications = current_user.notifications.preloading.most_recent_first
   end
 
   def count

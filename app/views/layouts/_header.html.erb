@@ -22,7 +22,14 @@
 			<li id="studies_link"><%= menu_link 'Studies', studies_path %></li>
     	<li id="people_link"><%= menu_link 'People', users_path %></li>
   	<% if logged_in? %>
-    	<li id="notification_link"><%= menu_link 'My Notifications', :controller => 'notifications' %></li>
+    	<li id="notification_link">
+    	  <%= menu_link 'My Notifications', :controller => 'notifications' %>
+    	  
+    	  <% hidden_span_if !current_user.has_unread_notifications?, 
+    	    { :id => "notification_count", :class => "notification_count" } do %>   	  
+    	    <%= current_user.notifications.unread.count %>
+    	  <% end %>
+    	</li>
     <% end %>
 		</ul>
   </div>

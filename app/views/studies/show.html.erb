@@ -4,6 +4,27 @@
 
 <%= render :partial => @study %>
 
+<strong>Attached Files:</strong>
+
+<div id="attached_files">
+  <% @study.attached_files.each do |file| %>
+      <a href="<%= file.document.url %>" class="attached_file" rel="facebox">
+        <%= image_tag file.document.url(:square), :class => 'bordered' %>
+        <span class="info" style="display:none">
+          <p><strong><%= h file.document_file_name %></strong></p>
+          <p><em><%= number_to_human_size file.document_file_size, :precision => 0 %></em></p>
+        </span>
+      </a>
+  <% end %>
+<div class="clear"></div>
+</div>
+
+
+
 <% if can_edit? @study %>
   <%= link_to "Edit", edit_study_path(@study) %>
 <% end %>
+
+<div class="footnotes">
+  Last updated <%= time_ago_in_words @study.updated_at %> ago
+</div>

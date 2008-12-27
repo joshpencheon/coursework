@@ -4,39 +4,37 @@ class EventCreator
   def before_save(model, user = :user, title = :title)
     user = model.send(user)
     model_string = model.class.to_s.downcase
+
+    @data = []
     
-    @event = model.events.build(:title => "#{model.class.to_s.downcase} '#{model.send(title)}'", :data => [])
+    puts "*** Got [ ] for @data ***"
     
     model.changes_by_type.each_pair do |assoc, changeset|
+      puts "*** On assoc. type :#{assoc}... ***"
+      puts "*** ...with changeset: ***"
+      puts "*** #{changeset.inspect} ***"
+      
       singular_name = assoc.to_s.humanize.downcase.singularize
       
       if assoc == :self
-        # "The study had it's title and description updated."
-        @event.data << 
-          { :edited => "The #{model_string} had its #{changeset.keys.to_sentence} updated." }
-        
+        @data << { :edited => "The #{model_string} had its #{changeset.keys.to_sentence} updated." } 
       else
         if changeset.key?(:new)
-          # "4 attached files were added to the study"
           join = was_or_were(changeset[:new])
-          @event.data << 
-            { :new => "#{helpers.pluralize(changeset[:new].length, singular_name)} #{join} added to the #{model_string}." }
-        
+          @data << { :new => "#{helpers.pluralize(changeset[:new].length, singular_name)} #{join} added to the #{model_string}." }
         elsif changeset.key?(:edited)
-          # "One of the study's attached files had it's title updated"
           changeset[:edited].each do |record, changes|
-            @event.data << 
-              { :edited => "One of the #{model_string}'s #{singular_name.pluralize} had its #{changes.keys.to_sentence} updated." }            
+            @data << { :edited => "One of the #{model_string}'s #{singular_name.pluralize} had its #{changes.keys.to_sentence} updated." }            
           end
-  
         elsif changeset.key?(:deleted)
-          # "1 attached file was deleted from the study."
           join = was_or_were(changeset[:deleted])
-          @event.data << 
-            { :deleted => "#{helpers.pluralize(changeset[:deleted].length, singular_name)} #{join} removed from the #{model_string}." }
+          @data << { :deleted => "#{helpers.pluralize(changeset[:deleted].length, singular_name)} #{join} removed from the #{model_string}." }
         end        
-      end
-      
+      end 
+    end
+    
+    if @data.any?
+      model.events.build(:title => "#{model.class.to_s.downcase} '#{model.send(title)}'", :data => @data)
     end
   end
   

@@ -1,8 +1,8 @@
 module NotificationsHelper
   def read_link(notification)
     text = notification.read? ? "Mark as unread" : "Mark as read"
-    text += image_tag 'spinner.gif', :style => 'width: 10px;display:none'
-    link_to text, read_notification_path(notification), :class => 'read_link'
+    # text += image_tag 'spinner.gif', :style => 'width: 10px;display:none'
+    button_to text, read_notification_path(notification), :method => :put, :class => 'read_link'
   end
   
   def notification_div_for(notification, options = {}, &block)
@@ -14,9 +14,16 @@ module NotificationsHelper
     div_for(notification, options, &block)
   end
   
-  def event_title_for(event)
+  def event_title_for(event, options = {})
     user = event.news_item.user
-    [ link_to(user.name, user), 'edited their', event.title ].join(' ')
+    parts = [ user.name(:short), 'edited their', event.title ]
+    
+    if true == options[:user_link] 
+      parts.shift
+      parts.unshift(link_to(user.name, user))
+    end
+    
+    parts.join(' ')
   end
   
   def event_items_for(event)

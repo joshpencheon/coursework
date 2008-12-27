@@ -9,6 +9,16 @@ $(document).ready(function($) {
 	})	
 })
 
+$.fn.button_to_link = function() {
+  // return the jQuery object for chaining
+  return this.each(function(){
+		var button = $(this)
+    var form = button.parents('form')
+    form.after('<a href="' + form.attr('action') + '" class="button_link_to ' + button.attr('class') + '">' + button.attr('value') + '</a>')
+    form.remove()
+  })
+}
+
 $.fn.updateThroughFade = function(time, text, callback) {
 	$(this).fadeTo(time, 0.001, function(){
 		if (callback) callback()
@@ -52,14 +62,15 @@ jQuery.extend({
 
 var Notification = {	
 	capsule: {
-		create: function(value) {
-			tab = $('#notification_link').css({position: 'relative'})
-			capsule = $('<span id="notification_count" class="notification_count"></span>')
-			this.element = capsule.appendTo(tab).hide().css({right: '-1em'})
-				.click(function() { Notification.capsule.updateRemotely() })
-			this.set(value)
+		init: function() {
+			if (!this.element) 
+				this.element = $('#notification_count').click(function() { 
+					Notification.capsule.updateRemotely() 
+				})
 		},
+		
 		set: function(value) {
+			this.value = value
 			if (value == null) value = $('<img src="/images/spinner_white_red.gif"/>')
 			if (this.element) {
 				if (parseInt(value) == 0) this.element.fadeOut('slow') 
@@ -67,11 +78,16 @@ var Notification = {
 			}
 			else this.create(value)
 		},
+		
 		updateRemotely: function() {
-			this.create(null)
+			this.spin()
 			$.ajax({ url: "/notifications/count", type: "GET", dataType: "text",			
 			  success: function(count) { Notification.capsule.set(count) }
 			});
-		}	
+		}, 
+		
+		spin: function() {
+			this.set(null)
+		}
 	}
 }

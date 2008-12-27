@@ -21,21 +21,30 @@ class User < ActiveRecord::Base
     true
   end
   
-  def name
-    [first_name, last_name].reject(&:blank?).join(' ')
+  def name(version = :long)
+    parts = [first_name, last_name]
+    
+    if version == :short
+      parts.first.blank?   ? self.login : parts.first
+    else
+      parts.reject(&:blank?).join(' ')
+    end
   end
   
   def watching?(study)
     watched_studies.include? study
   end
   
-  # Experimental: provides activity, most recent first
+  def has_unread_notifications?
+    !notifications.unread.count.zero?
+  end
+  
   def recent_events(limit = 5)
     studies.map(&:events).flatten.sort {|a, b| b.created_at <=> a.created_at }.slice(0...limit)
   end
   
   def to_param
-    "#{id}-#{login.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '_')}"
+    "#{id}-#{login.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '-')}"
   end
 
 end

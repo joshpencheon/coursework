@@ -51,8 +51,8 @@ describe User do
       end
     end
     
-    context 'with only first name' do
-      it 'should return it as full name' do
+    context 'with no last name' do
+      it 'should return their first name as full name' do
         @user = User.new(:first_name => 'Josh')
         @user.name.should == 'Josh'
       end
@@ -69,6 +69,20 @@ describe User do
       it 'should return them both as full name' do
         @user = User.new(:first_name => 'josh', :last_name => 'pencheon')
         @user.name.should == 'josh pencheon'
+      end
+    end
+    
+    context 'with no first name or last name' do
+      before(:each) do
+        @user = User.new(:login => 'jpencheon')
+      end
+      
+      it 'should return login as name' do
+        @user.name.should == 'jpencheon'
+      end
+      
+      it 'should return login as shortened name' do
+        @user.name(:short).should == 'jpencheon'
       end
     end
     

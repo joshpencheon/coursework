@@ -17,13 +17,20 @@ module LayoutHelper
       partial_path.collect{ |path| require_jquery(path) }
     else
       partial = render(:partial => 'javascripts/' + partial_path + '.js.erb')
-      content_for(:head) { javascript_tag { "$(document).ready(function(){#{partial}});" } }
+      jquery_block { partial }
     end
   end
+  
+  
+  #............. SIDEBAR CONTROLS ................
   
   def sidebar_action(*args)
     @sidebar_actions ||= []
     @sidebar_actions << content_tag(:li, link_to(*args))
+  end
+  
+  def sidebar_block(&block)
+    @sidebar_blocks << capture(&block)
   end
   
   def menu_link(name, path, options = {})
@@ -37,13 +44,20 @@ module LayoutHelper
   end
   
   def jquery_block(&block)
-    # content_for(:head) { concat javascript_tag { "$(document).ready(function(){#{capture(&block)}});" } }
-    concat javascript_tag { "$(document).ready(function(){#{capture(&block)}});" }
+    content_for(:head) { concat javascript_tag { "$(document).ready(function(){#{capture(&block)}});" } }
   end
   
   def icon(name, options = {})
     options[:class] ||= ''
     options[:class] += ' icon'
     image_tag "icons/#{name}", options
+  end
+  
+  def hidden_span_if(condition, options, &block)
+    if condition
+      options[:style] ||= ''
+      options[:style] += "; display:none;"
+    end
+    concat content_tag(:span, capture(&block), options)
   end
 end

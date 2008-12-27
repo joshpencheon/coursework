@@ -1,5 +1,10 @@
-<% partial = escape_javascript(render(:partial => 'notification.html.erb', :locals => {:notification => @notification })) %>
+Notification.capsule.set('<%= current_user.notifications.unread.count %>')
 
-$('#notification_<%= @notification.id %>').replaceThroughFade('100', '<%= partial %>')
-
-Notification.capsule.set('<%= @notification.user.notifications.unread.count %>')
+$('#notification_<%= @notification.id %>').fadeTo('fast', 0.001, function() {
+	link = $(this).toggleClass('read').find('a.read_link')
+	
+	link.text().match(/un/) ? text = 'Mark as read' : text = 'Mark as unread'
+	link.text(text)
+	
+	$(this).fadeTo('fast', 1)
+})

@@ -37,7 +37,7 @@ class StudiesController < ApplicationController
     
   end
   
-  def update    
+  def update  
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
       redirect_to @study

@@ -6,7 +6,7 @@ class Notification < ActiveRecord::Base
   named_scope :unread, :conditions => { :read => false }
   named_scope :most_recent_first, :order => 'created_at DESC'
   
-  default_scope :include => [ :event, :user ]
+  named_scope :preloading, :include => [ :event, :user ]
   
   def self.build_from_events(events)
     if events.is_a?(Array)

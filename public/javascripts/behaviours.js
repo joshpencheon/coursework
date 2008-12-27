@@ -2,21 +2,22 @@ $(document).ready(function() {
 	
 	//*********** NOTIFICATIONS ************
 
-	Notification.capsule.updateRemotely()
+	Notification.capsule.init()
 
-	$('.read_link').livequery(function() {
+	$('form.button-to input[type=submit]').button_to_link()
+
+	$('a.read_link').livequery(function() {
 		$(this).click(function(event) {
 			event.preventDefault()		
-			$(this).addClass('in_progress') // Removed by replacement
+			$(this).addClass('in_progress')
 			Notification.capsule.set(null);
-			$.put($(this).attr("href"), {}, function() {}, 'script')
-			
-			// Prevent double-click
-			$(this).attr("href", '#').unbind('click')
+			$.put($(this).attr("href"), {}, function() {
+				$(event.target).removeClass('in_progress')
+			}, 'script')
 		})
 	})
-
-	$('.follow_link').livequery(function() {
+	
+	$('a.follow_link').livequery(function() {
 		$(this).click(function(event) {
 			event.preventDefault()
 			$.post($(this).attr("href"),{}, function(){}, 'script')
@@ -34,12 +35,18 @@ $(document).ready(function() {
 		}, 'script')		
 	})
 	
+	$('.attached_file').hover(function() {
+		$(this).find('.info').show(100)
+	}, function() {
+		$(this).find('.info').hide(100)
+	});
+	
 	//********* EDITING A STUDY ************
 	
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
 		event.preventDefault()
-		$('#attachments').after('\
+		$(this).before('\
 			<div class="file"> \
 				<input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" /> \
 			</div>');
@@ -60,6 +67,7 @@ $(document).ready(function() {
 		if (parent.hasClass('deleted')) return false
 		parent.fadeTo('slow', 0.5).addClass('deleted')
 			.append('<span>will be deleted when you save this study.</span>')
+			.find('input').remove()
 		event.unbind()
 	})
 	

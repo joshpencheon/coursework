@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
-  before_filter :authorize, :except => [ :new, :create ]
-  before_filter :find_user, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :authorize,         :except => [ :new, :create ]
+  before_filter :find_user,         :only   => [ :show, :edit, :update, :destroy ]
+  before_filter :authorize_as_self, :only   => [ :edit, :update ]
 
   def index
     @users = User.all
@@ -46,6 +47,13 @@ class UsersController < ApplicationController
   end
   
   private
+  
+  def authorize_as_self
+    unless current_user == @user
+      flash[:warn] = 'You cannot access that page.'
+      redirect_to @user
+    end
+  end
   
   def find_user
     @user = User.find(params[:id])

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081224110626) do
+ActiveRecord::Schema.define(:version => 20081231220031) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20081224110626) do
     t.boolean  "read",       :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "requestee_id"
+    t.integer  "requester_id"
+    t.string   "message"
+    t.boolean  "granted",      :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "read",         :default => false, :null => false
   end
 
   create_table "studies", :force => true do |t|

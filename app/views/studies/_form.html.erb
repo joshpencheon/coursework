@@ -1,28 +1,46 @@
-<% form_for @study, :html => { :multipart => true } do |f| %>
-
+<% form_for @study do |f| %>
   <%= f.text_field :title, :class => 'bold' %>
 
   <%= f.text_area :description %>
-
-	<% if @study.saved_attachments.any? %>
-		<%= jquery_link 'Manage existing attachments >>', :id => 'manage_attachments' %>
-		<div id="attachments" style="display:none;">
-			<div class="style_wrapper"><%= saved_attachments_for @study %></div>
-		</div>
-	<% else %>
-		<div id="attachments" style="display:none">
-		
-		</div>
-	<% end %>
-	
-	<div>
-		<%= unsaved_attachments_for @study %>
-	
-		<%= jquery_link 'Attach a file', :id => 'add_attachment' %>
-	</div>
 	
 	<p>
 	  <%= f.submit 'Save Study' %>
-	  <%= f.check_box :publish_event %>
-	</p>
+    <%= render :partial => "shared/publish", :locals => { :form => f } %>
+  </p>
 <% end %>
+
+
+
+<% sidebar_block('Add an attachment') do %>
+ <% form_for @study, :html => { :multipart => true, :id => 'add_attachment_form' } do |f| %> 
+  
+    <% fields_for 'study[new_attached_file_attributes][]', @study.attached_files.build do |af| -%>      
+      <p class="new_attachment odd"><%= af.file_field :document, :no_label => true %></p>
+    <% end -%>
+    
+    <p><a href="#" id="add_attachment" style="display:none">Add another attachment</a></p>
+    
+    <p class="to_right"><%= f.submit 'Save attachment', :id => 'add_attachment_submit' %></p>
+  <% end %>
+<% end %>
+
+<% sidebar_block('Existing attachments') do %>
+  <% @study.saved_attachments.each do |attachment| %>
+  
+    <p class="existing_attachment<%= cycle(' odd', '') %>">
+      <span class="right">
+        <%= link_to icon('bin_empty.png'), attachment, 
+          :confirm => 'Are you sure?', 
+          :method => :delete, 
+          :class => 'delete_attachment_link' %>
+      </span>
+      
+      <%= icon attachment.icon_path %>
+      
+      <%= h truncate_centrally(attachment.document_file_name, 25) %> - <span class="filesize"><%= number_to_human_size attachment.document_file_size %></span>
+    </p>
+    
+  <% end %>
+<% end %>
+
+

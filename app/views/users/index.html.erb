@@ -1,6 +1,12 @@
 <% for user in @users %>
 <p>
   <%= avatar_for(user, :tiny) %>
-	<%= link_to "#{user.name || 'anon.'} (#{user.login})", user %>
+	<%= link_to h("#{user.name || 'anon.'} (#{user.login})"), user %>
+	<% if user.email_hidden? %>
+	 <em>Email kept private</em>
+   [<%= link_to 'request', request_permission_path(user) %>]
+	<% else %>
+	 [<%= mail_to h(user.email), 'send an email' %>]
+	<% end %>
 </p>
 <% end %>

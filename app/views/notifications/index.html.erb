@@ -1,22 +1,28 @@
+<%= render :partial => "permissions/common_controls" %>
+
 <% if @notifications.any? %>
-  <p class="note">
-    Delete: <%= link_to 'all', discard_notifications_path, :confirm => 'Are you sure?', :method => :delete %> | 
-    <%= link_to 'read', discard_notifications_path(:read => true), :confirm => 'Are you sure?', :method => :delete %>
-  </p>
+
+  <% sidebar_block('Actions') do %>
+    <li><%= link_to 'Delete all my notifications', discard_notifications_path,
+              :confirm => 'Are you sure?', :method => :delete %></li>
+    <li><%= link_to 'Delete notifications I\'ve read', discard_notifications_path(:read => true),
+              :confirm => 'Are you sure?', :method => :delete %></li>  
+  <% end %>
 
   <p>
     <span class="right"><%= will_paginate @notifications %></span>
     <%= page_entries_info @notifications %>
   </p>
 
-  <div id="notifications">
-    <%= render :partial => @notifications %>
-  </div>
+  <div id="notifications"><%= render :partial => @notifications %></div>
 
   <p><span class="right"><%= will_paginate @notifications %></span></p>
+  
 <% else %>
+
   <h2>You have no notifications!</h2>
   <div class="padded_contents">
     <%= render :partial => "help/notifications.html.erb" %>
   </div>
+  
 <% end %>

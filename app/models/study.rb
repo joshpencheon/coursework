@@ -17,18 +17,13 @@ class Study < ActiveRecord::Base
   
   attr_writer :publish_event
   
-  attr_accessor :attached_files_traversed
-  attr_protected :attached_files_traversed
+  # attr_accessor :attached_files_traversed
+  # attr_protected :attached_files_traversed
   
-  before_save :destroy_attached_files_marked_for_deletion  # must come before EventCreator
+ # before_save :manage_attached_files  # must come before EventCreator
+  before_save :remove_blank_attachments
   before_save EventCreator.new, :if => Proc.new { |record| record.publish_event? }
-  
-  before_save do |study|
-    changes = study.changes_by_type
-    if !changes[:self] && changes.values.map(&:any?).any?
-      study.updated_at = Time.now
-    end
-  end
+  before_save :update_timestamp_from_associations
   
   def publish_event
     @publish_event = true unless @publish_event == false 
@@ -46,29 +41,29 @@ class Study < ActiveRecord::Base
   def saved_attachments
     @saved_attachments ||= attached_files.reject(&:new_record?)
   end
-
+  # 
   def unsaved_attachments
     attached_files - saved_attachments
   end
-  
+  # 
   def new_attached_file_attributes=(attached_file_attributes)
     attached_file_attributes.each do |attributes|
       attached_files.build(attributes)
     end
   end
-  
-  def existing_attached_file_attributes=(attached_file_attributes)
-    saved_attachments.each do |attachment|
-      attributes = attached_file_attributes[attachment.id.to_s]
-      if attributes
-        attributes.delete(:id) # Cannot be mass-assigned to.
-        attachment.attributes = attributes
-      else
-        attachment.should_destroy = true
-      end
-    end
-    @attached_files_traversed = true
-  end
+  # 
+  # def existing_attached_file_attributes=(attached_file_attributes)
+  #   saved_attachments.each do |attachment|
+  #     attributes = attached_file_attributes[attachment.id.to_s]
+  #     if attributes
+  #       attributes.delete(:id) # Cannot be mass-assigned to.
+  #       attachment.attributes = attributes
+  #     else
+  #       attachment.should_destroy = true
+  #     end
+  #   end
+  #   @attached_files_traversed = true
+  # end
   
   def to_param
     "#{id}-#{title.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '-')}"
@@ -76,18 +71,17 @@ class Study < ActiveRecord::Base
   
   private 
   
+  def update_timestamp_from_associations
+    self.updated_at = Time.now if self.changes_by_type.values.any?
+  end
+  
   def remove_blank_attachments
     attached_files.delete( attached_files.select(&:untouched?) )
   end
   
-  def destroy_attached_files_marked_for_deletion
-    collection = if @attached_files_traversed
-      attached_files.select(&:should_destroy?)
-    else
-      attached_files
-    end
-    
-    collection.each(&:delete)
+  def manage_attached_files
+    attached_files.select(&:should_destroy).each(&:delete)
+    unsaved_attachments.each(&:save)
   end
   
   def changes_for_serialization

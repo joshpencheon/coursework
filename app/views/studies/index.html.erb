@@ -6,8 +6,8 @@
 	</div>
 <% end %>
 
-<% if logged_in? %>
-  <% sidebar_action('New Study', new_study_path) %>
-<% end %>
+<% sidebar_block('New...') do %>
+  <li><%= link_to "Study", new_study_path %></li>
+<% end if logged_in? %>
 
 <%= render :partial => @studies %>

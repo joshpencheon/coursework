@@ -15,10 +15,10 @@
 
 <div id="attached_files">
   <% @study.attached_files.each do |file| %>
-      <a href="<%= file.document.url %>" class="attached_file" rel="facebox">
-        <%= image_tag file.document.url(:square), :class => 'bordered' %>
+      <a href="<%= file.document.url %>" class="attached_file" <%= file.displayable_inline? ? (file.plain_text? ? 'rel="facebox.formatted.wide"' : 'rel="facebox"') : ''  %>>
+        <div class="thumbnail"><%= thumbnail_for file %></div>
         <span class="info" style="display:none">
-          <p><strong><%= h file.document_file_name %></strong></p>
+          <p><strong><%= h truncate_centrally(file.document_file_name, 15) %></strong></p>
           <p><em><%= number_to_human_size file.document_file_size, :precision => 0 %></em></p>
         </span>
       </a>

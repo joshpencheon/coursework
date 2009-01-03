@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
   
   private
   
+  def can_edit?(record)
+    current_user && (current_user.admin? || current_user == record.try(:user) || current_user == record)
+
+  end
+  helper_method :can_edit?
+  
   def add_delay_to_xhr_requests
     sleep 1 if request.xhr? 
   end

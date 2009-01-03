@@ -21,20 +21,6 @@ module LayoutHelper
     end
   end
   
-  
-  #............. SIDEBAR CONTROLS ................
-  
-  def sidebar_action(*args)
-    @sidebar_actions ||= []
-    @sidebar_actions << content_tag(:li, link_to(*args))
-  end
-  
-  def sidebar_block(title, &block)
-    @sidebar_blocks ||= {}
-    @sidebar_blocks[title] ||= []
-    @sidebar_blocks[title] << capture(&block)
-  end
-  
   def menu_link(name, path, options = {})
     current = (url_for(path) =~ %r(#{controller.controller_name})) ? { :class => 'current' } : {}
     link_to name, path, options.merge(current)

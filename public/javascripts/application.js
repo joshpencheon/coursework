@@ -12,28 +12,39 @@ $(document).ready(function($) {
 $.fn.button_to_link = function() {
   // return the jQuery object for chaining
   return this.each(function(){
-		var button = $(this)
+    var button = $(this)
     var form = button.parents('form')
     form.after('<a href="' + form.attr('action') + '" class="button_link_to ' + button.attr('class') + '">' + button.attr('value') + '</a>')
     form.remove()
   })
 }
-
+	
 $.fn.updateThroughFade = function(time, text, callback) {
-	$(this).fadeTo(time, 0.001, function(){
+	if ($(this).is(':hidden')) {
 		if (callback) callback()
-		$(this).text(text).fadeTo(time, 1)
-	})
+		$(this).text(text).fadeIn(time*2)
+	}
+	else {
+		$(this).fadeTo(time, 0.001, function(){
+			if (callback) callback()
+			$(this).text(text).fadeTo(time, 1)
+		})		
+	}
 }
 
+// Wraps the target, fades the wrapper, and replaces it's contents.
 $.fn.replaceThroughFade = function(time, element, callback) {
 	wrap = $(this).wrap(document.createElement('div')).parent()
-	wrap.fadeTo(time, 0.001, function(){
+	
+	if ($(this).is(':hidden')) {
 		if (callback) callback()
-		wrap.empty().html(element).fadeTo(time, 1, function() {
-			wrap.replaceWith(element)
+		wrap.empty().html(element).fadeIn(time*2, function() { wrap.replaceWith(element) })
+	} else {
+		wrap.fadeTo(time, 0.001, function(){
+			if (callback) callback()
+			wrap.empty().html(element).fadeTo(time, 1, function() { wrap.replaceWith(element) })
 		})
-	})
+	}
 }
 
 // Private method for jQuery to issue PUT and DELETE requests
@@ -60,7 +71,24 @@ jQuery.extend({
   }
 })
 
-var Notification = {	
+var Notification = {
+	counts: {
+		setEvents: function(value) {
+			this._set('.event_count', value)
+		},
+		
+		setRequests: function(value) {
+			this._set('.request_count', value)
+		},
+		
+		_set: function(elements, value) {
+			if (parseInt(value) == 0) $(elements).fadeOut('slow')
+			else {
+				$(elements).updateThroughFade('fast', value)
+			}
+		}
+	},
+		
 	capsule: {
 		init: function() {
 			if (!this.element) 

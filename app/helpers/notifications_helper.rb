@@ -14,6 +14,13 @@ module NotificationsHelper
     div_for(notification, options, &block)
   end
   
+  def hidden_span_if(condition, options = {}, &block)
+    options[:style] ||= ''
+    options[:style] += ';display:none;' if condition
+    
+    concat content_tag(:span, capture(&block), options)
+  end
+  
   def event_title_for(event, options = {})
     user = event.news_item.user
     parts = [ user.name(:short), 'edited their', event.title ]

@@ -16,6 +16,10 @@
 	width: 500px;
 }
 
+.formatted {
+	width: 500px;
+}
+
 #facebox .error {
 	color: red;
 }

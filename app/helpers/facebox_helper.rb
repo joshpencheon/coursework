@@ -39,7 +39,7 @@ module FaceboxHelper
         options.delete(:ajax)
       end
       options[:rel] = 'facebox'
-      options[:rel] += "[.#{options.delete(:class)}]" if options.has_key?(:class)
+      options[:rel] += ".#{options.delete(:class)}" if options.has_key?(:class)
       link_to(text, href, options)
     end
   end

@@ -13,7 +13,15 @@ class User < ActiveRecord::Base
     user.has_many :studies
     user.has_many :watchings
     user.has_many :notifications
+    
+    user.with_options :class_name => 'Permission' do |u|
+      u.has_many :received_requests, :foreign_key => 'requestee_id'
+      u.has_many :sent_requests,     :foreign_key => 'requester_id'
+    end
   end
+  
+  has_many :requesters, :through => :received_requests
+  has_many :requestees, :through => :sent_requests
   
   has_many :watched_studies, :through => :watchings, :source => :study
   
@@ -25,7 +33,7 @@ class User < ActiveRecord::Base
     parts = [first_name, last_name]
     
     if version == :short
-      parts.first.blank?   ? self.login : parts.first
+      parts.first.blank? ? self.login : parts.first
     else
       parts.reject(&:blank?).join(' ')
     end
@@ -35,8 +43,16 @@ class User < ActiveRecord::Base
     watched_studies.include? study
   end
   
+  def find_request_from(requestee_id)
+    received_requests.find_by_requestee_id(requestee_id)    
+  end
+  
   def has_unread_notifications?
-    !notifications.unread.count.zero?
+    !notification_count.zero?
+  end
+  
+  def notification_count
+    notifications.unread.count + received_requests.pending.count
   end
   
   def recent_events(limit = 5)

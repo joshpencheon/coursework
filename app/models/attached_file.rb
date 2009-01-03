@@ -1,38 +1,39 @@
 class AttachedFile < ActiveRecord::Base
-  ALLOWED_CONTENT_TYPES = {
-    'MS Word'       => 'doc',
-    'MS Excel'      => 'xls',
-    'MS Powerpoint' => 'ppt',
-    'Adobe PDF'     => 'pdf',
-    'ZIP'           => 'zip',
-    'JPEG'          => 'jpeg',
-    'GIF'           => 'gif',
-    'PNG'           => 'png',
-    'text'          => 'txt'
-  }
-  APPLICATION_REGEXP = %r{^(x-)?application/#{ALLOWED_CONTENT_TYPES.values.join('|')}$}
-  IMAGE_REGEXP = %r{^(image|(x-)?application)/(x-png|pjpeg|jpeg|jpg|png|gif)$}
-  
   belongs_to :study
   has_attached_file :document, 
-                    :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry, '70x70#') }, :png ] },                    
-                    :default_url => "/images/documents/:style/:extension.png"  
- 
-  attr_accessible :document, :should_destroy
+                    :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry) }, :png ] }  
+  
+  before_destroy do |instance|
+    instance.study.events.create(:title => '1 attached file was removed from the study.', :data => [])
+  end
+                             
+  attr_accessible :document
   
   validates_attachment_presence :document
-  validates_attachment_content_type :document, 
-    :content_type => [ APPLICATION_REGEXP, IMAGE_REGEXP, 'text/plain' ],
-    :message => "must be: #{ALLOWED_CONTENT_TYPES.values.map{|k| '.' + k }.join(' ')}"
   
-  attr_accessor :should_destroy
   
-  def should_destroy?
-    !!self.should_destroy
+  def icon_path
+    path = "file_#{extension}.png"
+    if File.exists?(File.join(Rails.public_path, 'images', 'icons', path))
+      path
+    else
+      "file.png"
+    end
+  end
+  
+  def extension
+    ext = File.extname(self.document_file_name).gsub(/\./, '')
+    ext.chop! if ext[-1,1] == 'x'
+    ext = 'jpeg' if ext == 'jpg'    
+    ext
+  end
+  
+  def plain_text?
+    document_content_type =~ %r(text/plain) || false
   end
   
   def image?
-    document_content_type =~ /jpe?g|gif|png/ || false
+    document_content_type =~ /jpe?g|gif|bmp|png/ || false
   end
   
   def hazard?
@@ -40,7 +41,11 @@ class AttachedFile < ActiveRecord::Base
   end
   
   def displayable_inline?
-    document_content_type =~ %r(text/plain) || image?
+    plain_text? || image?
+  end
+  
+  def thumbnailable?
+    document_content_type =~ /pdf/ || image?
   end
   
   def untouched?

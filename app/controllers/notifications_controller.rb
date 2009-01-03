@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   end
 
   def count
-    render :text => current_user.notifications.unread.count
+    render :text => current_user.notification_count
   end
 
   def read
@@ -32,11 +32,9 @@ class NotificationsController < ApplicationController
   
   def discard
     @notifications = current_user.notifications
-    if params[:read]
-      @notifications = @notifications.read
-    end
-    @notifications.destroy_all
+    @notifications = @notifications.read if params[:read]
     
+    @notifications.destroy_all
     redirect_to notifications_url
   end
 
@@ -44,6 +42,13 @@ class NotificationsController < ApplicationController
   
   def find_notification
     @notification = Notification.find(params[:id])
+  end
+  
+  def authorize
+    unless can_edit?(@notification)
+      flash[:warn] = 'You cannot access that page.'
+      redirect_to studies_url
+    end
   end
 
 end

@@ -19,7 +19,8 @@ h2 {
 #header {
 	background: #70BB2C url(/images/leaves.png) no-repeat top right;
 	border-top: 1px solid #333;
-	border-bottom: 4px solid #416F1A;
+/*	border-bottom: 4px solid #416F1A;*/
+	border-bottom: 4px solid #83371F;
 	height: 100px;
 	position: relative;
 }
@@ -123,6 +124,29 @@ li#help_link a {
 	background-color: #FFF;
 }
 
+/*********** FLASH *************/
+
+.flash {
+	margin: 2px 0;
+	padding: 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+
+#notice.flash {
+	background-color: #B4FA70;
+	color: #376E0F;
+	font-weight: bold;
+	border-color: #4A9A15;
+}
+
+#warn.flash {
+	background-color: #E56564;
+	color: #FEE;
+	font-weight: bold;
+	border-color: #7C1817;
+}
+
 #sidebar {
 	color: #444;
 	padding: 20px 10px 20px 20px;
@@ -187,6 +211,11 @@ li#help_link a {
 
 /****** SIDEBAR ******/
 
+#sidebar > * {
+	margin-bottom: 20px;
+	padding-bottom: 5px;
+}
+
 #sidebar ul {
 	list-style-type: none;
 }
@@ -210,8 +239,9 @@ li#help_link a {
 	text-decoration: none;
 } 
 
+#sidebar li a.active,
 #sidebar li a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 	background-color: #DDD; 
 }
 
@@ -219,6 +249,23 @@ li#help_link a {
 	background-image: url(/images/spinner.gif);
 	background-position: 95%;
 	background-repeat: no-repeat;
+}
+
+#sidebar li a .right {
+	position: relative;
+	top: -1px;
+	padding: 1px 8px;
+	background-color: #6981E8;
+	color: #EEE;
+	text-align: center;
+	margin-right: 10px;
+	-webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+}
+
+#sidebar li a.active span.right,
+#sidebar li a:hover span.right {
+	background-color: #385AF7;
 }
 
 /********* NOTIFICATION *********/
@@ -295,6 +342,10 @@ a.read_link.in_progress:hover {
 }
 
 
+/********** PERMISSIONS **********/
+
+
+
 /********* VIEWING STUDY *********/
 
 .footnotes {
@@ -312,8 +363,12 @@ a.read_link.in_progress:hover {
 }
 
 .attached_file {
+	background-color: #F5F5F5;
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 	position: relative;
-	margin: 10px 8px 2em 8px;
+	padding: 10px 8px 2.4em 8px;
+	margin: 3px;
 	display: block;
 	float: left;
 }
@@ -323,17 +378,48 @@ a.read_link.in_progress:hover {
 	text-decoration: none;
 }
 
+.attached_file .thumbnail {
+	display:block;
+	width: 80px;
+	height: 80px;
+	text-align: center;
+}
+
 .attached_file .info {
 	color: #888;
 	position: absolute;
-	top: 100%;
+	bottom: 0.2em;
 	width: 100%;
 	left: 0;
 	font-size: 0.8em;
 	text-align: center;
 }
 
-/****** ADDING ATTACHMENTS ******/
+/****** ADDING ATTACHMENTS: STUDY ******/
+
+#add_attachment {
+	background: url(/images/icons/attach.png) no-repeat 0px 0px;
+	padding-left: 16px;
+}
+
+p.existing_attachment {
+	padding: 5px;
+	font-size: 0.9em;
+}
+
+.odd {
+	background-color: #E5E5E5;
+}
+
+p.existing_attachment.over {
+	background-color: #E7DBDB;
+}
+
+.filesize {
+	color: #888;
+}
+
+/****** ADDING ATTACHMENTS: USER ******/
 
 div.button {
 	-webkit-border-radius: 5px;
@@ -374,17 +460,4 @@ div.button {
 
 #avatar_fields a {
 	line-height: 2em;
-}
-
-#add_attachment {
-	background: url(/images/icons/attach.png) no-repeat 0px 0px;
-	padding-left: 16px;
-}
-
-#attachments {
-	background-color: #EEE;
-}
-
-#attachments .style_wrapper {
-	padding: 15px;
 }

@@ -5,7 +5,9 @@ module StudiesHelper
   end
   
   def watch_link_for(study)
-    sidebar_action(text_for_watch_link(study), watch_study_path(study), :class => 'watch_study_link')
+    sidebar_block('This Study') do
+      content_tag :li, link_to(text_for_watch_link(study), watch_study_path(study), :class => 'watch_study_link')
+    end
   end
   
   

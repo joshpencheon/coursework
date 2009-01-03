@@ -1,5 +1,30 @@
 $(document).ready(function() {
 	
+	//*********** CUSTOM FACEBOX ***********
+	
+	$(document).bind('reveal.facebox', function() { 
+		var box = $('#facebox .content')	
+		// Add linebreaks 
+		if (box.hasClass('formatted')) {
+			box.html( box.text().replace(/\n/g, '<br/>') )
+		}
+	})
+	
+	//*********** PERMISSIONS **************
+	
+	$('#permission_message').focus(function(event) {
+		counter = $('#permission_message_length')
+		var permissionMessageCounter = setInterval(function() {
+			length = 255 - $(event.target).attr('value').length
+			if (length < 0) { clr = 'red' } else { clr = '#444' }
+			counter.text(length).css({color: clr})
+		}, 200)
+	})
+	
+	$('#permission_message').blur(function() {
+		clearInterval(permissionMessageCount)
+	})
+	
 	//*********** NOTIFICATIONS ************
 
 	Notification.capsule.init()
@@ -19,9 +44,9 @@ $(document).ready(function() {
 	
 	$('a.follow_link').livequery(function() {
 		$(this).click(function(event) {
-			event.preventDefault()
-			$.post($(this).attr("href"),{}, function(){}, 'script')
-		})
+      event.preventDefault()
+      $.post($(this).attr("href"),{}, function(){}, 'script')
+    })
 	})
 	
 	//*********** VIEW A STUDY *************
@@ -43,33 +68,37 @@ $(document).ready(function() {
 	
 	//********* EDITING A STUDY ************
 	
+	$('#add_attachment').show()
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
-		event.preventDefault()
-		$(this).before('\
-			<div class="file"> \
-				<input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" /> \
-			</div>');
-		$('.file:last').hide().slideDown()
-		$(this).text('Attach another file')
+		var parent = $(this).parent()
+		input = $('\
+			<p class="new_attachment">\
+				<input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" />\
+			</p>')
+		input.insertBefore(parent)
+		input.hide().slideDown()
+		
+		$('p.new_attachment:even').addClass('odd')
+		
+		var button = parent.parent().find('input[type=submit]')
+		if (!button.attr('value').match(/attachments/)) 
+			button.attr('value', 'Save attachments')
+		return false
 	})
 	
-	// Shows existing files attached to a study
-	$('#manage_attachments').click(function(event) {
-		event.preventDefault()
-		$('#attachments').toggle('blind')
+	$('#add_attachment_submit').click(function() {
+		if ($(this).attr(value).match(/ing/)) return false
+		value = $(this).attr('value').replace(/Save/, 'Saving') + '...'
+		$(this).attr('value', value)
+		return true
 	})
-
-	// Removes an existing file from a study
-	$('.file_delete_link').click(function(event) {
-		event.preventDefault()
-		var parent = $(this).parent()
-		if (parent.hasClass('deleted')) return false
-		parent.fadeTo('slow', 0.5).addClass('deleted')
-			.append('<span>will be deleted when you save this study.</span>')
-			.find('input').remove()
-		event.unbind()
-	})
+	
+	$('.delete_attachment_link').hover(function() {
+		$(this).parents('.existing_attachment').addClass('over')
+	}, function() {
+		$(this).parents('.existing_attachment').removeClass('over')
+	});
 	
 	//******** USER ********//
 	

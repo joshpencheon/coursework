@@ -1,4 +1,6 @@
-Notification.capsule.set('<%= current_user.notifications.unread.count %>')
+Notification.capsule.set('<%= current_user.notification_count %>')
+
+Notification.counts.setEvents('<%= current_user.notifications.unread.length %>')
 
 $('#notification_<%= @notification.id %>').fadeTo('fast', 0.001, function() {
 	link = $(this).toggleClass('read').find('a.read_link')

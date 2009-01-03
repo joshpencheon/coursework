@@ -10,7 +10,7 @@
 	</p>
 	
 	<div id="logo">
-		<%= link_to image_tag('logo_b&w.png'), root_url %>
+    <%= link_to image_tag('logo_b&w.png'), root_url %>
 	</div>
 	
 	<div id="menu" class="clear">
@@ -27,7 +27,7 @@
     	  
     	  <% hidden_span_if !current_user.has_unread_notifications?, 
     	    { :id => "notification_count", :class => "notification_count" } do %>   	  
-    	    <%= current_user.notifications.unread.count %>
+    	    <%= current_user.notification_count %>
     	  <% end %>
     	</li>
     <% end %>

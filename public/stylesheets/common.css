@@ -6,8 +6,9 @@
 }
 
 body {
-	color: #222;
-	background-color: #DDD;
+	color: #333;
+/*	background-color: #DDD;*/
+	background-color: #3A3A3A;
 	min-width: 1130px;
 	max-width: 1920px;
 }
@@ -49,6 +50,10 @@ label {
 
 .center {
 	text-align: center;
+}
+
+.to_right {
+	text-align: right;
 }
 
 .col {
@@ -96,8 +101,6 @@ label {
 	position: relative;
 	left: 7px;
 }
-
-
 
 .spacer {
 	margin: 15px auto;

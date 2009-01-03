@@ -7,13 +7,7 @@ class EventCreator
 
     @data = []
     
-    puts "*** Got [ ] for @data ***"
-    
     model.changes_by_type.each_pair do |assoc, changeset|
-      puts "*** On assoc. type :#{assoc}... ***"
-      puts "*** ...with changeset: ***"
-      puts "*** #{changeset.inspect} ***"
-      
       singular_name = assoc.to_s.humanize.downcase.singularize
       
       if assoc == :self

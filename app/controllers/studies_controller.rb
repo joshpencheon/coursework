@@ -56,4 +56,11 @@ class StudiesController < ApplicationController
   def find_study
     @study = Study.find(params[:id])
   end
+  
+  def authorize
+    unless can_edit?(@study)
+      flash[:warn] = 'You cannot access that page.'
+      redirect_to @study
+    end
+  end
 end

@@ -47,9 +47,9 @@ describe FaceboxHelper do
     end
     
     context 'and a css has been specified' do
-      it "should add rel='facebox[**CLASS_HERE**]' tag and prepend div id with a hash" do
+      it "should add rel='facebox.className' tag and prepend div id with a hash" do
         helper.link_to_facebox('click for T&Cs', :div => 'terms_and_conditions', :class => 'boring-font').should ==
-          %q(<a href="#terms_and_conditions" rel="facebox[.boring-font]">click for T&Cs</a>)        
+          %q(<a href="#terms_and_conditions" rel="facebox.boring-font">click for T&Cs</a>)        
       end
     end
   end

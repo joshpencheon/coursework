@@ -1,0 +1,13 @@
+<h2>Request contact with <%= @requestee.name(:short) %>...</h2>
+<p class="spacer">
+  <strong>- To make it easier for <%= @requestee.name(:short) %> to consider your resquest, you can write a short message: (255 character limit)</strong>
+</p>
+
+<% form_for @permission do |f| %>
+  <%= f.text_area :message %>
+  <%= f.hidden_field :requestee_id %>
+  <p><em>Characters left: <span id="permission_message_length">
+    <%= @permission.message.length.zero? ? '255' : 255 - @permission.message.length %>
+  </span></em></p>
+  <p class="button"><%= f.submit 'Send request' %></p>
+<% end %>

@@ -1,4 +1,5 @@
 class HelpController < ApplicationController
+  layout 'basic'
 
   before_filter :get_partial, :except => [ :search ]
 
@@ -9,16 +10,16 @@ class HelpController < ApplicationController
   def index
   end
   
-  def welcome
-  end
-  
-  def private_details
-  end
-  
   private
   
   def get_partial
     topic = params[:topic].blank? ? 'index' : params[:topic]
-    render :partial => topic + '.html.erb'    
+    @partial = topic + '.html.erb'
+
+    if request.xhr?
+      render :partial => @partial
+    else
+      render :action => 'index'
+    end
   end
 end

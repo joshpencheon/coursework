@@ -1,16 +1,7 @@
-<p>
+<div>
+  <h5>About</h5>
   The SDU knowledge base is a place where information concerning environmental best practices in the NHS can be collected and discussed.
-</p>
-
-
-<% if @sidebar_actions && @sidebar_actions.any? %>
-  <ul>
-		<h5>Actions</h5>
-		<% for link in @sidebar_actions %>
-			<%= link %>
-		<% end %>	
-  </ul>
-<% end %>
+</div>
 
 <% if @sidebar_blocks %>
   <ul>	
@@ -18,5 +9,5 @@
       <h5><%= title %></h5>
       <%= contents %>
 	  <% end %>
-    </ul>
+  </ul>
 <% end %>

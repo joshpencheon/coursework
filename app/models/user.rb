@@ -32,11 +32,13 @@ class User < ActiveRecord::Base
   def name(version = :long)
     parts = [first_name, last_name]
     
-    if version == :short
-      parts.first.blank? ? self.login : parts.first
+    string = if version == :short
+      parts.first
     else
       parts.reject(&:blank?).join(' ')
     end
+    
+    string.blank? ? login : string.capitalize_name
   end
   
   def watching?(study)

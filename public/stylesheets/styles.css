@@ -4,6 +4,10 @@ html, body {
 	font-size: 13px;
 }
 
+body {
+	background-position: center 100px;
+}
+
 h2 {
 	text-align: center;
 	-webkit-border-radius: 2px;
@@ -19,8 +23,7 @@ h2 {
 #header {
 	background: #70BB2C url(/images/leaves.png) no-repeat top right;
 	border-top: 1px solid #333;
-/*	border-bottom: 4px solid #416F1A;*/
-	border-bottom: 4px solid #83371F;
+	border-bottom: 4px solid #00376A;
 	height: 100px;
 	position: relative;
 }
@@ -169,7 +172,8 @@ li#help_link a {
 	padding: 1em 10px;
 	width: 70%;
 	height: 1em;
-	background-color: #BBB;
+	color: #999;
+	background-color: #444;
 }
 
 #content, #footer {
@@ -225,6 +229,7 @@ li#help_link a {
 	left: -5px;
 	padding-bottom: 10px;
 	text-transform: uppercase;
+	color: #555;
 }
 
 #sidebar li {
@@ -259,8 +264,8 @@ li#help_link a {
 	color: #EEE;
 	text-align: center;
 	margin-right: 10px;
-	-webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
+	-webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
 }
 
 #sidebar li a.active span.right,
@@ -334,7 +339,6 @@ a.read_link.in_progress {
 	background-image: url(/images/spinner_white.gif);
 	background-position: 95%;
 	background-repeat: no-repeat;
-	background-size: 1em 1em;
 }
 
 a.read_link.in_progress:hover {

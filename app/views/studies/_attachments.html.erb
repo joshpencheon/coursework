@@ -1,0 +1,27 @@
+<% sidebar_block('Add an attachment') do %>
+ <% form_for @study, :html => { :multipart => true, :id => 'add_attachment_form' } do |f| %>  
+    <% fields_for 'study[new_attached_file_attributes][]', @study.attached_files.build do |af| -%>      
+      <p class="new_attachment odd"><%= af.file_field :document, :no_label => true %></p>
+    <% end -%>   
+    <p><a href="#" id="add_attachment" style="display:none">Add another attachment</a></p>   
+    <p class="to_right"><%= f.submit 'Save attachment', :id => 'add_attachment_submit' %></p>
+  <% end %>
+<% end %>
+
+<% if @study.saved_attachments.any? %>
+  <% sidebar_block('Existing attachments') do %>
+    <% @study.saved_attachments.each do |attachment| %>
+      <p class="existing_attachment<%= cycle(' odd', '') %>">
+        <span class="right">
+          <%= link_to icon('bin_empty.png'), attachment, 
+            :confirm => 'Are you sure?', 
+            :method => :delete, 
+            :class => 'delete_attachment_link' %>
+        </span>
+        <%= icon attachment.icon_path %>
+        <%= h truncate_centrally(attachment.document_file_name, 25) %> 
+        - <span class="filesize"><%= number_to_human_size attachment.document_file_size %></span>
+      </p>
+    <% end %>
+  <% end %>  
+<% end %>

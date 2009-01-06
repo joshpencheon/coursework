@@ -7,8 +7,7 @@
 
 body {
 	color: #333;
-/*	background-color: #DDD;*/
-	background-color: #3A3A3A;
+	background: #3A3A3A url(/images/gradient.png) repeat-x;
 	min-width: 1130px;
 	max-width: 1920px;
 }

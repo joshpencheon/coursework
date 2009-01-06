@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081231220031) do
+ActiveRecord::Schema.define(:version => 20090103174328) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -60,16 +60,16 @@ ActiveRecord::Schema.define(:version => 20081231220031) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "login",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "remember_token",                         :null => false
+    t.string   "login",                                 :null => false
+    t.string   "crypted_password",                      :null => false
+    t.string   "remember_token",                        :null => false
     t.integer  "login_count"
-    t.string   "password_salt",                          :null => false
+    t.string   "password_salt",                         :null => false
     t.datetime "current_login_at"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.string   "avatar_file_size"
-    t.boolean  "email_hidden",        :default => false
+    t.boolean  "email_hidden",        :default => true
   end
 
   create_table "watchings", :force => true do |t|

@@ -1,7 +1,7 @@
 class AttachedFile < ActiveRecord::Base
   belongs_to :study
   has_attached_file :document, 
-                    :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry) }, :png ] }  
+                    :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry, '70x70#') }, :png ] }  
   
   before_destroy do |instance|
     instance.study.events.create(:title => '1 attached file was removed from the study.', :data => [])

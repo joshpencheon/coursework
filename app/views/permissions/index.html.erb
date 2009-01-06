@@ -1,6 +1,7 @@
 <%= render :partial => "common_controls" %>
 
 <% if @received_requests.any? %>
+  <h3><%= pluralize @sent_requests.length, 'person' %> would like you to share your email address with them</h3>
   <% for request in @received_requests %>
     <div class="notification">
       <strong><%= link_to h(request.requester.name), request.requester %> would like to get in contact with you, and has requested that you share you email address with them.</strong> 
@@ -8,14 +9,14 @@
         <p class="message"><%= request.message %></p>
       <% end %>        
 
-      <%= link_to 'Accept', grant_permission_path(request.requestee_id) %> |
-      <%= link_to 'Decline', reject_permission_path(request.requestee_id) %>
+      <%= link_to 'Accept', grant_permission_path(request.requestee_id), :method => :put, :style => 'color:green' %> |
+      <%= link_to 'Decline', reject_permission_path(request.requestee_id), :method => :put, :style => 'color:red' %>
     </div>
   <% end %>
 <% end %>
 
 <% if @sent_requests.any? %>
-  <h3>You have <%= pluralize @sent_requests.length, 'request' %> that you've sent awaiting a reply.</h3>
+  <h3>You have <%= pluralize @sent_requests.length, 'request' %> that you've sent awaiting a reply</h3>
   <% for sent in @sent_requests %>
     <div class="notification">
       <p>

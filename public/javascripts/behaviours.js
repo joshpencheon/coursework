@@ -1,10 +1,14 @@
 $(document).ready(function() {
 	
+	//**************** FLASH ***************
+	
+	setTimeout("$('.flash').fadeOut('slow')", 5000)
+	
 	//*********** CUSTOM FACEBOX ***********
 	
+	// Adds line-breaks to text documents
 	$(document).bind('reveal.facebox', function() { 
 		var box = $('#facebox .content')	
-		// Add linebreaks 
 		if (box.hasClass('formatted')) {
 			box.html( box.text().replace(/\n/g, '<br/>') )
 		}

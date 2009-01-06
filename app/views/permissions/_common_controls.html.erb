@@ -1,20 +1,18 @@
 <% sidebar_block('Go to...') do %>
-  <ul>
-    <li><a href="<%= permissions_path %>" <%= 'class="active"' if current_page?(permissions_path) %>>
-      
-      <% hidden_span_if !current_user.received_requests.pending.any?, :class => 'right request_count' do %>
-        <%= current_user.received_requests.pending.length %>
-      <% end %>
-      
-      Pending Requests
-    </a></li>
-    <li><a href="<%= notifications_path %>" <%= 'class="active"' if current_page?(notifications_path) %>>
-      
-      <% hidden_span_if !current_user.notifications.unread.any?, :class => 'right event_count' do %>
-        <%= current_user.notifications.unread.length %>
-      <% end %>
-      
-      My Notifications
-    </a></li>
-  </ul>
+  <li><a href="<%= permissions_path %>" <%= 'class="active"' if current_page?(permissions_path) %>>
+    
+    <% hidden_span_if !current_user.received_requests.pending.any?, :class => 'right request_count' do %>
+      <%= current_user.received_requests.pending.length %>
+    <% end %>
+    
+    Pending Requests
+  </a></li>
+  <li><a href="<%= notifications_path %>" <%= 'class="active"' if current_page?(notifications_path) %>>
+    
+    <% hidden_span_if !current_user.notifications.unread.any?, :class => 'right event_count' do %>
+      <%= current_user.notifications.unread.length %>
+    <% end %>
+    
+    My Notifications
+  </a></li>
 <% end %>

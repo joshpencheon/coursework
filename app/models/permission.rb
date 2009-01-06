@@ -15,10 +15,10 @@ class Permission < ActiveRecord::Base
   attr_protected :granted
   
   def grant!
-    update_attibutes!(:granted => true, :read => true)
+    update_attributes(:granted => true, :read => true)
   end
   
   def reject!
-    update_attibutes!(:granted => false, :read => true)
+    update_attributes(:granted => false, :read => true)
   end
 end

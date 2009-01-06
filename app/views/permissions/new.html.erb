@@ -7,7 +7,7 @@
   <%= f.text_area :message %>
   <%= f.hidden_field :requestee_id %>
   <p><em>Characters left: <span id="permission_message_length">
-    <%= @permission.message.length.zero? ? '255' : 255 - @permission.message.length %>
+    <%= @permission.message ? 255 - @permission.message.length : 255 %>
   </span></em></p>
   <p class="button"><%= f.submit 'Send request' %></p>
 <% end %>

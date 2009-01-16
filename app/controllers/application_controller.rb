@@ -13,8 +13,7 @@ class ApplicationController < ActionController::Base
   private
   
   def can_edit?(record)
-    current_user && (current_user.admin? || current_user == record.try(:user) || current_user == record)
-
+    current_user && (current_user.admin? || current_user == record.try(:user))
   end
   helper_method :can_edit?
   

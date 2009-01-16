@@ -33,22 +33,30 @@ $(document).ready(function() {
 
 	Notification.capsule.init()
 
-	$('form.button-to input[type=submit]').button_to_link()
-
 	$('a.read_link').livequery(function() {
 		$(this).click(function(event) {
-			event.preventDefault()		
+			event.preventDefault()
 			$(this).addClass('in_progress')
 			Notification.capsule.set(null);
-			$.put($(this).attr("href"), {}, function() {
+			$.put($(this).attr("href"), {}, function() {			
 				$(event.target).removeClass('in_progress')
+			}, 'script')
+		})
+	})
+	
+	$('a.load_notification_link').livequery(function() {
+		$(this).click(function(event) {
+			event.preventDefault()
+			$(this).text('Loading details...')
+			$.get($(this).attr('href'), {}, function(data){
+				$(event.target).remove()
 			}, 'script')
 		})
 	})
 	
 	$('a.follow_link').livequery(function() {
 		$(this).click(function(event) {
-      event.preventDefault()
+			event.preventDefault()
       $.post($(this).attr("href"),{}, function(){}, 'script')
     })
 	})
@@ -84,10 +92,6 @@ $(document).ready(function() {
 		input.hide().slideDown()
 		
 		$('p.new_attachment:even').addClass('odd')
-		
-		var button = parent.parent().find('input[type=submit]')
-		if (!button.attr('value').match(/attachments/)) 
-			button.attr('value', 'Save attachments')
 		return false
 	})
 	

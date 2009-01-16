@@ -20,10 +20,15 @@ class User < ActiveRecord::Base
     end
   end
   
+  has_many :events
   has_many :requesters, :through => :received_requests
   has_many :requestees, :through => :sent_requests
   
   has_many :watched_studies, :through => :watchings, :source => :study
+  
+  def disciples
+    requesters.find(received_requests.granted.map(&:requester_id))
+  end
   
   def admin?
     true
@@ -32,11 +37,8 @@ class User < ActiveRecord::Base
   def name(version = :long)
     parts = [first_name, last_name]
     
-    string = if version == :short
-      parts.first
-    else
-      parts.reject(&:blank?).join(' ')
-    end
+    string = version == :short ?
+      parts.first : parts.reject(&:blank?).join(' ')
     
     string.blank? ? login : string.capitalize_name
   end
@@ -49,6 +51,10 @@ class User < ActiveRecord::Base
     received_requests.find_by_requestee_id(requestee_id)    
   end
   
+  def has_sent_request_to(requestee_id)
+    !!sent_requests.find_by_requestee_id(requestee_id)    
+  end
+  
   def has_unread_notifications?
     !notification_count.zero?
   end
@@ -58,7 +64,8 @@ class User < ActiveRecord::Base
   end
   
   def recent_events(limit = 5)
-    studies.map(&:events).flatten.sort {|a, b| b.created_at <=> a.created_at }.slice(0...limit)
+    studies.map(&:events).flatten.sort { |a, b| 
+      b.created_at <=> a.created_at }.slice(0...limit)
   end
   
   def to_param

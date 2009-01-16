@@ -5,6 +5,16 @@ class NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.notifications.preloading.most_recent_first.paginate(:page => params[:page], :per_page => 5)
+    if params[:referrer] == 'tab' && @notifications.empty? && !current_user.notification_count.zero?
+      return redirect_to permissions_url
+    end
+  end
+  
+  def show
+    @notification = current_user.notifications.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   def count

@@ -16,6 +16,6 @@
   </p>
 <% end %>
 
-<% if can_edit?(@user) %>
+<% if current_user == @user %>
   <%= link_to "Edit", edit_user_path(@user) %>  
 <% end %>

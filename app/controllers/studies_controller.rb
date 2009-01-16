@@ -38,11 +38,14 @@ class StudiesController < ApplicationController
   end
   
   def update  
+    params[:existing_attached_file_attributes] ||= {}
+    
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
       redirect_to @study
     else
-      render :action => "new"
+      logger.info '******' + @study.attached_files.map(&:errors).inspect
+      render :action => "edit"
     end
   end
 

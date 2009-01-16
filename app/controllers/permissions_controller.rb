@@ -8,33 +8,44 @@ class PermissionsController < ApplicationController
   end
   
   def new
+    if current_user.has_sent_request_to(@requestee)
+      flash[:notice] = "You've already sent a request to #{@requestee.name(:short)} - please be patient."
+      redirect_to @requestee
+    end
+
     session[:permission_redirect] = request.referrer
     @permission = current_user.sent_requests.build(:requestee_id => @requestee.id)
   end
   
   def create
+    params[:permission][:granted] = false
+    
     @permission = current_user.sent_requests.build(params[:permission])
-    if @permission.save
-      flash[:notice] = "Your request has been sent."
-      redirect_to session[:permission_redirect] || users_url
+    if current_user.has_sent_request_to(@requestee) || @permission.save
+      flash[:notice] = "Your request has been sent. Please wait for a response."
+      redirect_to session[:permission_redirect] || permissions_url
     else
       render :action => 'new'
     end
   end
   
   def grant
-    @request.grant!
-    redirect_to notifications_url
+    if @request.grant
+      flash[:notice] = "Permission granted."
+    end
+    redirect_to permissions_url
   end
   
   def reject
-    @request.reject!
-    redirect_to notifications_url
+    if @request.reject
+      flash[:notice] = "Permission revoked."
+    end
+    redirect_to permissions_url
   end
   
   def destroy
     @request.destroy
-    redirect_to notifications_url    
+    redirect_to permissions_url    
   end
   
   private

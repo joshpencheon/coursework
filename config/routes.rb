@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
     :action     => 'new'
   
   map.resources :notifications,
-    :only       => :index, 
+    :only       => [ :index, :show ],
     :member     => { :read  => :put, :follow  => :post   },
     :collection => { :count => :get, :discard => :delete }
   

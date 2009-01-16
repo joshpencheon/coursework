@@ -3,12 +3,11 @@ class AttachedFile < ActiveRecord::Base
   has_attached_file :document, 
                     :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry, '70x70#') }, :png ] }  
   
-  before_destroy do |instance|
-    instance.study.events.create(:title => '1 attached file was removed from the study.', :data => [])
-  end
+  # before_destroy do |instance|
+  #   instance.study.events.create(:title => '1 attached file was removed from the study.', :data => [])
+  # end
                              
-  attr_accessible :document
-  
+  attr_accessible :document, :notes
   validates_attachment_presence :document
   
   
@@ -26,6 +25,10 @@ class AttachedFile < ActiveRecord::Base
     ext.chop! if ext[-1,1] == 'x'
     ext = 'jpeg' if ext == 'jpg'    
     ext
+  end
+  
+  def title
+    document_file_name || 'untitled'
   end
   
   def plain_text?
@@ -49,9 +52,7 @@ class AttachedFile < ActiveRecord::Base
   end
   
   def untouched?
-    return false unless new_record?
-    (attributes == self.class.new.attributes) ||
-      (attributes == study.attached_files.build.attributes) rescue false
+    new_record? && document_file_name.blank? && notes.blank?
   end
   
   private

@@ -18,7 +18,7 @@
 		
 		<div id="site">
 			<%= render :partial => 'layouts/header' %>
-
+			
 			<div id="content">
 				<% flash.each do |key, msg| %>
 					<%= content_tag :div, msg, :id => key, :class => 'flash' %>

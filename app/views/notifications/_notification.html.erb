@@ -1,7 +1,7 @@
 <% notification_div_for notification do %>
   <div class="right" style="text-align:right">
     <div><%= read_link(notification) %></div><br/>
-    <div><%= button_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %></div>
+    <div><%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %></div>
   </div>
     
   <p class="title">
@@ -9,7 +9,11 @@
     <span class="relative"><%= time_ago_in_words notification.event.created_at %> ago</span>
   </p>
   
-  <div><%= event_items_for notification.event %></div>
+  <div class="items">
+    <p class="spacer center">
+      <%= link_to 'Load details...', notification, :class => 'load_notification_link' %>
+    </p>
+  </div>
   
   <div class="clear"></div>
 <% end %>

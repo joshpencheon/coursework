@@ -9,16 +9,6 @@ $(document).ready(function($) {
 	})	
 })
 
-$.fn.button_to_link = function() {
-  // return the jQuery object for chaining
-  return this.each(function(){
-    var button = $(this)
-    var form = button.parents('form')
-    form.after('<a href="' + form.attr('action') + '" class="button_link_to ' + button.attr('class') + '">' + button.attr('value') + '</a>')
-    form.remove()
-  })
-}
-	
 $.fn.updateThroughFade = function(time, text, callback) {
 	if ($(this).is(':hidden')) {
 		if (callback) callback()

@@ -1,20 +1,17 @@
-<% form_for @study do |f| %>
+<% form_for @study, :html => { :multipart => true } do |f| %>
   <%= f.text_field :title, :class => 'bold' %>
-
   <%= f.text_area :description %>
-	
+  
+  <% if @study.new_record? %>
+    You'll need to save the study before you can attach files to it.
+  <% else %>
+    <%= render :partial => 'attachments' %>
+  <% end %>
+  
 	<p>
 	  <%= f.submit 'Save Study' %>
     <%= render :partial => "shared/publish", :locals => { :form => f } %>
   </p>
-<% end %>
-
-<% if @study.new_record? %>
-  <% sidebar_block('Attachments') do %>
-    <em>You need to save the study before you can attach any files to it.</em>
-  <% end %>
-<% else %>
-  <%= render(:partial => "attachments") %>    
 <% end %>
 
 

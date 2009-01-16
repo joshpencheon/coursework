@@ -120,12 +120,18 @@ li#help_link a {
 }
 
 #content {
-	padding: 10px;
 	margin: 20px 10px;
+	background-color: #FFF;
+	padding: 10px;
 	float: left;
 	width: 70%;
-	background-color: #FFF;
 }
+
+#content, #footer {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
 
 /*********** FLASH *************/
 
@@ -174,11 +180,6 @@ li#help_link a {
 	height: 1em;
 	color: #999;
 	background-color: #444;
-}
-
-#content, #footer {
-	-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
 }
 
 /*********ELEMENTS BY ID*********/
@@ -294,6 +295,12 @@ ul.notification_items {
 
 ul.notification_items li {
 	padding: 5px 0 5px 20px;
+}
+
+li.section {
+	position: relative;
+	left: -0.5em;
+	font-weight: bold;
 }
 
 li.new {

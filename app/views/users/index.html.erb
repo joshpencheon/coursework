@@ -1,16 +1,14 @@
-<% sidebar_block('Actions') do %>
-  <li></li>
-<% end %>
-
 <% for user in @users %>
 <p>
   <%= avatar_for(user, :tiny) %>
 	<%= link_to h("#{user.name || 'anon.'} (#{user.login})"), user %>
-	<% if user.email_hidden? %>
-	 <em>Email kept private</em>
-   [<%= link_to 'request', request_permission_path(user) %>]
-	<% else %>
-	 [<%= mail_to h(user.email), 'send an email' %>]
-	<% end %>
+		
+  <% if !user.email_hidden? || user.disciples.include?(current_user) %>
+    [<%= mail_to h(user.email), 'send an email' %>]
+  <% else %>
+    <em>Email kept private</em>
+    [<%= request_link_for user %>]
+  <% end %>
+	
 </p>
 <% end %>

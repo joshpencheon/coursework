@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_filter :authorize_as_self, :only   => [ :edit, :update ]
 
   def index
-    @users = User.all
+    @users = User.paginate(:page => params[:page], :per_page => 5)
   end
   
   def show
@@ -31,7 +31,9 @@ class UsersController < ApplicationController
   end
   
   def update
-    params[:user][:avatar] = nil if (params[:user][:destroy_avatar] == '1' && params[:user][:avatar].blank?)
+    if (params[:user][:destroy_avatar] == '1') && params[:user][:avatar].blank?
+      params[:user][:avatar] = nil
+    end
     
     if @user.update_attributes(params[:user])
       flash[:notice] = "Successfully updated..."

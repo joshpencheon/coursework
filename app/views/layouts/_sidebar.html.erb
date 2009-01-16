@@ -4,10 +4,7 @@
 </div>
 
 <% if @sidebar_blocks %>
-  <ul>	
-  <% @sidebar_blocks.each_pair do |title, contents| %>
-    <h5><%= title %></h5>
-    <%= contents %>
+  <% @sidebar_blocks.each do |blk| %>
+    <%= content_tag :ul, "<h5>#{blk[:title]}</h5>#{blk[:contents]}", blk[:styles] %>
   <% end %>
-  </ul>
 <% end %>

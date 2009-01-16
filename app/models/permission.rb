@@ -14,11 +14,18 @@ class Permission < ActiveRecord::Base
   
   attr_protected :granted
   
-  def grant!
-    update_attributes(:granted => true, :read => true)
+  def grant
+    set(true)
   end
   
-  def reject!
-    update_attributes(:granted => false, :read => true)
+  def reject
+    set(false)
   end
+  alias_method :revoke, :reject
+  
+  def set(bool)
+    update_attribute :granted, bool
+    update_attribute :read, true
+  end
+  
 end

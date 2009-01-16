@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090103174328) do
+ActiveRecord::Schema.define(:version => 20090114095358) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20090103174328) do
     t.string   "document_file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "notes"
   end
 
   create_table "events", :force => true do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20090103174328) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.integer  "user_id"
   end
 
   create_table "notifications", :force => true do |t|
@@ -60,16 +62,16 @@ ActiveRecord::Schema.define(:version => 20090103174328) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "login",                                 :null => false
-    t.string   "crypted_password",                      :null => false
-    t.string   "remember_token",                        :null => false
+    t.string   "login",                                  :null => false
+    t.string   "crypted_password",                       :null => false
+    t.string   "remember_token",                         :null => false
     t.integer  "login_count"
-    t.string   "password_salt",                         :null => false
+    t.string   "password_salt",                          :null => false
     t.datetime "current_login_at"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.string   "avatar_file_size"
-    t.boolean  "email_hidden",        :default => true
+    t.boolean  "email_hidden",        :default => false
   end
 
   create_table "watchings", :force => true do |t|

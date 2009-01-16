@@ -1,1 +1,1 @@
-window.location = '<%= url_for(@target) %>'
+window.location = '<%= escape_javascript(url_for(@target)) %>'

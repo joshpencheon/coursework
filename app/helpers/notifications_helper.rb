@@ -2,7 +2,7 @@ module NotificationsHelper
   def read_link(notification)
     text = notification.read? ? "Mark as unread" : "Mark as read"
     # text += image_tag 'spinner.gif', :style => 'width: 10px;display:none'
-    button_to text, read_notification_path(notification), :method => :put, :class => 'read_link'
+    link_to text, read_notification_path(notification), :class => 'read_link'
   end
   
   def notification_div_for(notification, options = {}, &block)
@@ -23,7 +23,7 @@ module NotificationsHelper
   
   def event_title_for(event, options = {})
     user = event.news_item.user
-    parts = [ user.name(:short), 'edited their', event.title ]
+    parts = [ user.name(:short), 'edited their', event.title.first, "'#{event.title.last}'" ]
     
     if true == options[:user_link] 
       parts.shift
@@ -35,8 +35,22 @@ module NotificationsHelper
   
   def event_items_for(event)
     html = ''
-    event.data.map do |pair|
-      html << content_tag(:li, pair.values.first, :class => pair.keys.first)
+    event.data.each_pair do |assoc, types|
+      html << content_tag(:li, assoc.to_s.humanize, :class => 'section')
+      
+      if types.is_a?(Hash) 
+        types.each_pair do |type, changes|
+          if type.is_a?(Integer)
+            instance = assoc.to_s.singularize.camelize.constantize.find(type)
+            html << content_tag(:li, "#{instance.title}: #{changes}", :class => 'edited')          
+          else
+            klass = type == :new ? 'new' : 'deleted'
+            html << content_tag(:li, changes, :class => klass )
+          end
+        end        
+      else
+        html << content_tag(:li, types, :class => 'edited')
+      end
     end
     content_tag :ul, html, :class => 'notification_items'
   end

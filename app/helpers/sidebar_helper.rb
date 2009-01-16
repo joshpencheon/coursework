@@ -1,10 +1,10 @@
 module SidebarHelper
-  def sidebar_block(title, &block)
-    logger.info("Adding :#{title} to sidebar")
-    
+  def sidebar_block(title, options = {}, &block)
     title.downcase!
-    @sidebar_blocks ||= ActiveSupport::OrderedHash.new
-    @sidebar_blocks[title] ||= []
-    @sidebar_blocks[title] << capture(&block)
+    @sidebar_blocks ||= []
+    
+    Struct.new("SidebarBlock", :title, :contents, :styles)
+    blk = Struct::SidebarBlock.new(title, capture(&block), options)
+    @sidebar_blocks << blk
   end
 end

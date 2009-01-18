@@ -1,0 +1,29 @@
+one:
+  name: 'North West'
+
+two:  
+  name: 'North East'
+
+three:
+  name: 'East Midlands'
+
+four:
+  name: 'West Midlands'
+
+five:
+  name: 'York and Humberside'
+
+six:
+  name: 'East of England'
+
+seven:
+  name: 'London'
+
+eight:
+  name: 'South Central'
+  
+nine:
+  name: 'South Coast'
+
+ten:
+  name: 'South West'

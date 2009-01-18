@@ -1,0 +1,23 @@
+one:
+  name: 'Other'
+  
+two:
+  name: 'Central Department of Health'
+  
+three:
+  name: 'NHS Strategic Health Authority'
+  
+four:  
+  name: 'NHS Primary Care Trust'
+  
+five:
+  name: 'Regional Development Agency'
+  
+six:
+  name: 'Third Sector'
+  
+seven:
+  name: 'Local Government'
+  
+eight:
+  name: 'European Union'

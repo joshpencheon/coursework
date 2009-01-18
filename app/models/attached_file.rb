@@ -2,15 +2,10 @@ class AttachedFile < ActiveRecord::Base
   belongs_to :study
   has_attached_file :document, 
                     :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry, '70x70#') }, :png ] }  
-  
-  # before_destroy do |instance|
-  #   instance.study.events.create(:title => '1 attached file was removed from the study.', :data => [])
-  # end
                              
   attr_accessible :document, :notes
   validates_attachment_presence :document
-  
-  
+   
   def icon_path
     path = "file_#{extension}.png"
     if File.exists?(File.join(Rails.public_path, 'images', 'icons', path))

@@ -15,7 +15,6 @@ class HelpController < ApplicationController
   def get_partial
     topic = params[:topic].blank? ? 'index' : params[:topic]
     @partial = topic + '.html.erb'
-
     if request.xhr?
       render :partial => @partial
     else

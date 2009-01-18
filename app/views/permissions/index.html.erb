@@ -27,11 +27,11 @@
   <% for sent in @sent_requests %>
     <div class="notification">
       <p>
-        <strong>You requested to get in contact with <%= link_to h(request.requester.name), request.requester %>.
+        <strong>You requested to get in contact with <%= link_to h(sent.requestee.name), sent.requestee %>.
         <span class="relative"><%= time_ago_in_words(sent.created_at) %> ago</span></strong>
       </p> 
       <% unless sent.message.blank? %>
-        <p class="message"><%= request.message %></p>
+        <p class="message"><%= sent.message %></p>
       <% end %>        
 
     </div>

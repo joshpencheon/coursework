@@ -1,5 +1,15 @@
 <%= render :partial => "permissions/common_controls" %>
 
+<% sidebar_block('Syndicate') do %>
+  <%= image_tag 'rss.png', :style => 'float:left;padding-right: 0.8em' %>
+  You can keep track of your notifications without visiting this site by using your personalised
+  <%= link_to 'atom feed', feed_notifications_url(:format => 'atom', :token => current_user.token) %>.
+<% end %>
+
+<% content_for(:head) do %>
+  <%= auto_discovery_link_tag :atom, feed_notifications_url(:format => 'atom', :token => current_user.token) %>
+<% end -%>
+
 <% if @notifications.any? %>
 
   <% sidebar_block('Actions') do %>
@@ -9,14 +19,12 @@
               :confirm => 'Are you sure?', :method => :delete %></li>  
   <% end %>
 
-  <p>
+  <p class="small_spacer">
     <span class="right"><%= will_paginate @notifications %></span>
     <%= page_entries_info @notifications %>
   </p>
 
   <div id="notifications"><%= render :partial => @notifications %></div>
-
-  <p><span class="right"><%= will_paginate @notifications %></span></p>
   
 <% else %>
 

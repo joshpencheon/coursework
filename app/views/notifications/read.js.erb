@@ -3,10 +3,14 @@ Notification.capsule.set('<%= current_user.notification_count %>')
 Notification.counts.setEvents('<%= current_user.notifications.unread.length %>')
 
 $('#notification_<%= @notification.id %>').fadeTo('fast', 0.001, function() {
-	link = $(this).toggleClass('read').find('a.read_link')
+	link = $(this).find('a.read_link')
 	
-	link.text().match(/un/) ? text = 'Mark as read' : text = 'Mark as unread'
-	link.text(text)
-	
-	$(this).fadeTo('fast', 1)
+	if (link.text().match(/un/)) { 
+		link.text('Mark as read')
+		$(this).fadeTo('fast', 1).removeClass('read')
+	} 
+	else {
+		link.text('Mark as unread')
+		$(this).fadeTo('fast', 0.6).addClass('read')
+	}
 })

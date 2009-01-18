@@ -1,15 +1,19 @@
 module StudiesHelper
   
   def text_for_watch_link(study)
-    study.watched_by?(current_user) ? 'Stop watching this study' : 'Watch this study'    
+    if study.watched_by?(current_user)
+      text = 'You - Stop watching this study'
+      style = {}
+    else
+      text = 'Watch this study'
+      style = { :style => 'visibility: hidden' }
+    end
+    avatar_for(current_user, :minute, style) + text 
   end
   
   def watch_link_for(study)
-    sidebar_block('This Study') do
-      content_tag :li, link_to(text_for_watch_link(study), watch_study_path(study), :class => 'watch_study_link')
-    end
+    link_to(text_for_watch_link(study), watch_study_path(study), :class => 'watch_study_link watcher_link')
   end
-  
   
   
   def saved_attachments_for(study)

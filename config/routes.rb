@@ -11,8 +11,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :notifications,
     :only       => [ :index, :show ],
-    :member     => { :read  => :put, :follow  => :post   },
-    :collection => { :count => :get, :discard => :delete }
+    :member     => { :read  => :put, :follow => :post },
+    :collection => { :feed  => :get, :count  => :get, :discard => :delete }
   
   map.resources :studies,
     :member     => { :watch => :post },

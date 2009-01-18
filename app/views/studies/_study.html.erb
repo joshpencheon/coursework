@@ -1,3 +1,7 @@
-<h1><%= link_to study.title, study %></h1>
-<p>Posted: <%= study.created_at %> by <%= study.user.login %></p>
+<h1>
+  <%= image_tag "/images/#{study.category.downcase}.png", :size => '28x28', :style => 'vertical-align: middle' %>
+  <%= study.region.name %> - <%= link_to study.title, study %>
+</h1>
+<p style="color:gray"><%= [study.category, study.partnership.name].join(' | ') %></p>
+<p>Posted by <%= link_to study.user.name, study.user %></p>
 <p><%= study.description %></p>

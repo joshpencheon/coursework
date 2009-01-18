@@ -12,12 +12,12 @@ $(document).ready(function($) {
 $.fn.updateThroughFade = function(time, text, callback) {
 	if ($(this).is(':hidden')) {
 		if (callback) callback()
-		$(this).text(text).fadeIn(time*2)
+		$(this).html(text).fadeIn(time*2)
 	}
 	else {
 		$(this).fadeTo(time, 0.001, function(){
 			if (callback) callback()
-			$(this).text(text).fadeTo(time, 1)
+			$(this).html(text).fadeTo(time, 1)
 		})		
 	}
 }

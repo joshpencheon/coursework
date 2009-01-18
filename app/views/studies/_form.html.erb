@@ -1,6 +1,10 @@
 <% form_for @study, :html => { :multipart => true } do |f| %>
   <%= f.text_field :title, :class => 'bold' %>
   <%= f.text_area :description %>
+  <%= f.collection_select :region_id,      Region.all,      :id, :name, :prompt => 'Select a Region...' %>
+  <%= f.collection_select :partnership_id, Partnership.all, :id, :name, :prompt => 'Choose Partnership details...' %>
+  <%= f.select :category, Study::CATEGORIES,     :prompt => 'Select a Category...' %>
+
   
   <% if @study.new_record? %>
     You'll need to save the study before you can attach files to it.

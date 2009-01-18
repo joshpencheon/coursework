@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090114095358) do
+ActiveRecord::Schema.define(:version => 20090118154031) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(:version => 20090114095358) do
     t.datetime "updated_at"
   end
 
+  create_table "partnerships", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "permissions", :force => true do |t|
     t.integer  "requestee_id"
     t.integer  "requester_id"
@@ -50,12 +56,21 @@ ActiveRecord::Schema.define(:version => 20090114095358) do
     t.boolean  "read",         :default => false, :null => false
   end
 
+  create_table "regions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "studies", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "partnership_id"
+    t.integer  "region_id"
+    t.string   "category"
   end
 
   create_table "users", :force => true do |t|
@@ -72,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20090114095358) do
     t.string   "avatar_content_type"
     t.string   "avatar_file_size"
     t.boolean  "email_hidden",        :default => false
+    t.string   "token"
   end
 
   create_table "watchings", :force => true do |t|

@@ -34,9 +34,9 @@ module NotificationsHelper
   end
   
   def event_items_for(event)
-    html = ''
+    return_html = ''
     event.data.each_pair do |assoc, types|
-      html << content_tag(:li, assoc.to_s.humanize, :class => 'section')
+      html = content_tag(:li, assoc.to_s.humanize, :class => 'section')
       
       if types.is_a?(Hash) 
         types.each_pair do |type, changes|
@@ -45,13 +45,17 @@ module NotificationsHelper
             html << content_tag(:li, "#{instance.title}: #{changes}", :class => 'edited')          
           else
             klass = type == :new ? 'new' : 'deleted'
-            html << content_tag(:li, changes, :class => klass )
+            [ changes ].flatten.each do |change|
+              html << content_tag(:li, change, :class => klass )              
+            end
           end
         end        
       else
         html << content_tag(:li, types, :class => 'edited')
       end
+      return_html << content_tag(:ul, html, :class => 'notification_items')
     end
-    content_tag :ul, html, :class => 'notification_items'
+    return_html
   end
+
 end

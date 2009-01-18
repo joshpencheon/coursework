@@ -1,3 +1,11 @@
+<noscript>
+  <div  style="color:red;margin-bottom: 20px;">
+    <h5 style="color:red">You don't have JavaScript enabled</h5> 
+    Whilst you may still be able to make use of the basic functionality of this site, many features will be unavailable to you. JavaScript presents no real security risk, so enabling it in your browser's settings isn't dangerous. In fact, on this site it is used to protect you.
+  </div>
+</noscript>
+
+
 <div>
   <h5>About</h5>
   The SDU knowledge base is a place where information concerning environmental best practices in the NHS can be collected and discussed.
@@ -5,6 +13,7 @@
 
 <% if @sidebar_blocks %>
   <% @sidebar_blocks.each do |blk| %>
-    <%= content_tag :ul, "<h5>#{blk[:title]}</h5>#{blk[:contents]}", blk[:styles] %>
+    <% tag = blk[:contents] =~ /<li/ ? :ul : :div %>
+    <%= content_tag tag, "<h5>#{blk[:title]}</h5>#{blk[:contents]}", blk[:styles] %>
   <% end %>
 <% end %>

@@ -38,13 +38,13 @@ class StudiesController < ApplicationController
   end
   
   def update  
-    params[:existing_attached_file_attributes] ||= {}
+    params[:study][:existing_attached_file_attributes] ||= {}
+    params[:study][:publish_event] = false unless current_user.id == @study.user.id
     
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
       redirect_to @study
     else
-      logger.info '******' + @study.attached_files.map(&:errors).inspect
       render :action => "edit"
     end
   end

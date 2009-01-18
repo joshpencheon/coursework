@@ -1,7 +1,7 @@
 <% notification_div_for notification do %>
   <div class="right" style="text-align:right">
-    <div><%= read_link(notification) %></div><br/>
-    <div><%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %></div>
+    <%= read_link(notification) %>
+    <%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %>
   </div>
     
   <p class="title">
@@ -10,7 +10,7 @@
   </p>
   
   <div class="items">
-    <p class="spacer center">
+    <p class="small_spacer center">
       <%= link_to 'Load details...', notification, :class => 'load_notification_link' %>
     </p>
   </div>

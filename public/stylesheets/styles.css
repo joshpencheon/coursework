@@ -194,14 +194,26 @@ li#help_link a {
 }
 
 #login {
-	-webkit-border-radius: 2px;
+	-webkit-border-radius: 3px;
   -moz-border-radius: 2px;
 	background: rgba(0,0,0,0.55);
 	margin: 5px 5px 0 0;
 	padding: 5px 10px;
 	font-size: 0.95em;
 	font-variant: small-caps;
+	text-align: right;
 	color: #EEE;
+}
+
+#login img {
+	border: 1px solid #888;
+	float: right;
+	margin-left: 1em;
+}
+
+#login div {
+	white-space: nowrap;
+	float: left
 }
 
 #login a {
@@ -245,6 +257,11 @@ li#help_link a {
 	text-decoration: none;
 } 
 
+#sidebar li a.inline {
+	display: inline;
+	padding: 0;
+}
+
 #sidebar li a.active,
 #sidebar li a:hover {
 	text-decoration: none;
@@ -271,35 +288,46 @@ li#help_link a {
 
 #sidebar li a.active span.right,
 #sidebar li a:hover span.right {
-	background-color: #385AF7;
+	background-color: #385af7;
+}
+
+.watcher_link img.avatar {
+	margin-right: 0.5em;
+	vertical-align: middle;
 }
 
 /********* NOTIFICATION *********/
 
 .notification {
-	border-top: 1px solid #CCC;
-	padding: 10px;
+	border: 1px solid #DDD;
+	border-left: 3px solid #DDD;
+	background-color: #FAFAFA;
+	padding: 10px 10px 13px 10px;
 	margin-bottom: 10px;
 }
+
+.notification.read {
+	opacity: 0.6;
+}
+
 .notification .title {
 	font-weight: bold;
 }
 
-.notification.read .title {
-	font-weight: normal;
-}
-
 ul.notification_items {
+	padding: 1em 1em 0 1em;
 	list-style-type: none;
 }
 
 ul.notification_items li {
 	padding: 5px 0 5px 20px;
+	border-top: 1px solid #BBB;
 }
 
-li.section {
-	position: relative;
-	left: -0.5em;
+ul.notification_items li.section {
+	border-top-width: 0;
+	background-color: #DDD;
+	padding-left: 10px;
 	font-weight: bold;
 }
 

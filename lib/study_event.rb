@@ -6,7 +6,7 @@ class StudyEvent
     
     # Changes to the study
     unless study.changes.blank?
-      @data[:study] = change_string(study.changes)
+      @data[:study] = change_strings(study, study.changes)
     end
     
     @data[:attached_files] = {}    
@@ -19,7 +19,7 @@ class StudyEvent
     # Changes to attached files
     study.attached_files.map do |file|
       if !file.new_record? && file.changes.include?('notes')
-        string = change_string({ 'notes' => file.changes['notes'] })
+        string = change_strings(file, { 'notes' => file.changes['notes'] })
         @data[:attached_files][file.id] = string unless string.blank?
       end
     end
@@ -59,20 +59,28 @@ class StudyEvent
   end
   
   def removed_files_strings(files)
-    files.map { |file| "'#{file.document_file_name}' was deleted."}
+    files.map do |file|
+      # Paperclip removes this attribute.
+      name = "'#{file.changes["document_file_name"].first}'"
+      name = 'An attached file' if name == "''"
+      "#{name} was deleted."
+    end
   end
   
-  def change_string(changes)
+  def change_strings(obj, changes)
+    logger_for(obj).info("************#{changes.inspect}")
     verbose = changes.length == 1 && changes.values.first.all? do |value|
       value.is_a?(String) ? value.length < 50 : false
     end
     
     if verbose
       removed = changes.values.first.first.strip
-      added   = changes.values.first.last.strip
+      added   = changes.values.first.last.strip      
+      
       "The #{changes.keys.first} changed from '#{removed}' to '#{added}'."
     else
-      "The #{changes.keys.to_sentence} #{was_or_were(changes.keys)} updated."
+      keys = changes.keys.map { |key| key =~ /(.*)_id$/ ? $1 : key }
+      "The #{keys.to_sentence} #{was_or_were(changes.keys)} updated."
     end    
   end
 

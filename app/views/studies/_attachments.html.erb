@@ -1,36 +1,7 @@
-<p>
-  <strong>From here, you can attach Files to the study.</strong>
-  You can upload any type of file you like, but only images and plain text (.txt) documents can be viewed on this site; other files have to be downloaded first.
-</p>
+<h4>Attached Files</h4>
 
-<% fields_for 'study[new_attached_file_attributes][]', @study.attached_files.build do |af| -%>      
-  <p class="new_attachment odd">
-    <%= af.file_field :document, :no_label => true %>
-  </p><p>
-    <%= af.text_field :notes %>
-  </p>
-<% end -%>   
-<p><a href="#" id="add_attachment" style="display:none">Add another attachment</a></p>   
+<%= render :partial => @study.attached_files.build %>
 
 <% if @study.saved_attachments.any? %>
-  <% @study.saved_attachments.each do |attachment| %>
-    <%= attachment.valid? %>
-    <p class="existing_attachment<%= cycle(' odd', '') %>">
-      <% fields_for 'study[existing_attached_file_attributes][]', attachment do |af| -%>      
-        <p class="new_attachment odd">
-          <%= af.text_area :notes %>
-        </p>
-      <% end -%>
-      
-      
-      <%= icon attachment.icon_path %>
-      <%= h truncate_centrally(attachment.document_file_name, 25) %> 
-      - <span class="filesize"><%= number_to_human_size attachment.document_file_size %></span>
-      
-      <%= link_to 'Delete', attachment, 
-        :confirm => 'Are you sure?', 
-        :method => :delete, 
-        :class => 'delete_attachment_link' %>
-    </p>
-  <% end %>
+  <%= render :partial => @study.saved_attachments %>
 <% end %>

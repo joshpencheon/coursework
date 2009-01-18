@@ -1,5 +1,9 @@
 class Study < ActiveRecord::Base
+  CATEGORIES = %w( Energy Travel Procurement ).freeze
+  
   belongs_to :user
+  belongs_to :region
+  belongs_to :partnership
   
   with_options :dependent => :destroy do |study|
     study.has_many :watchings
@@ -12,8 +16,12 @@ class Study < ActiveRecord::Base
   before_validation :remove_blank_attachments
   validates_presence_of :title, :description
   
-  # has_dirty_associations :attached_files, 
-  #   :preload => false
+  validates_presence_of  :category, :message => "needs to be selected"
+  validates_inclusion_of :category, :in => Study::CATEGORIES, :message => 'needs to be a category'
+  
+  validates_presence_of :region_id, :message => "needs to be selected"
+  
+  validates_presence_of :partnership_id, :message => "needs to be selected"
   
   attr_writer :publish_event
   
@@ -26,6 +34,10 @@ class Study < ActiveRecord::Base
   
   def publish_event
     @publish_event != false ? @publish_event = true : @publish_event
+  end
+  
+  def watchers_other_than(array)
+    watchers - [ array ].flatten
   end
   
   def publish_event?
@@ -51,11 +63,10 @@ class Study < ActiveRecord::Base
   end
   
   def existing_attached_file_attributes=(attached_file_attributes)
+    logger.info('***RECEIVED: ' + attached_file_attributes.inspect)
     attached_files.reject(&:new_record?).each do |attached_file|
       attributes = attached_file_attributes[attached_file.id.to_s]
       if attributes
-        logger.info('***ASSIGNING TO: ' + attached_file.id.to_s)
-        logger.info(attributes.inspect)
         attached_file.attributes = attributes
       else
         attached_file.destroy
@@ -64,40 +75,12 @@ class Study < ActiveRecord::Base
   end
   
   def to_param
-    "#{id}-#{title.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '-')}"
+    "#{id}-#{title.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s{1,}/, '-')}"
   end
   
   private 
   
   def remove_blank_attachments
     attached_files.delete( attached_files.select(&:untouched?) )
-  end
-  
-  def changes_for_serialization
-    returning({}) do |serial|
-      changes_by_type.each do |assoc, changeset|
-        if assoc == :self
-          serial[:self] = changeset
-        else
-          serial[assoc] = {}
-          
-          if changeset.key?(:new)
-            serial[assoc][:new] = changeset[:new].map(&:id)
-          end
-          
-          if changeset.key?(:edited)
-            serial[assoc][:edited] = {}
-            
-            changeset[:edited].each_pair do |record, changes|
-              serial[assoc][:edited][record.id] = changes
-            end
-          end
-          
-          if changeset.key?(:deleted)
-            serial[assoc][:deleted] = changeset[:deleted].map(&:id)
-          end
-        end
-      end
-    end
   end
 end

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   
   has_attached_file :avatar, 
                     :styles => { :original => "70x70#",
-                                 :tiny => "30x30#" },
+                                 :tiny     => "30x30#",
+                                 :minute   => "20x20#" },
                     :default_url => '/images/avatars/:style_missing.png'
 
   attr_accessor :destroy_avatar  
@@ -25,6 +26,9 @@ class User < ActiveRecord::Base
   has_many :requestees, :through => :sent_requests
   
   has_many :watched_studies, :through => :watchings, :source => :study
+    
+  attr_readonly :token
+  before_create :set_token
   
   def disciples
     requesters.find(received_requests.granted.map(&:requester_id))
@@ -69,7 +73,13 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    "#{id}-#{login.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s/, '-')}"
+    "#{id}-#{login.downcase.gsub(/[^a-z]/,' ').strip.gsub(/\s{1,}/, '-')}"
+  end
+  
+  private
+  
+  def set_token
+    self.token = ActiveSupport::SecureRandom.hex(16)
   end
 
 end

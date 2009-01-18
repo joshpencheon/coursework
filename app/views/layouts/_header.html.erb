@@ -1,13 +1,16 @@
 <div id="header">
-	<p id="login" class="right">	
+	<div id="login" class="right">	
 	<% if logged_in? %>
-		You're logged in (<%= link_to 'Settings', edit_user_path(current_user) %>,
-		<%= link_to 'Sign out', signout_path %>)
+    <%= image_tag current_user.avatar.url(:tiny) %>
+    <div>
+  	  <p><%= current_user.name %></p> 
+  		<p><%= link_to 'Settings', edit_user_path(current_user) %> | <%= link_to 'Sign out', signout_path %></p>      
+    </div>
 	<% else %>	
 		<%= link_to 'Sign in', signin_path %> /
 		<%= link_to 'Sign up', signup_path %>
 	<% end %>
-	</p>
+	</div>
 	
 	<div id="logo">
     <%= link_to image_tag('logo_b&w.png'), root_url %>

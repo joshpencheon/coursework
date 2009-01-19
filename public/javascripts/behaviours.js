@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	//**************** FLASH ***************
 	
-	setTimeout("$('.flash').fadeOut('slow')", 5000)
+	setTimeout("Flash.hide()", 5000)
 	
 	//*********** CUSTOM FACEBOX ***********
 	

@@ -24,7 +24,8 @@ Rails::Initializer.run do |config|
   # They can then be installed with "rake gems:install" on new installations.
   config.gem :authlogic, :version => '>=1.3.0'
 
-  config.gem "thoughtbot-paperclip", :lib => 'paperclip', :version => '=2.1.5'
+  # Github namespacing removed whilst using manually cloned edge version...
+  config.gem "paperclip", :lib => 'paperclip' , :version => '>=2.2.2'
   
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   

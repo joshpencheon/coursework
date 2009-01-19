@@ -61,6 +61,14 @@ jQuery.extend({
   }
 })
 
+var Flash = {
+	hide: function() {
+		$('.flash').fadeTo('fast', 0.1, function() { 
+			$(this).slideUp('fast')
+		})
+	}
+}
+
 var Notification = {
 	counts: {
 		setEvents: function(value) {

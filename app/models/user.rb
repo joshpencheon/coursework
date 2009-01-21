@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     user.has_many :studies
     user.has_many :watchings
     user.has_many :notifications
+    user.has_many :comments
     
     user.with_options :class_name => 'Permission' do |u|
       u.has_many :received_requests, :foreign_key => 'requestee_id'

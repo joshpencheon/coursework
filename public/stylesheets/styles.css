@@ -261,8 +261,12 @@ li#help_link a {
 
 #sidebar li a.active,
 #sidebar li a:hover {
-	text-decoration: none;
-	background-color: #DDD; 
+	background-color: #DDD;
+	text-decoration: none; 
+}
+
+#sidebar li a:hover span.underline {
+	text-decoration: underline;
 }
 
 #sidebar li a.in_progress {

@@ -2,7 +2,7 @@ module StudiesHelper
   
   def text_for_watch_link(study)
     if study.watched_by?(current_user)
-      text = 'You - Stop watching'
+      text = 'You - <span class="underline">Stop watching</span>'
       style = {}
     else
       text = 'Watch this study'

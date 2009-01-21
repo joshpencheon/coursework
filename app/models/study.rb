@@ -8,6 +8,7 @@ class Study < ActiveRecord::Base
   with_options :dependent => :destroy do |study|
     study.has_many :watchings
     study.has_many :attached_files
+    study.has_many :comments
     study.has_many :events, :as => :news_item
   end
   
@@ -16,13 +17,11 @@ class Study < ActiveRecord::Base
   before_validation :remove_blank_attachments
   validates_presence_of :title, :description
   
-  validates_presence_of  :category, :message => "needs to be selected"
-  validates_inclusion_of :category, :in => Study::CATEGORIES, :message => 'needs to be a category'
-  
-  validates_presence_of :region_id, :message => "needs to be selected"
-  
-  validates_presence_of :partnership_id, :message => "needs to be selected"
-  
+  validates_presence_of  :category, :partnership_id, :region_id,
+    :message => "needs to be selected"
+    
+  validates_inclusion_of :category, :in => CATEGORIES, :message => 'needs to be a category'
+
   attr_writer :publish_event
   
   before_save StudyEvent.new, 
@@ -63,7 +62,6 @@ class Study < ActiveRecord::Base
   end
   
   def existing_attached_file_attributes=(attached_file_attributes)
-    logger.info('***RECEIVED: ' + attached_file_attributes.inspect)
     attached_files.reject(&:new_record?).each do |attached_file|
       attributes = attached_file_attributes[attached_file.id.to_s]
       if attributes

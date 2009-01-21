@@ -6,7 +6,7 @@ class StudyEvent
     
     # Changes to the study
     unless study.changes.blank?
-      @data[:study] = change_strings(study, study.changes)
+      @data[:study] = change_strings(study.changes)
     end
     
     @data[:attached_files] = {}    
@@ -19,7 +19,7 @@ class StudyEvent
     # Changes to attached files
     study.attached_files.map do |file|
       if !file.new_record? && file.changes.include?('notes')
-        string = change_strings(file, { 'notes' => file.changes['notes'] })
+        string = change_strings({ 'notes' => file.changes['notes'] })
         @data[:attached_files][file.id] = string unless string.blank?
       end
     end
@@ -61,14 +61,13 @@ class StudyEvent
   def removed_files_strings(files)
     files.map do |file|
       # Paperclip removes this attribute.
-      name = "'#{file.changes["document_file_name"].first}'"
-      name = 'An attached file' if name == "''"
+      name = "#{file.changes["document_file_name"].first}"
+      name = name.blank? ? 'An attached_file' : "'#{name}'"
       "#{name} was deleted."
     end
   end
   
-  def change_strings(obj, changes)
-    logger_for(obj).info("************#{changes.inspect}")
+  def change_strings(changes)
     verbose = changes.length == 1 && changes.values.first.all? do |value|
       value.is_a?(String) ? value.length < 50 : false
     end

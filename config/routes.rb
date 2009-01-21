@@ -14,9 +14,12 @@ ActionController::Routing::Routes.draw do |map|
     :member     => { :read  => :put, :follow => :post },
     :collection => { :feed  => :get, :count  => :get, :discard => :delete }
   
-  map.resources :studies,
-    :member     => { :watch => :post },
-    :has_many   => :attached_files, :shallow => true
+  map.resources :studies, :member => { :watch => :post } do |study|
+    study.with_options :shallow => true do |s|
+      s.resources :attached_files, :only => [ :show ]
+      s.resources :comments,       :only => [ :create ]      
+    end
+  end
   
   map.resources :users
   
@@ -25,7 +28,7 @@ ActionController::Routing::Routes.draw do |map|
     user.signup "/signup", :action => "new"
   end
   
-  map.resource  :user_session
+  map.resource :user_session
   map.with_options :controller => "user_sessions" do |session|
     session.signin  "/signin",  :action => "new"
     session.signout "/signout", :action => "destroy"

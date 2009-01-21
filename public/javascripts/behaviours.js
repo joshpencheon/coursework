@@ -122,6 +122,28 @@ $(document).ready(function() {
 		return false
 	})
 	
+	//******** COMMENTS ********//
+		
+	$('#new_comment').submit(function() {
+		button = $(this).find('input[type=submit]')
+		fields = $(this).find('input, textarea')
+		
+		$(this).ajaxSubmit({
+			dataType: 'script',
+			clearForm: true,
+			beforeSubmit: function() {
+				button.attr('value', 'Posting...')
+			},
+			success:  function() {
+				button.attr('value', 'Post another comment')
+				fields.removeAttr('disabled')
+			}
+		})
+		
+		fields.attr('disabled', 'disabled')
+		return false
+	})
+	
 	//******** USER ********//
 	
 	$('#user_destroy_avatar').attr("checked", null)

@@ -1,0 +1,8 @@
+<div id="comments">
+  <%= render :partial => @study.comments %>
+</div>
+
+<% form_for [@study, @study.comments.build] do |f| %>
+  <%= f.text_area :content %>
+  <p class="button"><%= f.submit 'Post comment' %></p>
+<% end %>

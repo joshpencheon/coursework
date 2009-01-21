@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090118154031) do
+ActiveRecord::Schema.define(:version => 20090121185856) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20090118154031) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "notes"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "study_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -86,7 +94,7 @@ ActiveRecord::Schema.define(:version => 20090118154031) do
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.string   "avatar_file_size"
-    t.boolean  "email_hidden",        :default => false
+    t.boolean  "email_hidden",        :default => true
     t.string   "token"
   end
 

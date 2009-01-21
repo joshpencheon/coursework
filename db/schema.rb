@@ -77,11 +77,11 @@ ActiveRecord::Schema.define(:version => 20090118154031) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "login",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "remember_token",                         :null => false
+    t.string   "login",                                 :null => false
+    t.string   "crypted_password",                      :null => false
+    t.string   "remember_token",                        :null => false
     t.integer  "login_count"
-    t.string   "password_salt",                          :null => false
+    t.string   "password_salt",                         :null => false
     t.datetime "current_login_at"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"

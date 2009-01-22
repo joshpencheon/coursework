@@ -4,5 +4,6 @@ tmp/**/*
 */.DS_Store
 public/avatars/**/*
 public/documents/**/*
+public/system/**/*
 public/images/icons/*
 vendor/**/*

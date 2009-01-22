@@ -1,7 +1,7 @@
 <% if can_edit? @study %>
   <% sidebar_block('Actions') do %>
     <li><%= link_to "Edit", edit_study_path(@study) %></li>
-    <li><%= link_to 'Destroy', @study, :confirm => 'Are you sure?', :method => :delete %></li>
+    <li><%= link_to 'Delete', @study, :confirm => 'Are you sure?', :method => :delete %></li>
   <% end %>
 <% end %>
 
@@ -18,7 +18,7 @@
   <%= render :partial => 'attached_files' %>
 </div>
 
-<divclass="spacer">
+<div class="spacer">
   <%= render :partial => 'comments' %>
 </div>
 

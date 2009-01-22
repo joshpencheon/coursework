@@ -2,6 +2,7 @@ class UserSessionsController < ApplicationController
   layout "basic"
   
   def new
+    session[:return_to] = request.referrer
     @user_session = UserSession.new
   end
 

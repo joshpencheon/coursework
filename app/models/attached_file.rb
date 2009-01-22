@@ -1,7 +1,7 @@
 class AttachedFile < ActiveRecord::Base
   belongs_to :study
   has_attached_file :document, 
-                    :styles => { :square => [ Proc.new { |instance| instance.send(:crop_geometry, '70x70#') }, :png ] }  
+                    :styles => { :square => [ '70x70#', :png ] }  
                              
   attr_accessible :document, :notes
   validates_attachment_presence :document
@@ -23,19 +23,19 @@ class AttachedFile < ActiveRecord::Base
   end
   
   def title
-    document_file_name || 'untitled'
+    !! (document_file_name || 'untitled')
   end
   
   def plain_text?
-    document_content_type =~ %r(text/plain) || false
+    !! (document_content_type =~ %r(text/plain) || false)
   end
   
   def image?
-    document_content_type =~ /jpe?g|gif|bmp|png/ || false
+    !! (document_content_type =~ /jpe?g|gif|bmp|png/ || false)
   end
   
   def hazard?
-    document_content_type =~ /zip/ || false
+    !! (document_content_type =~ /zip/ || false)
   end
   
   def displayable_inline?
@@ -48,17 +48,6 @@ class AttachedFile < ActiveRecord::Base
   
   def untouched?
     new_record? && document_file_name.blank? && notes.blank?
-  end
-  
-  private
-  
-  # using the '#' (crop) custom geometry-string modifier with
-  # multi-page PDFs doesn't work. This removes the crop option 
-  # for PDFs. (Paperclip still wants to thumbnail, but its not
-  # an image.)
-  def crop_geometry(string)
-    string.chop! if string[-1,1] == '#' && !image?
-    string
   end
 
 end

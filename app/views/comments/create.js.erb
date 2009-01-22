@@ -1,6 +1,6 @@
 <% if @comment.new_record? %>
 	$.facebox('<%= escape_javascript error_messages_for(:comment) %>')
 <% else %>
-	$('#comments').append("<%= escape_javascript render(:partial => 'comments/comment.html', :object => @comment) %>")
-	$('.comment:last').hide().slideDown('slow')
+	$('#comments').append("<%= escape_javascript render(:partial => 'comments/comment.html.erb', :object => @comment) %>")
+	$('.comment:last').hide().slideDown('fast').effect('highlight', {}, 2000)
 <% end %>

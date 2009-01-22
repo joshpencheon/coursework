@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_filter :find_study
+  before_filter :authorize
+  before_filter :find_study, :only => [ :create ]
 
   def create
     @comment = @study.comments.build(params[:comment])

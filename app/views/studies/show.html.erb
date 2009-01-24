@@ -1,3 +1,7 @@
+<% sidebar_block('Download') do %>
+  You can <%= link_to_facebox 'download', :ajax => configure_download_path(@study) %> this study for use offline.
+<% end %>
+
 <% if can_edit? @study %>
   <% sidebar_block('Actions') do %>
     <li><%= link_to "Edit", edit_study_path(@study) %></li>

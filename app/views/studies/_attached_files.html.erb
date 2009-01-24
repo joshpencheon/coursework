@@ -1,8 +1,10 @@
 <% if @study.attached_files.any? %>
-  <table style="width: 100%">  
+  <table id="attached_files">  
     <% @study.attached_files.in_groups_of(2).each do |pair| %>
       <tr>
         <% pair.each do |file| %><td>
+          <%# render(:partial => file) unless file.nil? %>
+          
           <% next if file.nil? %>
           <% div_for file do %>
 
@@ -11,17 +13,22 @@
             </div>      
 
             <div class="file_info">
-                <%= link_to 'show notes', @study, :class => 'toggle_notes_link right', :style => 'display: none' %>            
+              <%= link_to 'show notes', @study, :class => 'toggle_notes_link right', :style => 'display: none' %>            
               
               <p>
-                <%= link_to truncate_centrally(file.title, 30), file.document.url %>
+                <%= facebox_enabled_link_for truncate_centrally(file.title, 30), file %>
                 <span class="file_size" style="display:none">
-                  <%= file.file_string %> <%= file_size_for file %></span>
+                  <%= file.file_string %> <%= file_size_for file %>
+                </span>
               </p>
               
               <div class="notes" style="display:none;">
-                <h4 class="title">Notes on '<%= file.title %>'</h4>
-                <%= h file.notes.blank? ? 'No notes available' : file.notes %>
+                <h4 class="title">Notes on '<%= truncate_centrally(file.title, 30) %>'</h4>
+                <% if file.notes.blank? %>
+                  <em><strong>Sorry</strong> - No notes available.</em>
+                <% else %>
+                  <%= h file.notes %>
+                <% end %>
               </div>
             </div>
             

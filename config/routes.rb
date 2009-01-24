@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :permissions,
     :only       => [ :index, :new, :create, :destroy ],
     :member     => { :grant => :put, :reject => :put }
+  
   map.request_permission "/permissions/request/:requestee_id", 
     :controller => 'permissions',
     :action     => 'new'
@@ -14,7 +15,11 @@ ActionController::Routing::Routes.draw do |map|
     :member     => { :read  => :put, :follow => :post },
     :collection => { :feed  => :get, :count  => :get, :discard => :delete }
   
-  map.resources :studies, :member => { :watch => :post } do |study|
+  map.resources :downloads, 
+    :only       => [ ],
+    :member     => { :configure => :get, :serve => :get , :build => :post }
+  
+  map.resources :studies, :member => { :download => :get, :watch => :post } do |study|
     study.with_options :shallow => true do |s|
       s.resources :attached_files, :only => [ :show ]
       s.resources :comments,       :only => [ :create ]      

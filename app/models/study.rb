@@ -14,6 +14,8 @@ class Study < ActiveRecord::Base
   
   has_many :watchers, :through => :watchings, :source => :user
   
+  acts_as_taggable
+  
   before_validation :remove_blank_attachments
   validates_presence_of :title, :description
   
@@ -21,7 +23,7 @@ class Study < ActiveRecord::Base
     :message => "needs to be selected"
     
   validates_inclusion_of :category, :in => CATEGORIES, :message => 'needs to be a category'
-
+  
   attr_writer :publish_event
   
   before_save StudyEvent.new, 

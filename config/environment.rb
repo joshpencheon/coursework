@@ -32,15 +32,11 @@ Rails::Initializer.run do |config|
   # Gems required for testing
   config.gem :ZenTest
   config.gem :mocha
-  
-  # RSpec should will load itself when tests are run
-  # config.gem 'rspec-rails', :lib => 'spec/rails'
-  # config.gem 'rspec', :lib => 'spec'
 
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
-  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+  config.plugins = [ :acts_as_taggable_on_steroids ]
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)

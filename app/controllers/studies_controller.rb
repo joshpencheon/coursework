@@ -3,7 +3,7 @@ class StudiesController < ApplicationController
   before_filter :authorize, :except => [ :index, :show ]
   
   def index
-    @studies = Study.all
+    @studies = Study.find_by_category(params[:category]) || Study.all
   end
 
   def show

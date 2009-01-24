@@ -6,6 +6,10 @@
 	</div>
 <% end %>
 
+<% sidebar_block('About') do %>
+  The SDU knowledge base is a place where information concerning environmental best practices in the NHS can be collected and discussed.
+<% end %>
+
 <% sidebar_block('New...') do %>
   <li><%= link_to "Study", new_study_path %></li>
 <% end if logged_in? %>

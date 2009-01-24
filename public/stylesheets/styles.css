@@ -383,6 +383,29 @@ a.read_link.in_progress:hover {
 
 /********* VIEWING STUDY *********/
 
+.download_options {
+	text-align: center;
+}
+
+.summary {
+	border: 1px solid #DDD;
+	background-color: #FCFCFC;
+	margin: 5px;
+	padding: 10px;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+.summary p {
+	padding: 5px;
+}
+
+.category {
+	vertical-align: middle;
+	width: 28px;
+	height: 28px;
+}
+
 .footnotes {
 	font-size: 0.7em;
 	color: #777;
@@ -391,17 +414,20 @@ a.read_link.in_progress:hover {
 
 
 #attached_files {
-	background-color: #EEE;
-	-webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-	padding: 10px;
+	width: 100%;
 }
 
+#attached_files td {
+	width: 50%;
+}
+
+
 .attached_file {
-	border: 1px solid #AAA;
+	border: 1px solid #DDD;
+	background-color: #FCFCFC;
 	margin: 5px;
-	-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
 	line-height: 45px;
 }
 
@@ -416,14 +442,14 @@ a.read_link.in_progress:hover {
 }
 
 .attached_file .file_info {
-	line-height: 1.1em;
+	line-height: 1.2em;
 	margin-top: 1.5em
 }
 
 .attached_file .file_size {
 	font-size: smaller;
 	font-weight: bold;
-	color: #999;
+	color: #777;
 	display: block;
 }
 
@@ -433,7 +459,7 @@ a.read_link.in_progress:hover {
 }
 
 .attached_file .thumbnail {
-	padding: 10px;
+	padding: 5px;
 	width: 45px;
 	height: 45px;
 	text-align: center;

@@ -1,0 +1,11 @@
+<div class="download_options">
+  <h4 class="title">Study Download</h4>
+  <% form_for build_download_path(StudyDownload.new) do |f| %>
+    <h4></h4>
+  
+    <%= f.radio_button :archive_method, :zip, :no_label => true %>
+    <%= f.radio_button :archive_method, :tgz, :no_label => true %>
+    <%= f.check_box :include_comments, :no_label => true  %>
+    <p class="button"><%= image_submit_tag 'download.png' %></p>
+  <% end %>
+</div>

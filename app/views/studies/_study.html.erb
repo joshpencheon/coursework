@@ -1,7 +1,15 @@
 <h1>
-  <%= image_tag "/images/#{study.category.downcase}.png", :size => '28x28', :style => 'vertical-align: middle' %>
+  <%= category_image_for study %>
   <%= study.region.name %> - <%= link_to study.title, study %>
 </h1>
 <p style="color:gray"><%= [study.category, study.partnership.name].join(' | ') %></p>
+<% unless study.tag_list.blank? %>
+  <p style="color:gray">tags: <%= study.tag_list.join(', ') %></p>
+<% end %>
 <p>Posted by <%= link_to study.user.name, study.user %></p>
-<p><%= study.description %></p>
+
+<div class="summary">
+  <h4>Summary:</h4>
+  <p><%= study.description %></p>  
+</div>
+

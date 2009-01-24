@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$(document).bind('reveal.facebox', function() { 
 		var box = $('#facebox .content')	
 		if (box.hasClass('formatted')) {
-			box.html( box.text().replace(/\n/g, '<br/>') )
+			box.html( box.html().replace(/\n/g, '<br/>') )
 		}
 	})
 	
@@ -75,9 +75,16 @@ $(document).ready(function() {
 		}
 	})
 	
+	$('#download_link').click(function() {
+		$.facebox($('#download_options').html())
+		return false
+	});
+	
 	$('.attached_file').hover(function() {
+		$(this).find('.file_info').animate({marginTop: '1.1em'}, 100)
 		$(this).find('.file_size, .toggle_notes_link').fadeIn('fast')
 	}, function() {
+		$(this).find('.file_info').animate({marginTop: '1.5em'}, 100)
 		$(this).find('.file_size, .toggle_notes_link').fadeOut('fast')
 	})
 	

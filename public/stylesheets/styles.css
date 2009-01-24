@@ -381,11 +381,6 @@ a.read_link.in_progress:hover {
 	background-image: url(/images/spinner_white_orange.gif);
 }
 
-
-/********** PERMISSIONS **********/
-
-
-
 /********* VIEWING STUDY *********/
 
 .footnotes {
@@ -403,11 +398,33 @@ a.read_link.in_progress:hover {
 }
 
 .attached_file {
-	border: 2px solid #AAA;
+	border: 1px solid #AAA;
 	margin: 5px;
 	-webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-	line-height: 80px;
+	line-height: 45px;
+}
+
+.attached_file .notes {
+	width: 100%;
+}
+
+.toggle_notes_link {
+	padding-right: 1em;
+	color: #555;
+	font-size:smaller;
+}
+
+.attached_file .file_info {
+	line-height: 1.1em;
+	margin-top: 1.5em
+}
+
+.attached_file .file_size {
+	font-size: smaller;
+	font-weight: bold;
+	color: #999;
+	display: block;
 }
 
 .attached_file,
@@ -417,9 +434,8 @@ a.read_link.in_progress:hover {
 
 .attached_file .thumbnail {
 	padding: 10px;
-	width: 80px;
-	height: 80px;
-/*	line-height: 80px;*/
+	width: 45px;
+	height: 45px;
 	text-align: center;
 	float: left;
 }

@@ -1,11 +1,26 @@
 class AttachedFile < ActiveRecord::Base
   belongs_to :study
   has_attached_file :document, 
-                    :styles => { :square => [ '70x70#', :png ] }  
+                    :styles => { :square => [ '35x35', :png ] }  
                              
   attr_accessible :document, :notes
   validates_attachment_presence :document
-   
+  
+  FILE_TYPES = {
+    'jpg'     => 'JPEG image',
+    'jpeg'    => 'JPEG image',
+    'png'     => 'Portable Network Graphic',
+    'gif'     => 'GIF image',
+    'doc'     => 'Microsoft Word Document',
+    'xls'     => 'Microsoft Excel Spreadsheet',
+    'ppt'     => 'Microsoft PowerPoint Presentation',
+    'numbers' => 'Apple Numbers Spreadsheet',
+    'pages'   => 'Apple Numbers Spreadsheet',
+    'key'     => 'Apple Keynote Presentation',
+    'pdf'     => 'Adobe Portable Document Format',
+    'txt'     => 'Plain Text Document'
+  }
+  
   def icon_path
     path = "file_#{extension}.png"
     if File.exists?(File.join(Rails.public_path, 'images', 'icons', path))
@@ -23,7 +38,7 @@ class AttachedFile < ActiveRecord::Base
   end
   
   def title
-    !! (document_file_name || 'untitled')
+     document_file_name || 'untitled'
   end
   
   def plain_text?
@@ -44,6 +59,10 @@ class AttachedFile < ActiveRecord::Base
   
   def thumbnailable?
     document_content_type =~ /pdf/ || image?
+  end
+  
+  def file_string
+    "#{FILE_TYPES[self.extension]} - " if FILE_TYPES[self.extension]
   end
   
   def untouched?

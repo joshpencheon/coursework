@@ -57,7 +57,10 @@ class StudiesController < ApplicationController
   private
   
   def find_study
-    @study = Study.find(params[:id])
+    unless @study = Study.find_by_id(params[:id])
+      flash[:warn] = "Unable to find study."
+      redirect_to studies_url
+    end
   end
   
   def authorize

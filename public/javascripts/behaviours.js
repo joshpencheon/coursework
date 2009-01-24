@@ -76,10 +76,15 @@ $(document).ready(function() {
 	})
 	
 	$('.attached_file').hover(function() {
-		$(this).find('.info').show(100)
+		$(this).find('.file_size, .toggle_notes_link').fadeIn('fast')
 	}, function() {
-		$(this).find('.info').hide(100)
-	});
+		$(this).find('.file_size, .toggle_notes_link').fadeOut('fast')
+	})
+	
+	$('.toggle_notes_link').click(function() {
+		$.facebox($(this).parents('.attached_file').find('.notes').html())
+		return false
+	})
 	
 	//********* EDITING A STUDY ************
 	

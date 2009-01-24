@@ -1,17 +1,36 @@
-  <% if @study.attached_files.any? %>
-      <% @study.attached_files.each do |file| %>
-        <% div_for file do %>
-        
-          <div class="thumbnail">
-            <%= clickable_thumbnail_for file %>            
-          </div>      
-        
-          <p><%= h file.document_file_name %>
-          <%= number_to_human_size file.document_file_size, :precision => 0 %></p>
-          
-          <div class="clear"></div>
-        <% end %>
-      <% end %>
-  <% else %>
-    <strong>No files have been attached to this study.</strong>
-  <% end %>
+<% if @study.attached_files.any? %>
+  <table style="width: 100%">  
+    <% @study.attached_files.in_groups_of(2).each do |pair| %>
+      <tr>
+        <% pair.each do |file| %><td>
+          <% next if file.nil? %>
+          <% div_for file do %>
+
+            <div class="thumbnail">
+              <%= clickable_thumbnail_for file %>            
+            </div>      
+
+            <div class="file_info">
+                <%= link_to 'show notes', @study, :class => 'toggle_notes_link right', :style => 'display: none' %>            
+              
+              <p>
+                <%= link_to truncate_centrally(file.title, 30), file.document.url %>
+                <span class="file_size" style="display:none">
+                  <%= file.file_string %> <%= file_size_for file %></span>
+              </p>
+              
+              <div class="notes" style="display:none;">
+                <h4 class="title">Notes on '<%= file.title %>'</h4>
+                <%= h file.notes.blank? ? 'No notes available' : file.notes %>
+              </div>
+            </div>
+            
+            <div class="clear"></div>
+          <% end %>          
+        </td><% end %>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <strong>No files have been attached to this study.</strong>
+<% end %>

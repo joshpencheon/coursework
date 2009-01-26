@@ -1,19 +1,20 @@
 class DownloadsController < ApplicationController
-  before_filter :find_study, :only => :serve
+  before_filter :find_study, :only => [:configure, :build, :serve]
 
   def configure
     render :partial => 'configure.html.erb' if request.xhr?
   end
 
   def build
-    spawn do 
-      StudyDownload.new(params[:study_download])
-    end
+    @reference_token = ActiveSupport::SecureRandom.hex(16) 
+    params[:token] = @reference_token
+    StudyDownload.new(params)
+
+    redirect_to serve_download_path(:id => "#{@study.id}-#@reference_token")
   end
 
   def serve
-    send_data StudyDownload.serve('...'),
-      :filename => @study.title
+    send_file StudyDownload.serve(params[:id]), :filename => "sdu_archive_#{@study.to_param}"
   end
 
   private

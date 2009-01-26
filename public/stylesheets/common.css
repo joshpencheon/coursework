@@ -183,9 +183,10 @@ input[type=file] {
 }
 
 input[type=checkbox] {
-	position: relative;
+	vertical-align: middle;
+/*	position: relative;
 	top: 0.25em;
-	left: 0.1em;
+	left: 0.1em;*/
 }
 
 input[type=text],

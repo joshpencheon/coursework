@@ -1,11 +1,26 @@
 <div class="download_options">
-  <h4 class="title">Study Download</h4>
-  <% form_for build_download_path(StudyDownload.new) do |f| %>
-    <h4></h4>
-  
-    <%= f.radio_button :archive_method, :zip, :no_label => true %>
-    <%= f.radio_button :archive_method, :tgz, :no_label => true %>
-    <%= f.check_box :include_comments, :no_label => true  %>
-    <p class="button"><%= image_submit_tag 'download.png' %></p>
+  <h4 class="title">Download - <em><%= truncate @study.title %></em></h4>
+  <% form_tag build_download_path(:id => @study.id) do %>
+    
+    <h4>Including comments and watchers:</h4>
+    An archive can include all of the comments made on the study, as well as a list of all those watching it.
+    <p class="center" style="padding: 1em 0">
+      <span><%= check_box_tag :include_comments, true, true %> Include comments &amp; watchers?</span>
+    </p>    
+    
+    <h4>The study will be compressed for sending:</h4>
+    You can choose which format to use to archive with:
+    <div class="center" style="padding-top: 1em">
+      <p id="format_radio_group">
+        <%= radio_button_tag :archive_format, :zip, true %>
+        <%= label_tag :archive_format_zip, 'Zip archive (.zip)'%><br/>
+        <%= radio_button_tag :archive_format, :tgz, false %>
+        <%= label_tag :archive_format_tgz, 'Tarball (.tgz)' %>
+      </p>
+    </div>
+        
+    <p style="padding: 1em 0 0.5em">
+      <%= submit_tag "Build download", :id => 'submit_study_download' %>
+    </p>
   <% end %>
 </div>

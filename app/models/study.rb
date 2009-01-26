@@ -18,6 +18,7 @@ class Study < ActiveRecord::Base
   
   before_validation :remove_blank_attachments
   validates_presence_of :title, :description
+  validates_length_of :title, :maximum => 40
   
   validates_presence_of  :category, :partnership_id, :region_id,
     :message => "needs to be selected"
@@ -31,6 +32,16 @@ class Study < ActiveRecord::Base
     
   after_save do |study|
     study.attached_files.select(&:changed?).map(&:save)
+  end
+  
+  define_index do
+    indexes title
+    indexes description
+    indexes attached_files.document_file_name, :as => :attached_file_document_file_names
+    indexes attached_files.notes, :as => :attached_file_notes
+    indexes tags(:name), :as => :tag_names
+    
+    set_property :delta => :datetime, :threshold => 1.day
   end
   
   def publish_event

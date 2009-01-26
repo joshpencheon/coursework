@@ -9,15 +9,24 @@ class StudyDownload
     FileUtils.mkdir containing_dir
   end
   
+  def self.serve(identifier)
+    begin
+      Dir.chdir(containing_dir) do
+        File.expand_path(Dir.glob("#{identifier}.???")[0])
+      end
+    rescue Exception => e
+      raise ActiveRecord::RecordNotFound, 'Unable to find archive ' + identifier
+    end
+  end
+  
   def initialize(options = {})
     begin
       log('starting new bundle...')
       
-      @study_id = options[:study_id]
-	    @format   = options[:archive_format].to_s.downcase || 'zip'
+      @study_id = options[:id]
+	    @format   = options[:archive_format].blank? ? 'zip' : options[:archive_format].to_s.downcase
 	    @comments = options[:include_comments] || false
-	    
-	    @token    = ActiveSupport::SecureRandom.hex(16)
+	    @token    = options[:token] || ActiveSupport::SecureRandom.hex(16)  	    	    
 	    
 	    unless get_study
 	      raise 'Unable to find Study'
@@ -31,31 +40,35 @@ class StudyDownload
 	    
 	    log('completed bundle successfully!')
     rescue Exception => e
-      log(e)
+      log('Error: ' + e)
+      log("called with (#{options.class}): " + options.inspect)
+      e.backtrace.each { |line| log(line) }
       FileUtils.remove_dir @temp_dir if @temp_dir
     end
-  end
-  
-  def serve
-    
   end
   
   private
   
   def compress!
-    Dir.chdir self.class.containing_dir
+    Dir.chdir(self.class.containing_dir) do
+      log('compressing download...')
+      
+      # Rename for archive contents
+      unique = "#{@study.to_param}_#{Time.now.to_i}"
+      `mv #{token_string} #{unique}`
+      
+      if @format == 'zip'
+        `zip -r #{token_string}.zip #{unique}`
+      elsif @format == 'tgz'
+        `tar -cvzf #{token_string}.tgz #{unique}`
+      else
+        raise 'Unknown compression format: ' + @format
+      end
     
-    log('compressing download...')
-    if @format == 'zip'
-      `zip -r #{token_string}.zip #{token_string}`
-    elsif @format == 'tgz'
-      `tar -cvzf #{token_string}.tgz #{token_string}`
-    else
-      raise 'Unknown compression format: ' + @format
+      log('cleaning up...')
+      # Leave only the archive
+      FileUtils.remove_dir unique
     end
-    
-    log('cleaning up...')
-    FileUtils.remove_dir token_string
   end
   
   def get_study
@@ -83,8 +96,10 @@ class StudyDownload
     end
     
     create_summary_pdf
-    create_watchers_pdf
-    create_comments_pdf if @comments
+    if @comments
+      create_watchers_pdf
+      create_comments_pdf 
+    end
   end
   
   def create_comments_pdf

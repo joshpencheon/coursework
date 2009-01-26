@@ -31,7 +31,13 @@ class StudyEvent
     end
     
     # Clean up if no changes.
-    @data.delete(:attached_files) if @data[:attached_files].blank?
+    if @data[:attached_files].blank?
+      @data.delete(:attached_files)
+    else
+      # This is done after changes are recorded,
+      # so it doesn't show up. :-]
+      study.updated_at = Time.now
+    end
     
     if @data.any?
       event = study.events.build(

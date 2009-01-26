@@ -383,8 +383,15 @@ a.read_link.in_progress:hover {
 
 /********* VIEWING STUDY *********/
 
-.download_options {
-	text-align: center;
+#format_radio_group {
+	text-align: left;
+	margin: 0 auto; 
+	width: 50%;
+	line-height: 1.3em;
+}
+
+#format_radio_group label {
+	display: inline;
 }
 
 .summary {

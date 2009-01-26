@@ -8,3 +8,4 @@ public/system/**/*
 public/study_downloads/**/*
 public/images/icons/*
 vendor/**/*
+db/sphinx/development/*

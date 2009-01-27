@@ -67,7 +67,7 @@ class StudiesController < ApplicationController
   def authorize
     unless can_edit?(@study)
       flash[:warn] = 'You cannot access that page.'
-      redirect_to @study
+      redirect_to @study || studies_url
     end
   end
 end

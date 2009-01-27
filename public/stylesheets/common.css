@@ -152,7 +152,9 @@ img.bordered_tiny {
 }
 
 img.bordered_minute {
-	border: 1px solid #DDD;
+	padding: 1px;
+	background-color: transparent;
+	border: 1px solid #BBB;
 }
 
 /************** FORM ELEMENTS **************/

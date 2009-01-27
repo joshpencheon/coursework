@@ -61,6 +61,31 @@ $(document).ready(function() {
     })
 	})
 	
+	
+	//*********** SEARCH FORM **************
+	
+	$('#search_filters').hide()
+	$('#search_wrapper').hide()
+	$('#search_filters_link').show().click(function() {
+		$(this).fadeOut('fast', function(){
+			$('#search_filters').fadeIn('fast')
+		})
+		
+		return false
+	})
+	
+	$('#search').val('Search...').focus(function() {
+		$(this).val('')
+	}).blur(function() {
+		if ($(this).val() == '') $(this).val('Search...')
+	})
+	
+	$('#search_link a').click(function() {
+		$('#search_wrapper').slideToggle('fast')
+		
+		return false
+	})
+	
 	//*********** VIEW A STUDY *************
 	
 	$('.watch_study_link').click(function(event) {

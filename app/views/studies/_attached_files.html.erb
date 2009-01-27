@@ -23,11 +23,11 @@
               </p>
               
               <div class="notes" style="display:none;">
-                <h4 class="title">Notes on '<%= truncate_centrally(file.title, 30) %>'</h4>
+                <h4 class="title">Notes on '<%=h truncate_centrally(file.title, 30) %>'</h4>
                 <% if file.notes.blank? %>
                   <em><strong>Sorry</strong> - No notes available.</em>
                 <% else %>
-                  <%= h file.notes %>
+                  <%= simple_format h(file.notes) %>
                 <% end %>
               </div>
             </div>

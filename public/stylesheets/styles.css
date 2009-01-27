@@ -223,6 +223,38 @@ li#help_link a {
 	text-decoration: underline;
 }
 
+/******* SEARCH ********/
+
+#search_wrapper {
+	border-bottom: 4px solid #00376A;
+	background-color: #1B255D;
+	padding: 1em 3em;
+	color: #FFF;
+	text-align: right;
+}
+
+#search_wrapper a,
+#search_wrapper a:hover {
+	color: #FFF;
+}
+
+#search_filters,
+#search_filters_link {
+	padding: 0 1em;
+}
+
+#search_filters span {
+	margin-right: 0.5em;
+}
+
+
+#search_wrapper input[type=text] {
+	border: 0;
+	padding: 3px;
+	background-color: white;
+	width: 200px;
+}
+
 /****** SIDEBAR ******/
 
 #sidebar > * {

@@ -44,6 +44,14 @@ class Study < ActiveRecord::Base
     set_property :delta => :datetime, :threshold => 1.day
   end
   
+  def thumbnail
+    if thumbnail_id || (candidates = attached_files.select(:image?)).any?
+      (attached_files.find_by_id(thumbnail_id) || candidates.first).url
+    else
+      'default_one.png'
+    end
+  end
+  
   def publish_event
     @publish_event != false ? @publish_event = true : @publish_event
   end

@@ -1,7 +1,10 @@
 class AttachedFile < ActiveRecord::Base
   belongs_to :study
   has_attached_file :document, 
-                    :styles => { :square => [ '35x35', :png ] }  
+                    :styles => {
+                      :square => [ '35x35', :png ],
+                      :medium => [ '70x70', :png ]
+                    }  
                              
   attr_accessible :document, :notes
   validates_attachment_presence :document

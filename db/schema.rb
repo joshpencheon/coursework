@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090124134502) do
+ActiveRecord::Schema.define(:version => 20090127204844) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20090124134502) do
     t.integer  "partnership_id"
     t.integer  "region_id"
     t.string   "category"
+    t.integer  "thumbnail_id"
   end
 
   create_table "taggings", :force => true do |t|

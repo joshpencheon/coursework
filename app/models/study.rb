@@ -44,11 +44,11 @@ class Study < ActiveRecord::Base
     set_property :delta => :datetime, :threshold => 1.day
   end
   
-  def thumbnail
-    if thumbnail_id || (candidates = attached_files.select(:image?)).any?
-      (attached_files.find_by_id(thumbnail_id) || candidates.first).url
+  def thumbnail_url
+    if thumbnail_id || (candidates = attached_files.select(&:image?)).any?
+      (attached_files.find_by_id(thumbnail_id) || candidates.first).document.url(:medium)
     else
-      'default_one.png'
+      "/images/default_study.png"
     end
   end
   

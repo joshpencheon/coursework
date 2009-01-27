@@ -42,8 +42,7 @@ class User < ActiveRecord::Base
   def name(version = :long)
     parts = [first_name, last_name]
     
-    string = version == :short ?
-      parts.first : parts.reject(&:blank?).join(' ')
+    string = (version == :short) ? parts.first : parts.reject(&:blank?).join(' ')
     
     string.blank? ? login : string.capitalize_name
   end

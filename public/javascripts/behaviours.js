@@ -80,7 +80,7 @@ $(document).ready(function() {
 		if ($(this).val() == '') $(this).val('Search...')
 	})
 	
-	$('#search_link a').click(function() {
+	$('#search_link a, #cancel_search').click(function() {
 		$('#search_wrapper').slideToggle('fast')
 		
 		return false

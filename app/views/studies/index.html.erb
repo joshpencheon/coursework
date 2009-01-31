@@ -15,3 +15,14 @@
 <% end if logged_in? %>
 
 <%= render :partial => @studies %>
+
+<% for study in @studies do %>
+  <div class="study_preview">
+    <%= image_tag study.thumbnail_url, :style => 'float:left', :class => 'bordered' %>
+    <h1><%= link_to study.title, study %></h1>
+    <p style="color:gray"><%= [study.category, study.partnership.name, study.region.name].join(' | ') %></p>
+    <p style="color:gray">tagged with: <%= study.tag_list.join(', ') %></p>
+    
+    <div class="clear"></div>
+  </div>
+<% end %>

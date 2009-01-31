@@ -228,7 +228,7 @@ li#help_link a {
 #search_wrapper {
 	border-bottom: 4px solid #00376A;
 	background-color: #1B255D;
-	padding: 1em 3em;
+	padding: 1em;
 	color: #FFF;
 	text-align: right;
 }
@@ -243,6 +243,9 @@ li#help_link a {
 	padding: 0 1em;
 }
 
+#cancel_search {
+	margin-left: 1em;
+}
 #search_filters span {
 	margin-right: 0.5em;
 }

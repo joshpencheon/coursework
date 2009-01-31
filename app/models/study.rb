@@ -45,11 +45,8 @@ class Study < ActiveRecord::Base
   end
   
   def thumbnail_url
-    if thumbnail_id || (candidates = attached_files.select(&:image?)).any?
-      (attached_files.find_by_id(thumbnail_id) || candidates.first).document.url(:medium)
-    else
-      "/images/default_study.png"
-    end
+      file = attached_files.find_by_id(thumbnail_id)
+      file ? file.document.url(:medium) : "/images/default_study.png"
   end
   
   def publish_event

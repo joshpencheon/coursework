@@ -3,8 +3,15 @@ class StudiesController < ApplicationController
   before_filter :authorize, :except => [ :index, :show ]
   
   def index
-    @studies = Study.search(params[:search])
-    # @studies = Study.find_by_category(params[:category]) || Study.all
+    conditions = {}
+    
+    conditions[:region_id] = params[:region_id] unless params[:region_id].blank?
+    conditions[:partnership_id] = params[:partnership_id] unless params[:partnership_id].blank?
+    conditions[:category] = params[:category] unless params[:category].blank?
+    
+    logger.info('searching with conditions:' + conditions.inspect)
+      
+    @studies = Study.search(params[:search], :conditions => conditions)
   end
 
   def show

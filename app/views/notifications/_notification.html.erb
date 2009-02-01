@@ -1,19 +1,21 @@
-<% notification_div_for notification do %>
-  <div class="right" style="text-align:right">
-    <%= read_link(notification) %>
-    <%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %>
-  </div>
+<% cache :action_suffix => notification.id do %> 
+  <% notification_div_for notification do %>
+    <div class="right" style="text-align:right">
+      <%= read_link(notification) %>
+      <%= link_to 'Check out &#187;', follow_notification_path(notification), :class => 'follow_link' %>
+    </div>
     
-  <p class="title">
-    <%= event_title_for notification.event, :user_link => true %>
-    <span class="relative"><%= time_ago_in_words notification.event.created_at %> ago</span>
-  </p>
-  
-  <div class="items">
-    <p class="small_spacer center">
-      <%= link_to 'Load details...', notification, :class => 'load_notification_link' %>
+    <p class="title">
+      <%= event_title_for notification.event, :user_link => true %>
+      <%= relative_time(notification.event.created_at) %>
     </p>
-  </div>
   
-  <div class="clear"></div>
+    <div class="items">
+      <p class="small_spacer center">
+        <%= link_to 'Load details...', notification, :class => 'load_notification_link' %>
+      </p>
+    </div>
+  
+    <div class="clear"></div>
+  <% end %>
 <% end %>

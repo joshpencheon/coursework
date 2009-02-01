@@ -28,7 +28,7 @@
     <div class="notification">
       <p>
         <strong>You requested to get in contact with <%= link_to h(sent.requestee.name), sent.requestee %>.
-        <span class="relative"><%= time_ago_in_words(sent.created_at) %> ago</span></strong>
+          <%= relative_time(sent.created_at) %>
       </p> 
       <% unless sent.message.blank? %>
         <p class="message"><%= sent.message %></p>

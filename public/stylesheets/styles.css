@@ -379,7 +379,7 @@ li.deleted {
 	background: url(/images/icons/delete.png) no-repeat 0 50%;	
 }
 
-.relative {
+.relative_time {
 	color: #666;
 	font-style: italic;
 }
@@ -522,11 +522,44 @@ a.read_link.in_progress:hover {
 	text-align: center;
 }
 
-/****** ADDING ATTACHMENTS: STUDY ******/
+/****** EDIT STUDY ******/
 
-#add_attachment {
-	background: url(/images/icons/attach.png) no-repeat 0px 0px;
-	padding-left: 16px;
+#tag_cloud {
+	padding: 1em;
+	line-height: 1.8em;
+}
+
+#tag_cloud p {
+	position: relative;
+	top: -0.5em;
+}
+
+.tag {
+	padding: 1px 2px;
+	color: #555;
+	border: 1px solid transparent;
+}
+
+.tag:hover {
+	background-color: #FAFAFA;
+	border-color: #BBB;
+}
+
+.tag.active {
+	border-color: #D2D08C;
+	background-color: #F3FFD2;
+}
+
+.tag_small {
+	font-size: 1.0em;	
+}
+
+.tag_medium {
+	font-size: 1.2em;	
+}
+
+.tag_large {
+	font-size: 1.4em;
 }
 
 p.existing_attachment {

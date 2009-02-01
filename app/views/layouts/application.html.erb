@@ -4,8 +4,10 @@
 	<head>
 		<title>SDU Knowledge Base</title>
 	
+	  <%= javascript_tag "var SHOW_SEARCH_BOX = #{!!@searching};"%>
+	  
 		<%= javascript_include_tag %w( jquery jquery-ui ) %>
-		<%= javascript_include_tag %w( jquery.livequery jquery.form ) %>
+		<%= javascript_include_tag %w( jquery.livequery jquery.form jquery.timeago ) %>
 		<%= javascript_include_tag %w( facebox lowpro application ) %>
 		<%= javascript_include_tag %w( behaviours ) %>
 		

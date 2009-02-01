@@ -11,19 +11,21 @@
 <h1><%= h @user.name %></h1>
 <%= avatar_for @user %>
 
-<% if @user.recent_events.any? %>
-  <div id="recent_activity">
-    <h3 class="spacer">Recent Activity:</h3>
-  
-    <% for notification in Notification.build_from_events(@user.recent_events) %>
-      <div class="notification">
-        <p class="title">
-          <%= event_title_for notification.event %>
-          <span class="relative"><%= time_ago_in_words notification.event.created_at %> ago</span>
-        </p>
+<% cache :action_suffix => "events" do %>
+  <% if @user.recent_events.any? %>
+    <div id="recent_activity">
+      <h3 class="spacer">Recent Activity:</h3>
+      
+      <% for notification in Notification.build_from_events(@user.recent_events) %>
+        <div class="notification">
+          <p class="title">
+            <%= link_to event_title_for(notification.event), notification.event.news_item %>           
+            <%= relative_time(notification.event.created_at) %>
+          </p>
 
-        <p><%= event_items_for notification.event %></p>
-      </div>
-    <% end %>    
-  </div>
-<% end %>
+          <p><%= event_items_for notification.event %></p>
+        </div>
+      <% end %>   
+    </div>
+  <% end %>
+<% end %> 

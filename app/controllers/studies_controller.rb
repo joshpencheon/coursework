@@ -1,17 +1,25 @@
 class StudiesController < ApplicationController
   before_filter :find_study, :only  => [ :show, :watch, :unwatch, :edit, :update, :destroy ]
-  before_filter :authorize, :except => [ :index, :show ]
+  before_filter :authorize, :except => [ :index, :search, :tag, :show ]
+  
+  cache_sweeper :site_sweeper, :only => [ :create, :update, :destroy ]
   
   def index
-    conditions = {}
+    @studies = Study.all
+  end
+  
+  def search
+    @studies = Study.filtered_search(params)
+    @searching = true
+
+    render :action => 'index'
+  end
+  
+  def tag
+    redirect_to studies_path unless params[:id]
+    @studies = Study.find_tagged_with(params[:id])
     
-    conditions[:region_id] = params[:region_id] unless params[:region_id].blank?
-    conditions[:partnership_id] = params[:partnership_id] unless params[:partnership_id].blank?
-    conditions[:category] = params[:category] unless params[:category].blank?
-    
-    logger.info('searching with conditions:' + conditions.inspect)
-      
-    @studies = Study.search(params[:search], :conditions => conditions)
+    render :action => 'index'
   end
 
   def show
@@ -51,9 +59,9 @@ class StudiesController < ApplicationController
     
     if @study.update_attributes(params[:study])
       flash[:notice] = "Successfully updated..."
-      redirect_to @study
+      redirect_to @study          
     else
-      render :action => "edit"
+      render :action => 'edit'
     end
   end
 

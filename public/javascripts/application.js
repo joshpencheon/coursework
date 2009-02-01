@@ -1,6 +1,7 @@
 // Attach the event onLoad. Using livequery,
 // it will also get called whenever the dom changes.
 $(document).ready(function($) {
+	
 	// Initialise Facebox links.
 	$('a[rel*=facebox]').livequery(function() { $(this).facebox({
 		loadingImage : '/images/facebox/loading.gif',
@@ -60,6 +61,61 @@ jQuery.extend({
     return _ajax_request(url, data, callback, type, 'DELETE');
   }
 })
+
+var TagList = {
+	
+	initialize: function(field, tagSelector) {
+		this.field = $(field)
+		this.tagLinks = $(tagSelector)
+		
+		this.tagLinks.click(function(event) {
+			TagList.toggle($(this).text().toLowerCase(), $(this))
+			
+			return false
+		})
+		
+		TagList.manageLinks()
+	},
+	
+	toggle: function(tag, link) {
+		if (TagList.active(tag)) TagList.remove(tag)
+		else TagList.add(tag)
+	},
+	
+	manageLinks: function() {
+		this.tagLinks.each(function(index) {
+			if (TagList.active($(this).text().toLowerCase())) $(this).addClass('active')
+			else $(this).removeClass('active')
+		})
+	},
+	
+	add: function(tag) {
+		newTags = TagList.list().concat(tag).join(', ')
+		TagList.set(newTags)
+	},
+	
+	remove: function(tagToRemove) {
+		newTags = TagList.list().filter(function(tag) {
+			return tag != tagToRemove
+		}).join(', ')
+		TagList.set(newTags)		
+	},
+	
+	set: function(newTags) {
+		TagList.field.val(newTags)
+		TagList.manageLinks()
+	},
+	
+	list: function() {
+		return TagList.field.val().split(/\s*,\s*/).map(function(tag){
+			return tag.toLowerCase()
+		}).filter(function(tag){ return tag != '' })
+	},
+	
+	active: function(tag) {
+		return !!(TagList.list().indexOf(tag.toLowerCase()) >= 0)
+	}
+}
 
 var Flash = {
 	hide: function() {

@@ -1,13 +1,17 @@
-<% sidebar_block('Download') do %>
-  <%= link_to_facebox image_tag('download.png', :style => 'float:left;padding-right: 0.8em'), :ajax => configure_download_path(@study) %>
-  You can <%= link_to_facebox 'download', :ajax => configure_download_path(@study) %> this study for use offline.
-<% end %>
-
 <% if can_edit? @study %>
   <% sidebar_block('Actions') do %>
     <li><%= link_to "Edit", edit_study_path(@study) %></li>
     <li><%= link_to 'Delete', @study, :confirm => 'Are you sure?', :method => :delete %></li>
   <% end %>
+<% end %>
+
+<% sidebar_block('Download') do %>
+  <%= link_to_facebox image_tag('download.png', :style => 'float:left;padding-right: 0.8em'), :ajax => configure_download_path(@study) %>
+  You can <%= link_to_facebox 'download', :ajax => configure_download_path(@study) %> this study for use offline.
+<% end %>
+
+<% sidebar_block("Posted by") do %>
+  <li><%= watcher_link_for(@study.user) %></li>
 <% end %>
 
 <% sidebar_block('Watching this study') do %>
@@ -17,16 +21,18 @@
   <% end %>
 <% end %>
 
-<%= render :partial => @study %>
+<% cache :action_suffix => "study_#{@study.id}" do %>
+  <%= render :partial => @study %>
 
-<div class="spacer">
-  <%= render :partial => 'attached_files' %>
-</div>
+  <div class="spacer">
+    <%= render :partial => 'attached_files' %>
+  </div>
 
-<div class="spacer">
-  <%= render :partial => 'comments' %>
-</div>
+  <div class="spacer">
+    <%= render :partial => 'comments' %>
+  </div>
 
-<div class="footnotes">
-  Added <%= @study.created_at.to_date %> ~ last update <%= time_ago_in_words @study.updated_at %> ago
-</div>
+  <div class="footnotes">
+    Added <%= @study.created_at.to_date %> ~ last update <%= relative_time(@study.updated_at) %>
+  </div>
+<% end %>

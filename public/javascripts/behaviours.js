@@ -1,5 +1,12 @@
 $(document).ready(function() {
 	
+	//*************** SIDEBAR **************
+	
+	// Hide an empty sidebar
+	$('#sidebar').livequery(function(){
+		if ($(this).find('noscript').siblings().length == 0) $(this).hide()
+	})
+	
 	//**************** FLASH ***************
 	
 	setTimeout("Flash.hide()", 5000)
@@ -13,6 +20,17 @@ $(document).ready(function() {
 			box.html( box.html().replace(/\n/g, '<br/>') )
 		}
 	})
+	
+	//*********** TIMESTAMPS ***************
+	
+	$('.relative_time').livequery(function() { $(this).timeago().show() });
+
+	$('.relative_time_later').livequery(function() {
+		oldSuffix = jQuery.timeago.settings.strings.suffixAgo
+		$.extend(jQuery.timeago.settings.strings, {suffixAgo: 'later'})
+		$(this).timeago().show()
+		$.extend(jQuery.timeago.settings.strings, {suffixAgo: oldSuffix})
+	});
 	
 	//*********** PERMISSIONS **************
 	
@@ -64,18 +82,24 @@ $(document).ready(function() {
 	
 	//*********** SEARCH FORM **************
 	
-	$('#search_filters').hide()
-	$('#search_wrapper').hide()
-	$('#search_filters_link').show().click(function() {
-		$(this).fadeOut('fast', function(){
-			$('#search_filters').fadeIn('fast')
-		})
-		
-		return false
+	if (!SHOW_SEARCH_BOX) {
+		$('#search_wrapper').hide()
+		$('#search_filters').hide()
+		$('#search_filters_link').show().click(function() {
+			$(this).fadeOut('fast', function(){
+				$('#search_filters').fadeIn('fast') })
+			return false
+		})	
+	}
+	
+	$('#search_form').submit(function() {
+		input = $('#search')
+		if (input.val() == 'Search...') input.val('')
+		return true
 	})
 	
-	$('#search').val('Search...').focus(function() {
-		$(this).val('')
+	$('#search').focus(function() {
+		$(this).select()
 	}).blur(function() {
 		if ($(this).val() == '') $(this).val('Search...')
 	})
@@ -120,6 +144,28 @@ $(document).ready(function() {
 	
 	//********* EDITING A STUDY ************
 	
+	TagList.initialize('#study_tag_list', '.tag')
+	
+	$('#hide_tags_link').click(function() {
+		cloud = $('#tag_cloud')
+		
+		if (cloud.is(':visible'))
+			cloud.fadeTo(200, 0.001, function() { 
+				cloud.hide('blind',{}, 200) 
+			})
+		
+		return false
+	})
+	
+	$('#study_tag_list').focus(function() {
+		cloud = $('#tag_cloud')
+		
+		if (cloud.is(':hidden'))
+			cloud.fadeTo(1, 0.001).show('blind', {}, 200, function(){ 
+				cloud.fadeTo(200, 1) 
+			}) 
+	})
+	
 	$('#add_attachment').show()
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
@@ -135,7 +181,6 @@ $(document).ready(function() {
 		return false
 	})
 	
-	
 	$('.attached_file_notes').hide()
 	$('.show_attached_file_notes').show()
 	
@@ -143,7 +188,7 @@ $(document).ready(function() {
 		$(this).parents('.fields').find('.attached_file_notes').toggle('fast')
 		
 		return false
-	});
+	})
 	
 	$('#add_attachment_submit').click(function() {
 		if ($(this).attr(value).match(/ing/)) return false

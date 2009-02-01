@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
   
   private
   
+  def call_rake(task, options = {})
+    options[:rails_env] ||= Rails.env
+    args = options.map { |n, v| "#{n.to_s.upcase}='#{v}'" }
+    system "/usr/bin/rake #{task} #{args.join(' ')} --trace 2>&1 >> #{Rails.root}/log/rake.log &"
+  end
+  
   def can_edit?(record)
     current_user && (current_user.admin? || current_user == record.try(:user))
   end

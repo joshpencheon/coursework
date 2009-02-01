@@ -37,16 +37,31 @@ class Study < ActiveRecord::Base
   define_index do
     indexes title
     indexes description
+    indexes partnership_id
+    indexes region_id
+    indexes category    
+    
     indexes attached_files.document_file_name, :as => :attached_file_document_file_names
     indexes attached_files.notes, :as => :attached_file_notes
+    
     indexes tags(:name), :as => :tag_names
     
     set_property :delta => :datetime, :threshold => 1.day
   end
   
+  def self.filtered_search(params)
+    conditions = {}
+    
+    [:region_id, :partnership_id, :category].each do |filter|
+      conditions[filter] = params[filter] unless params[filter].blank?
+    end  
+    
+    search(params[:search], :conditions => conditions)
+  end
+  
   def thumbnail_url
-      file = attached_files.find_by_id(thumbnail_id)
-      file ? file.document.url(:medium) : "/images/default_study.png"
+    file = attached_files.find_by_id(thumbnail_id)
+    file ? file.document.url(:medium) : "/images/default_study.png"
   end
   
   def publish_event

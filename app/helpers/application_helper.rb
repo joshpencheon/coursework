@@ -1,5 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  include TagsHelper
+  
   def truncate_centrally(string, length, truncate_string = '...')
     return string if string.length <= length
     length_from_string = length - truncate_string.length
@@ -12,5 +14,12 @@ module ApplicationHelper
       right = (length_from_string - 1) / 2
     end
     string[0, left] + truncate_string + string[-right, right]
+  end
+  
+  def relative_time(time, options = {})
+    options[:class] ||= "relative_time"
+    options[:class] += '_later' if options.delete(:later)
+    defaults = { :title => time.getutc.iso8601, :style => 'display:none' }
+    content_tag(:abbr, time.to_s, options.merge(defaults)) if time
   end
 end

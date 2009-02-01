@@ -24,24 +24,26 @@
 		<ul>
 			<li id="studies_link"><%= menu_link 'Studies', studies_path %></li>
     	<li id="people_link"><%= menu_link 'People', users_path %></li>
-  	<% if logged_in? %>
-    	<li id="notification_link">
-    	  <%= menu_link 'My Notifications', :controller => 'notifications', :referrer => 'tab' %>
-    	  
-    	  <% hidden_span_if !current_user.has_unread_notifications?, 
-    	    { :id => "notification_count", :class => "notification_count" } do %>   	  
-    	    <%= current_user.notification_count %>
-    	  <% end %>
-    	</li>
-    <% end %>
+    	
+    	<% if logged_in? %>
+      	<li id="notification_link">
+      	  <%= menu_link 'My Notifications', :controller => 'notifications', :referrer => 'tab' %>
+  	  
+      	  <% hidden_span_if !current_user.has_unread_notifications?, 
+      	    { :id => "notification_count", :class => "notification_count" } do %>   	  
+      	    <%= current_user.notification_count %>
+      	  <% end %>
+      	</li>
+      <% end %>
+    
 		</ul>
   </div>
 </div>
 
 <div id="search_wrapper">
-  <% form_tag(studies_url, :method => :get) do %>
+  <% form_tag(search_studies_url, :method => :get, :id => 'search_form') do %>
     <%= link_to 'show filters', studies_path, :id => 'search_filters_link', :style => 'display: none' %>
-  
+
     <span id="search_filters">
       <span>Use these filters to narrow your search:</span>
       <%= select_tag :region_id, options_for_lookup(Region, :id, :name, 'Filter by Region...') %>
@@ -49,8 +51,8 @@
       <%= select_tag :category, options_for_select_with_prompt(Study::CATEGORIES, 'Filter by category...') %>
     </span>
 
-    <%= text_field_tag :search %>
-    
+    <%= text_field_tag :search, (params[:search].blank? ? 'Search...' : params[:search]) %>
+  
     <span id="cancel_search">
       <%= link_to 'cancel', studies_path %>
     </span>

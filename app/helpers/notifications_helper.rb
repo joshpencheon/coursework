@@ -41,8 +41,13 @@ module NotificationsHelper
       if types.is_a?(Hash) 
         types.each_pair do |type, changes|
           if type.is_a?(Integer)
-            instance = assoc.to_s.singularize.camelize.constantize.find(type)
-            html << content_tag(:li, "#{instance.title}: #{changes}", :class => 'edited')          
+            instance = assoc.to_s.singularize.camelize.constantize.find_by_id(type)
+            string = if instance
+              "#{instance.title}: #{changes}"
+            else
+              "One of the #{assoc.to_s.humanize.downcase.pluralize} was edited. (No more information available.)"              
+            end
+            html << content_tag(:li, string, :class => 'edited')          
           else
             klass = type == :new ? 'new' : 'deleted'
             [ changes ].flatten.each do |change|

@@ -19,7 +19,9 @@ ActionController::Routing::Routes.draw do |map|
     :only       => [ ],
     :member     => { :configure => :get, :serve => :get , :build => :post }
   
-  map.resources :studies, :member => { :download => :get, :watch => :post } do |study|
+  map.resources :studies, 
+    :member     => { :download => :get, :watch  => :post },
+    :collection => { :search   => :get } do |study|
     study.with_options :shallow => true do |s|
       s.resources :attached_files, :only => [ :show ]
       s.resources :comments,       :only => [ :create ]      

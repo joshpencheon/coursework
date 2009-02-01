@@ -1,7 +1,3 @@
 <h4>Attached Files</h4>
 
-<%= render :partial => @study.attached_files.build %>
-
-<% if @study.saved_attachments.any? %>
-  <%= render :partial => @study.saved_attachments %>
-<% end %>
+<%= render :partial => [@study.attached_files.build, @study.saved_attachments].flatten %>

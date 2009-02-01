@@ -4,8 +4,9 @@
       <tr>
         <% pair.each do |file| %><td>
           <%# render(:partial => file) unless file.nil? %>
-          
+        
           <% next if file.nil? %>
+          
           <% div_for file do %>
 
             <div class="thumbnail">
@@ -14,14 +15,14 @@
 
             <div class="file_info">
               <%= link_to 'show notes', @study, :class => 'toggle_notes_link right', :style => 'display: none' %>            
-              
+            
               <p>
                 <%= facebox_enabled_link_for truncate_centrally(file.title, 30), file %>
                 <span class="file_size" style="display:none">
                   <%= file.file_string %> <%= file_size_for file %>
                 </span>
               </p>
-              
+            
               <div class="notes" style="display:none;">
                 <h4 class="title">Notes on '<%=h truncate_centrally(file.title, 30) %>'</h4>
                 <% if file.notes.blank? %>
@@ -31,7 +32,7 @@
                 <% end %>
               </div>
             </div>
-            
+          
             <div class="clear"></div>
           <% end %>          
         </td><% end %>

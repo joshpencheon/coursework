@@ -10,9 +10,8 @@
   <% unless study.tag_list.blank? %>
     <p style="color:gray">tags: <%= study.tag_list.join(', ') %></p>
   <% end %>
-  <p>Posted by <%= link_to study.user.name, study.user %></p>
 
-  <div class="summary">
+  <div class="summary clear">
     <h4>Summary:</h4>
     <p><%= study.description %></p>  
   </div>

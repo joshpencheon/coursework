@@ -15,6 +15,8 @@ Rails::Initializer.run do |config|
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
   # See Rails::Configuration for more options.
+  
+  config.load_paths += %W( #{RAILS_ROOT}/app/sweepers )
 
   # Skip frameworks you're not going to use. To use Rails without a database
   # you must remove the Active Record framework.
@@ -65,7 +67,7 @@ Rails::Initializer.run do |config|
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
-
+  
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
 end

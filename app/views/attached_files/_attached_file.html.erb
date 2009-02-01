@@ -1,4 +1,5 @@
 <% if attached_file.new_record? %>
+
   <% fields_for 'study[new_attached_file_attributes][]', @study.attached_files.build do |af| -%>      
     <div class="fields new_attachment odd">
       <a href="#" class="show_attached_file_notes" style="display:none">Edit notes...</a>
@@ -7,13 +8,19 @@
     </div>
   <% end -%>
   <p><a href="#" id="add_attachment" style="display:none">Add another attachment</a></p>   
+  
 <% else %>
+
   <% fields_for 'study[existing_attached_file_attributes][]', attached_file do |af| -%>      
     <div id="attachment_<%= attached_file.id %>" class="fields existing_attachment<%= cycle(' odd', '') %>">
       <span class="right">
         <a href="#" class="show_attached_file_notes" style="display:none">Edit Notes</a> |
         <%= link_to 'Delete', '#', :class => 'delete_attachment_link' %>
       </span>
+      
+      <% if attached_file.image? %>
+        Use as thumbnail: <%= @study_form.radio_button :thumbnail_id, attached_file.id, :no_label => true %>
+      <% end %>
 
       <%= icon attached_file.icon_path %>
       <%= h truncate_centrally(attached_file.document_file_name, 25) %> 
@@ -23,5 +30,6 @@
         <%= af.text_area :notes %>                              
       </div>
     </div>
-  <% end -%>  
+  <% end -%>
+    
 <% end %>

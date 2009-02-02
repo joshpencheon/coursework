@@ -12,12 +12,4 @@ module UsersHelper
     link_to text + extra_text, user, :class => 'watcher_link'
   end
   
-  def request_link_for(user)
-    if current_user.has_sent_request_to(user)
-      'request sent'
-    else
-      link_to 'request', request_permission_path(user) 
-    end
-  end
-  
 end

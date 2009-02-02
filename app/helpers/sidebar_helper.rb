@@ -3,8 +3,10 @@ module SidebarHelper
     title.downcase!
     @sidebar_blocks ||= []
     
+    options[:class] ||= ''
+    options[:class] += title.gsub(/[^a-z]/, ' ').strip.gsub(/\s+/, '_')
+    
     Struct.new("SidebarBlock", :title, :contents, :styles)
-    blk = Struct::SidebarBlock.new(title, capture(&block), options)
-    @sidebar_blocks << blk
+    @sidebar_blocks << Struct::SidebarBlock.new(title, capture(&block), options)
   end
 end

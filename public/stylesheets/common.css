@@ -109,6 +109,10 @@ label {
 	margin: 5px auto;
 }
 
+.inline_spacer {
+	margin: 0 1em;
+}
+
 .icon {
 	height: 12px;
 	width: 12px;

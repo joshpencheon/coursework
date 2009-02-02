@@ -1,3 +1,17 @@
-<h4>Attached Files</h4>
+<div class="block red">
+  <h4>Attach Files:</h4>
+  <div id="new_attachments">
+    <%= render :partial => "attached_files/new_attached_file", :object => @study.attached_files.build %>  
+  </div>
 
-<%= render :partial => [@study.attached_files.build, @study.saved_attachments].flatten %>
+  <p><%= link_to 'Add another attachment', {:controller => 'javascripts', :action => 'attached_file_form' }, 
+           { :style => 'display:none', :id => 'add_attachment' } %></p>
+</div>
+
+<% unless @study.new_record? %>
+  <div class="block yellow">
+    <h4>Existing Attachments:</h4>
+  
+    <%= render :partial => "attached_files/existing_attached_file", :collection => @study.saved_attachments %>
+  </div>
+<% end %>

@@ -1,11 +1,12 @@
 class StudiesController < ApplicationController
-  before_filter :find_study, :only  => [ :show, :watch, :unwatch, :edit, :update, :destroy ]
-  before_filter :authorize, :except => [ :index, :search, :tag, :show ]
+  before_filter :find_study,   :only => [ :show, :watch, :unwatch, :edit, :update, :destroy ]
+  before_filter :authorize,    :only => [ :edit, :update, :destroy ]
+  before_filter :authenticate, :only => [ :new, :create ]
   
   cache_sweeper :site_sweeper, :only => [ :create, :update, :destroy ]
   
   def index
-    @studies = Study.all
+    @studies = Study.all(:order => 'created_at desc')
   end
   
   def search
@@ -16,8 +17,13 @@ class StudiesController < ApplicationController
   end
   
   def tag
-    redirect_to studies_path unless params[:id]
-    @studies = Study.find_tagged_with(params[:id])
+    unless tag = Tag.find_by_id(params[:id])
+      flash[:warn] = 'Unknown tag'
+      redirect_to studies_path 
+    end
+    
+    @studies = Study.find_tagged_with(tag.name)
+    @title = "Studies tagged with: '#{tag.name}'"
     
     render :action => 'index'
   end
@@ -79,7 +85,11 @@ class StudiesController < ApplicationController
     end
   end
   
-  def authorize
+  def authenticate
+    not current_user.nil?
+  end
+  
+  def authorize    
     unless can_edit?(@study)
       flash[:warn] = 'You cannot access that page.'
       redirect_to @study || studies_url

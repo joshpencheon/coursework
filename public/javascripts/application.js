@@ -62,11 +62,25 @@ jQuery.extend({
   }
 })
 
+var tagListTimeOut = ''
 var TagList = {
 	
 	initialize: function(field, tagSelector) {
 		this.field = $(field)
 		this.tagLinks = $(tagSelector)
+		
+		this.field.focus(function() {
+			tagListTimeOut = setInterval(function() { 
+				TagList.manageLinks()
+				$('#footer').text( $('#footer').text() + '.' )
+			}, 100)
+			
+			return true
+		})
+		
+		this.field.blur(function() {
+			clearInterval(tagListTimeOut)
+		})
 		
 		this.tagLinks.click(function(event) {
 			TagList.toggle($(this).text().toLowerCase(), $(this))

@@ -1,12 +1,14 @@
 <div class="study">
-  <%= image_tag study.thumbnail_url, :style => 'float:right', :class => 'bordered' %>
-  
-  <h1>
-    <%= category_image_for study %>
-    <%= study.region.name %> - <%= link_to study.title, study %>
-  </h1>
 
-  <p style="color:gray"><%= [study.category, study.partnership.name].join(' | ') %></p>
+  <h2 style="text-align: left">
+    <span class="right"><%= category_image_for study %></span>
+    
+    <%= image_tag study.thumbnail_url, :style => 'vertical-align:middle', :class => 'bordered' %>
+    <%= study.region.name %> - <%= link_to study.title, study %>
+  </h2>
+
+  <p style="color:gray">Region: <%= study.region.name %> | Partnership: <%= study.partnership.name %></p>
+  
   <% unless study.tag_list.blank? %>
     <p style="color:gray">tags: <%= study.tag_list.join(', ') %></p>
   <% end %>

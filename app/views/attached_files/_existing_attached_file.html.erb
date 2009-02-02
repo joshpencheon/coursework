@@ -1,0 +1,20 @@
+<% fields_for 'study[existing_attached_file_attributes][]', existing_attached_file do |af| -%>      
+  <div id="attachment_<%= existing_attached_file.id %>" class="fields existing_attachment<%= cycle(' odd', '') %>">
+    <span class="right">
+      <a href="#" class="show_attached_file_notes" style="display:none">Edit Notes</a> |
+      <%= link_to 'Delete', '#', :class => 'delete_attachment_link' %>
+    </span>
+
+    <% if existing_attached_file.image? %>
+      Use as thumbnail: <%= @study_form.radio_button :thumbnail_id, existing_attached_file.id, :no_label => true %>
+    <% end %>
+
+    <%= icon existing_attached_file.icon_path %>
+    <%= h truncate_centrally(existing_attached_file.document_file_name, 25) %> 
+    - <span class="filesize"><%= number_to_human_size existing_attached_file.document_file_size %></span>
+
+    <div class="attached_file_notes">
+      <%= af.text_area :notes %>                              
+    </div>
+  </div>
+<% end -%>

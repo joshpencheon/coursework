@@ -1,4 +1,4 @@
-<% if logged_in? && (show_welcome_message? || true) %>
+<% if logged_in? && show_welcome_message? %>
 	<% require_jquery 'welcome' %>
 
 	<div id="welcome_message" style="display:none;">
@@ -14,6 +14,17 @@
   <li><%= link_to "Study", new_study_path %></li>
 <% end if logged_in? %>
 
+<% sidebar_block('Tags') do %>
+  <% cache :action_suffix => 'tags' do %>
+    <% Study.ordered_tag_counts.each do |tag| %>
+      <p>
+        <span class="right"><%= tag.count %></span>
+        <%= tag_link_for tag %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
+
 <% for study in @studies do %>
   <% cache :action_suffix => "#{study.id}_small" do %>
     <div class="study_preview spacer">
@@ -23,7 +34,7 @@
       <p style="color:gray">Region: <%= study.region.name %> | Partnership: <%= study.partnership.name %></p>
   
       <% if study.tag_list.any? %>
-        <p style="color:gray">tagged with: <%= study.tag_list.join(', ') %></p>
+        <p style="color:gray">tagged with: <%= study.tags.map {|tag| tag_link_for tag }.join(', ') %></p>
       <% end %>
   
       <div class="clear"></div>

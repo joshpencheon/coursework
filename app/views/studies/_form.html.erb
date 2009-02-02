@@ -2,34 +2,37 @@
   <%# Dirty trick for forms in partials %>
   <% @study_form = f %>
   
-  <%= f.text_field :title, :class => 'bold' %>
-  <%= f.text_area :description %>
+  <div class="spacer block green">
+    <%= f.text_field :title, :class => 'bold' %>
+    <%= f.text_area :description %>
+  </div>
   
-  Region: <%= f.collection_select :region_id,      Region.all,      :id, :name, :prompt => 'Select a Region...', :no_label => true %>
-  Partnership: <%= f.collection_select :partnership_id, Partnership.all, :id, :name, :prompt => 'Choose Partnership details...', :no_label => true %>
-  Category: <%= f.select :category, Study::CATEGORIES, :prompt => 'Select a Category...', :no_label => true %>
+  <div class="spacer block purple">
+    <span class="inline_spacer">Region: <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => 'Select a Region...', :no_label => true %></span>
+    <span class="inline_spacer">Partnership: <%= f.collection_select :partnership_id, Partnership.all, :id, :name, :prompt => 'Choose Partnership details...', :no_label => true %></span>
+    <span class="inline_spacer">Category: <%= f.select :category, Study::CATEGORIES, :prompt => 'Select a Category...', :no_label => true %></span>
+  </div>
 
-  <%= f.text_field :tag_list, :label => 'Pick some tags' %>
+  <div class="spacer block blue">
+    <%= f.text_field :tag_list, :label => 'Pick some tags:', :class => 'bold' %>
   
-  <div id="tag_cloud" style="display:none" class="center">
-    <p class="note">
-      Click on a tag to toggle it: 
-      (<%= link_to 'hide list', @study, :id => 'hide_tags_link' %>)
-    </p>
-    <% tag_cloud Tag.all.sort_by(&:name), %w(tag_small tag_medium tag_large) do |tag, css_class| %>
-      <%= link_to tag.name, {:action => 'tag', :id => tag.name}, :class => "#{css_class} tag", :id => "tag_#{tag.name}" %>
-    <% end %>
+    <div id="tag_cloud" style="display:none" class="center">
+      <p class="note">
+        Click on a tag to toggle it: 
+        (<%= link_to 'hide list', @study, :id => 'hide_tags_link' %>)
+      </p>
+      <% tag_cloud Tag.all.sort_by(&:name), %w(tag_small tag_medium tag_large) do |tag, css_class| %>
+        <%= link_to tag.name, {:action => 'tag', :id => tag.name}, :class => "#{css_class} tag", :id => "tag_#{tag.name}" %>
+      <% end %>
+    </div>
   </div>
   
   <%= render :partial => 'attachments' %>
   
-  <p>
-    <%= render :partial => "shared/publish", :locals => { :form => f } %>
-  </p>
-  
-	<p>
+  <div class="block green" style="text-align:right">
+    <span class="inline_spacer"><%= render :partial => "shared/publish", :locals => { :form => f } %></span>
 	  <%= f.submit 'Save Study' %> or <%= link_to 'cancel', @study %>
-  </p>
+  </div>
 <% end %>
 
 

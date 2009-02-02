@@ -59,6 +59,10 @@ class Study < ActiveRecord::Base
     search(params[:search], :conditions => conditions)
   end
   
+  def self.ordered_tag_counts(options = {})
+    tag_counts({:order => 'count desc, name asc'}.reverse_merge!(options))    
+  end
+  
   def thumbnail_url
     file = attached_files.find_by_id(thumbnail_id)
     file ? file.document.url(:medium) : "/images/default_study.png"
@@ -98,6 +102,10 @@ class Study < ActiveRecord::Base
     attached_files.reject(&:new_record?).each do |attached_file|
       attributes = attached_file_attributes[attached_file.id.to_s]
       if attributes
+        if attached_file.notes.blank? && attributes[:notes].blank?
+          attributes.delete(:notes)
+        end
+        
         attached_file.attributes = attributes
       else
         attached_file.destroy

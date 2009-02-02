@@ -3,10 +3,6 @@ class HelpController < ApplicationController
 
   before_filter :get_partial, :except => [ :search ]
 
-  def search 
-    render :text => "some search results: #{params[:search]}"
-  end
-
   def index
   end
   

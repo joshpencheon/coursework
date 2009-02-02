@@ -169,25 +169,30 @@ $(document).ready(function() {
 	$('#add_attachment').show()
 	// Adds another file field to the study form
 	$('#add_attachment').click(function(event){
-		var parent = $(this).parent()
-		input = $('\
-			<p class="new_attachment">\
-				<input id="study_new_attached_file_attributes__document" name="study[new_attached_file_attributes][][document]" size="30" type="file" />\
-			</p>')
-		input.insertBefore(parent)
-		input.hide().slideDown()
+		$(this).text('Fetching...')
+		$.get($(this).attr('href'), function(html) {
+			input = $(html).hide()
+			$('#new_attachments').append(input)
+			input.slideDown()
+
+			$('div.new_attachment').removeClass('odd')			
+			$('div.new_attachment:odd').addClass('odd')
+
+			$(event.target).text('Add another attachment')
+		}, 'text')
 		
-		$('p.new_attachment:odd').addClass('odd')
 		return false
 	})
 	
 	$('.attached_file_notes').hide()
 	$('.show_attached_file_notes').show()
 	
-	$('.show_attached_file_notes').click(function() {
-		$(this).parents('.fields').find('.attached_file_notes').toggle('fast')
-		
-		return false
+	$('.show_attached_file_notes').livequery(function() {
+		$(this).click(function() {
+			$(this).toggleClass('highlight')
+			$(this).parents('.fields').find('.attached_file_notes').toggle('fast')
+			return false
+		})
 	})
 	
 	$('#add_attachment_submit').click(function() {
@@ -202,6 +207,15 @@ $(document).ready(function() {
 			$(this).remove()
 		})
 		return false
+	})
+	
+	$('.delete_new_attachment_link').livequery(function() {
+		$(this).click(function() {
+			$(this).parents('.new_attachment').slideUp(function() {
+				$(this).remove()
+			})
+			return false
+		})
 	})
 	
 	//******** COMMENTS ********//

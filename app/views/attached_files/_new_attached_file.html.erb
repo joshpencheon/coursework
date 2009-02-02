@@ -1,0 +1,11 @@
+<% fields_for 'study[new_attached_file_attributes][]', new_attached_file do |af| -%>      
+  <div class="fields new_attachment">
+    <span class="right">
+      <a href="#" class="show_attached_file_notes">Add notes</a> |
+      <%= link_to 'Cancel', '#', :class => 'delete_new_attachment_link' %>
+    </span>
+    
+    <%= af.file_field :document, :no_label => true %>
+    <%= af.text_area :notes, :class => 'attached_file_notes spacer', :style => 'display:none', :no_label => true %>
+  </div>
+<% end -%>

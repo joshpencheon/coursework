@@ -1,3 +1,15 @@
+# Reopen from acts_as_taggable_on_steriods
+Tag.class_eval do
+  
+  before_save do |tag|
+    tag.name.downcase!
+  end
+  
+  def to_param
+    "#{id}-#{name.gsub(/[^a-z]/, ' ').strip.gsub(/\s+/, '-')}"
+  end
+end
+
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   include TagsHelper

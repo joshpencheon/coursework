@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090127204844) do
+ActiveRecord::Schema.define(:version => 20090202115425) do
 
   create_table "attached_files", :force => true do |t|
     t.integer  "study_id"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20090127204844) do
     t.string   "avatar_file_size"
     t.boolean  "email_hidden",        :default => false
     t.string   "token"
+    t.boolean  "admin",               :default => false
+    t.string   "bio"
   end
 
   create_table "watchings", :force => true do |t|

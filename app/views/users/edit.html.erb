@@ -50,6 +50,12 @@
 			<strong>- Your email address is private.</strong> This means that other users will have to make a request before they can get in contact.
 		</div>
 	</div>
+	
+	<div id="more_info">
+	  <h3 class="ride_up center">About you</h3>
+	  <p class="note"><strong>Tell us a little about yourself:</strong> e.g. 'Consultant, Addenbroke's hospital, Cambridge'</p>
+    <%= f.text_field :bio, :no_label => true %>
+	</div>
 
 	<div class="button clear">
 		<%= f.submit 'Save my profile' %>

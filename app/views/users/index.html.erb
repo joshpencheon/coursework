@@ -1,14 +1,38 @@
 <% for user in @users %>
-<p>
-  <%= avatar_for(user, :tiny) %>
-	<%= link_to h("#{user.name || 'anon.'} (#{user.login})"), user %>
-		
-  <% if !user.email_hidden? || user.disciples.include?(current_user) %>
-    [<%= mail_to h(user.email), 'send an email' %>]
-  <% else %>
-    <em>Email kept private</em>
-    [<%= request_link_for user %>]
+<div class="user spacer">
+  
+  <% unless user == current_user %>
+    <span class="right">
+      <% if !user.email_hidden? %>
+        <%= mail_to h(user.email), 'send an email' %>
+      <% elsif user.disciples.include?(current_user) %>
+        Your request was granted - you can <%= mail_to h(user.email), 'send an email' %>
+      <% elsif user.blacklist.include?(current_user) %>
+        Sorry, but your request to get in contact was declined.
+      <% elsif current_user.has_sent_request_to(user) %>
+        Your request to get in contact is pending.
+      <% else %>
+        <em>Email kept private</em> - 
+        <%= link_to 'request contact', request_permission_path(user)  %>
+      <% end %>
+    </span>    
   <% end %>
+  
+  <%= avatar_for(user, :tiny) %>
+	<h3>
+	  <%= link_to h("#{user.name || 'anon.'} (#{user.login})"), user %>
+	  <% if user == current_user %>
+	    <span style="color:gray"> – This is you</span>
+	  <% end %>
+	</h3>
+	<p style="color:gray">
+	  <% if user.admin? %>
+  	 <span style="color:#A00">Admin</span>
+  	<% end %>
+	  <%=h user.bio %>
+	</p>
 	
-</p>
+	
+	<div class="clear"></div>
+</div>
 <% end %>

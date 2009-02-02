@@ -8,8 +8,11 @@
   <% end -%>
 <% end -%>
 
+<span class="right"><%= avatar_for @user %></span>
+
 <h1><%= h @user.name %></h1>
-<%= avatar_for @user %>
+
+<h3 style="color:gray"><%= h @user.bio %></h3>
 
 <% cache :action_suffix => "events" do %>
   <% if @user.recent_events.any? %>

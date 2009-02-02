@@ -131,6 +131,22 @@ li#help_link a {
   -moz-border-radius: 5px;
 }
 
+/*********** FORMS *************/
+
+.block {
+	border: 1px solid #DDD;
+	padding: 1em;
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	margin-top: 1em;
+}
+
+.block.red    { background-color: #EBE3E3 }
+.block.yellow { background-color: #F0F4D9 }
+.block.green  { background-color: #E1F4D9 }
+.block.blue   { background-color: #DFF7F5 }
+.block.purple { background-color: #E7E4F1 }
+
 
 /*********** FLASH *************/
 
@@ -166,6 +182,14 @@ li#help_link a {
   -moz-border-radius-topleft: 5px;
 }
 
+#sidebar .actions a {
+	color: #8B5358;
+}
+
+#sidebar .new a {
+	color: #4C7746;
+}
+
 #site {
 	height: auto !important;
 	margin-bottom: -4em; /* footer height */
@@ -177,7 +201,9 @@ li#help_link a {
 	padding: 1em 10px;
 	width: 70%;
 	height: 1em;
-	color: #999;
+	font-size: 0.8em;
+	text-align: right;
+	color: #777;
 	background-color: #444;
 }
 
@@ -285,7 +311,7 @@ li#help_link a {
 #sidebar li a {
 	display: block;
 	color: #444;
-	padding: 10px 0 10px 20px;
+	padding: 10px 0 10px 15px;
 	text-decoration: none;
 } 
 
@@ -526,7 +552,12 @@ a.read_link.in_progress:hover {
 
 #tag_cloud {
 	padding: 1em;
+	margin-top: 1em;
 	line-height: 1.8em;
+	border: 1px solid #999;
+	background-color: #FFF;
+	-webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
 }
 
 #tag_cloud p {
@@ -535,7 +566,9 @@ a.read_link.in_progress:hover {
 }
 
 .tag {
-	padding: 1px 2px;
+	-webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+	padding: 1px 4px;
 	color: #555;
 	border: 1px solid transparent;
 }
@@ -562,21 +595,51 @@ a.read_link.in_progress:hover {
 	font-size: 1.4em;
 }
 
-p.existing_attachment {
+.highlight {
+	background-color: #FEF8A3;
+	padding: 2px 1px 2px 3px;
+	border: 1px solid #D8CF67;
+	position: relative;
+	left: 2px;
+}
+
+div.new_attachment,
+div.existing_attachment {
 	padding: 5px;
 	font-size: 0.9em;
 }
 
 .odd {
-	background-color: #E5E5E5;
-}
-
-p.existing_attachment.over {
-	background-color: #E7DBDB;
+	background-color: #FFF;
 }
 
 .filesize {
 	color: #888;
+}
+
+/*********** PERMISSION *********/
+
+.message {
+	padding: 0.3em 1em;
+	color: #666;
+	font-style: italic;
+}
+
+/************* USER ************/
+
+.user {
+	border: 1px solid #DDD;
+	background-color: #FCFCFC;
+	margin: 1em 0;
+	padding: 1em;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
+.user img.avatar {
+	vertical-align: middle;
+	margin-right: 0.5em;
+	float: left;	
 }
 
 /****** ADDING ATTACHMENTS: USER ******/
@@ -603,6 +666,14 @@ div.button {
 	margin-top: 1em;
 	padding: 15px 25px;
 	background-color: #EEFAE1;	
+}
+
+#more_info {
+	-webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+	margin-top: 1em;
+	padding: 15px 25px;
+	background-color: #DFF7F5;
 }
 
 #avatar_upload_container {

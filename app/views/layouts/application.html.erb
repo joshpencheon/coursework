@@ -26,6 +26,10 @@
 					<%= content_tag :div, msg, :id => key, :class => 'flash' %>
 				<% end %>
 				
+				<% if @title %>
+				  <h2><%= h @title %></h2>
+				<% end %>
+				
 				<%= yield %>
 			</div>
 		

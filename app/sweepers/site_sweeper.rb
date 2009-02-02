@@ -22,7 +22,8 @@ class SiteSweeper < ActionController::Caching::Sweeper
     
     # Expire the study
     with_options :controller => 'studies' do |studies|
-      studies.expire_fragment(:action_suffix => "#{study.id}_small")      
+      studies.expire_fragment(:action_suffix => "#{study.id}_small") 
+      studies.expire_fragment(:action_suffix => "tags")
       studies.expire_fragment(:action => 'show',  :id => study.to_param, :action_suffix => "study_#{study.id}" )
     end
     

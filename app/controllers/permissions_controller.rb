@@ -4,12 +4,17 @@ class PermissionsController < ApplicationController
   
   def index
     @received_requests = current_user.received_requests.pending
-    @sent_requests = current_user.sent_requests.pending    
+    @sent_requests = current_user.sent_requests
   end
   
   def new
     if current_user.has_sent_request_to(@requestee)
       flash[:notice] = "You've already sent a request to #{@requestee.name(:short)} - please be patient."
+      redirect_to @requestee
+    end
+    
+    if @requestee == current_user
+      flash[:notice] = "That's you!"
       redirect_to @requestee
     end
 

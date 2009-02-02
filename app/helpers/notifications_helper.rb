@@ -37,7 +37,7 @@ module NotificationsHelper
     return_html = ''
     event.data.each_pair do |assoc, types|
       html = content_tag(:li, assoc.to_s.humanize, :class => 'section')
-      
+    
       if types.is_a?(Hash) 
         types.each_pair do |type, changes|
           if type.is_a?(Integer)

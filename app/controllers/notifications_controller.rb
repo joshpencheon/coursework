@@ -3,6 +3,8 @@ class NotificationsController < ApplicationController
   before_filter :authorize,            :except => [ :feed ]
   before_filter :authorize_from_token, :only   => [ :feed ]
   before_filter :find_notification,    :only   => [ :read, :follow ]
+  
+  caches_action :show
 
   def index
     @notifications = current_user.notifications.preloading.most_recent_first.paginate(:page => params[:page], :per_page => 5)
@@ -60,7 +62,7 @@ class NotificationsController < ApplicationController
   end
   
   def authorize
-    unless can_edit?(@notification)
+    unless current_user
       flash[:warn] = 'You cannot access that page.'
       redirect_to studies_url
     end

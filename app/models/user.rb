@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
   
   has_many :watched_studies, :through => :watchings, :source => :study
     
+  validates_length_of :bio, :maximum => 40
+    
+  attr_protected :admin
   attr_readonly :token
   before_create :set_token
   
@@ -35,8 +38,8 @@ class User < ActiveRecord::Base
     requesters.find(received_requests.granted.map(&:requester_id))
   end
   
-  def admin?
-    true
+  def blacklist
+    requesters.find(received_requests.declined.map(&:requester_id))
   end
   
   def name(version = :long)

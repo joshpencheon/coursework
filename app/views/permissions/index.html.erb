@@ -1,6 +1,23 @@
 <%= render :partial => "common_controls" %>
 
-<% if not (@sent_requests.any? || @received_requests.any?) %>
+<% if @sent_requests.granted.any? %>
+  <% sidebar_block('Requests granted by') do %>
+    <% @sent_requests.granted.map(&:requestee).each do |user| %>
+      <li><%= watcher_link_for user %></li>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if @sent_requests.declined.any? %>
+  <% sidebar_block('Requests declined by') do %>
+    <% @sent_requests.declined.map(&:requestee).each do |user| %>
+      <li><%= watcher_link_for user %></li>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+<% if not (@sent_requests.pending.any? || @received_requests.any?) %>
   <h2>You have no requests pending!</h2>
   <p class="spacer center">This is where you can keep track of requests that you've sent to others, as well as those that you've received yourself.</p>
 <% else %>
@@ -8,32 +25,35 @@
 <% end %>
 
 <% if @received_requests.any? %>
-  <h3><%= pluralize @received_requests.length, 'person' %> would like you to share your email address with them</h3>
-  <% for request in @received_requests %>
-    <div class="notification">
-      <strong><%= link_to h(request.requester.name), request.requester %> would like to get in contact with you, and has requested that you share your email address with them.</strong> 
-      <% unless request.message.blank? %>
-        <p class="message"><%= request.message %></p>
-      <% end %>        
+  <h3><%= pluralize @received_requests.length, 'person' %> would like you to share your email address with them:</h3>
+    <div class="spacer">
+      <% for request in @received_requests %>
+        <div class="notification">
+          <strong><%= link_to h(request.requester.name), request.requester %> would like to get in contact with you, and has requested that you share your email address with them.</strong> 
+          <% unless request.message.blank? %>
+            <p class="message"><%= request.message %></p>
+          <% end %>        
 
-      <%= link_to 'Accept', grant_permission_path(request.requestee_id), :method => :put, :style => 'color:green' %> |
-      <%= link_to 'Decline', reject_permission_path(request.requestee_id), :method => :put, :style => 'color:red' %>
-    </div>
-  <% end %>
+          <%= link_to 'Accept', grant_permission_path(request.requestee_id), :method => :put, :style => 'color:green' %> |
+          <%= link_to 'Decline', reject_permission_path(request.requestee_id), :method => :put, :style => 'color:red' %>
+        </div>
+    <% end %>
+  </div>
 <% end %>
 
-<% if @sent_requests.any? %>
-  <h3>You have <%= pluralize @sent_requests.length, 'request' %> that you've sent awaiting a reply</h3>
-  <% for sent in @sent_requests %>
-    <div class="notification">
-      <p>
-        <strong>You requested to get in contact with <%= link_to h(sent.requestee.name), sent.requestee %>.
+<% if @sent_requests.pending.any? %>
+  <h3>You have <%= pluralize @sent_requests.pending.length, 'request' %> that you've sent awaiting a reply:</h3>
+  <div class="spacer">
+    <% for sent in @sent_requests.pending %>
+      <div class="notification">
+        <p>
+          <strong>You requested to get in contact with <%= link_to h(sent.requestee.name), sent.requestee %></strong>
           <%= relative_time(sent.created_at) %>
-      </p> 
-      <% unless sent.message.blank? %>
-        <p class="message"><%= sent.message %></p>
-      <% end %>        
-
-    </div>
-  <% end %>
+        </p> 
+        <% unless sent.message.blank? %>
+          <p class="message"><%= sent.message %></p>
+        <% end %>        
+      </div>
+    <% end %>
+  </div>
 <% end %>

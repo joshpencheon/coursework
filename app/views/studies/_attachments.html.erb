@@ -11,7 +11,8 @@
 <% unless @study.new_record? %>
   <div class="block yellow">
     <h4>Existing Attachments:</h4>
-  
-    <%= render :partial => "attached_files/existing_attached_file", :collection => @study.saved_attachments %>
+    <div id="existing_attachments">
+      <%= render :partial => "attached_files/existing_attached_file", :collection => @study.saved_attachments %>
+    </div>
   </div>
 <% end %>

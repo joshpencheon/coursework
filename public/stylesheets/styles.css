@@ -613,6 +613,14 @@ div.existing_attachment {
 	background-color: #FFF;
 }
 
+#delete_message {
+	color: #941817;
+	background-color: #E1F4D9;
+	padding: 0.5em;
+	-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
 .filesize {
 	color: #888;
 }

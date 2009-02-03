@@ -203,9 +203,20 @@ $(document).ready(function() {
 	})
 	
 	$('.delete_attachment_link').click(function() {
-		$(this).parents('.existing_attachment').slideUp(function(){
-			$(this).remove()
-		})
+		if (confirm('Are you sure you want to delete this attachment?')) {
+			if ($('.existing_attachment').length == 1)
+				{ target = $('#existing_attachments').parent() }
+			else 
+			  { target = $(this).parents('.existing_attachment') }
+			
+			target.slideUp(function() {
+				$(this).remove()
+				
+				message = $('#delete_message')
+				if (message.is(':hidden')) message.fadeIn('slow')
+				else message.effect('highlight', {}, 3000)
+			})
+		}
 		return false
 	})
 	

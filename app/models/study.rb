@@ -85,7 +85,7 @@ class Study < ActiveRecord::Base
   end
   
   def saved_attachments
-    @saved_attachments ||= attached_files.reject(&:new_record?)
+    @saved_attachments ||= attached_files.reject(&:new_record?).partition(&:image?).flatten
   end
 
   def unsaved_attachments

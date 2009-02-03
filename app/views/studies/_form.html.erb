@@ -30,7 +30,13 @@
   <%= render :partial => 'attachments' %>
   
   <div class="block green" style="text-align:right">
-    <span class="inline_spacer"><%= render :partial => "shared/publish", :locals => { :form => f } %></span>
+    <span id="delete_message" style="display:none" class="note">
+     Saving will result in the deletion of an attached file(s) - click 'cancel' if this isn't what you want.
+    </span>
+    
+    <% unless @study.new_record? %>
+      <span class="inline_spacer"><%= render :partial => "shared/publish", :locals => { :form => f } %></span>
+    <% end -%>
 	  <%= f.submit 'Save Study' %> or <%= link_to 'cancel', @study %>
   </div>
 <% end %>

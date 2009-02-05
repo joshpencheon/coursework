@@ -43,7 +43,7 @@ class StudyEvent
       event = study.events.build(
         :user_id => study.user_id,
         :data    => @data,
-        :title   => ['study', study.title] )
+        :title   => ['edited their', 'study', study.title] )
     end
     
   end

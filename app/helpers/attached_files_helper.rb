@@ -22,6 +22,12 @@ module AttachedFilesHelper
     link_to(text, attached_file.document.url, options)
   end
   
+  def thumbnail_link_for(attached_file)
+    link_to 'Use as thumbnail', attached_file.document.url, 
+      :id    => "thumbnail_#{attached_file.id}",
+      :class => 'thumbnail_select_link'
+  end
+  
   def file_size_for(attached_file)
     number_to_human_size(attached_file.document_file_size, :precision => 0)
   end

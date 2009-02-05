@@ -1,10 +1,9 @@
 <% form_for @study, :html => { :multipart => true } do |f| %>
-  <%# Dirty trick for forms in partials %>
-  <% @study_form = f %>
   
   <div class="spacer block green">
     <%= f.text_field :title, :class => 'bold' %>
     <%= f.text_area :description %>
+    <%= f.hidden_field :thumbnail_id %>
   </div>
   
   <div class="spacer block purple">
@@ -35,7 +34,14 @@
     </span>
     
     <% unless @study.new_record? %>
-      <span class="inline_spacer"><%= render :partial => "shared/publish", :locals => { :form => f } %></span>
+      <span class="inline_spacer">
+        <% if current_user != @study.user && current_user.admin? %>
+          <span class="note">No notifications will be delivered</span>
+          <%= f.hidden_field :publish_event, :value => false %>
+        <% else %>
+          <%= render :partial => "shared/publish", :locals => { :form => f } %>
+        <% end %>
+      </span>
     <% end -%>
 	  <%= f.submit 'Save Study' %> or <%= link_to 'cancel', @study %>
   </div>

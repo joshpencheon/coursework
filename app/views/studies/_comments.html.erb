@@ -1,10 +1,41 @@
 <div id="comments">
-  <%= render :partial => @study.comments %>
+  <% if @study.comments.any? %>
+    <%= render :partial => @study.comments %>
+  <% else %>
+    <strong class="empty_message">No comments have been posted yet.</strong>
+  <% end %>
 </div>
 
 <% if logged_in? %>
   <% form_for [@study, @study.comments.build] do |f| %>
     <%= f.text_area :content %>
-    <p class="button"><%= f.submit 'Post comment' %></p>
+    <p class="button">
+      <%= f.submit 'Post comment' %>
+      <span class="note">
+        You can use <a href="http://hobix.com/textile/">Textile</a> to format your comment
+         - <%= link_to 'show formatting help', @study, :id => 'show_formatting_help' %>
+      </span>
+    </p>
+    
+    <div id="formatting_help" class="note" style="display:none">
+      <div>
+        <h4>Surround text with underscores for italics:</h4>
+        <p class="example"><code>I'd like some _emphasis_.</code></p>
+      </div>
+      <div>
+        <h4>For bold text, use stars:</h4>
+        <p class="example"><code>This is *really* important.</code></p>
+      </div>
+      <div>
+        <h4>To embed a link, surround the text in double quotes, followed by a colon and the URL:</h4>
+        <p class="example"><code>Visit the "NHS SDU":http://www.sdu.nhs.uk.</code></p>
+      </div>
+
+      <div class="spacer">
+        Also, leaving a blank line will insert a new paragraph. For more complex formatting, visit 
+        <a href="http://hobix.com/textile/">The Textile Reference</a>.
+      </div>
+    </div>
+    
   <% end %>  
 <% end %>

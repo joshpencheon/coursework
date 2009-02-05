@@ -22,10 +22,10 @@ module NotificationsHelper
   end
   
   def event_title_for(event, options = {})
-    user = event.news_item.user
-    parts = [ user.name(:short), 'edited their', event.title.first, "'#{event.title.last}'" ]
+    user = User.find_by_id(event.user_id)
+    parts = [ user.name(:short), event.title.first, event.title.second, "'#{event.title.last}'" ]
     
-    if true == options[:user_link] 
+    if options[:user_link] 
       parts.shift
       parts.unshift(link_to(user.name, user))
     end
@@ -34,6 +34,8 @@ module NotificationsHelper
   end
   
   def event_items_for(event)
+    return build_comment_event(event) if event.data.is_a?(String) 
+    
     return_html = ''
     event.data.each_pair do |assoc, types|
       html = content_tag(:li, assoc.to_s.humanize, :class => 'section')
@@ -61,6 +63,13 @@ module NotificationsHelper
       return_html << content_tag(:ul, html, :class => 'notification_items')
     end
     return_html
+  end
+  
+  private
+  
+  def build_comment_event(event)
+    comment = Comment.find_by_id(event.data)
+    html = content_tag :p, "&#8220;#{truncate(comment.content, 50)}&#8221;", :class => 'quote'
   end
 
 end

@@ -1,20 +1,12 @@
 <div class="study">
 
-  <h2 style="text-align: left">
-    <span class="right"><%= category_image_for study %></span>
-    
-    <%= image_tag study.thumbnail_url, :style => 'vertical-align:middle', :class => 'bordered' %>
-    <%= study.region.name %> - <%= link_to study.title, study %>
-  </h2>
+  <div id="study_header">
+    <%= render :partial => "header", :locals => { :study => study } %>
+  </div>
 
-  <p style="color:gray">Region: <%= study.region.name %> | Partnership: <%= study.partnership.name %></p>
-  
-  <% unless study.tag_list.blank? %>
-    <p style="color:gray">tags: <%= study.tag_list.join(', ') %></p>
-  <% end %>
+  <h3>Summary:</h3>
 
-  <div class="summary clear">
-    <h4>Summary:</h4>
+  <div class="summary clear spacer">
     <p><%= study.description %></p>  
   </div>
 </div>

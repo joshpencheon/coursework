@@ -1,0 +1,14 @@
+<% cache :action_suffix => "#{study.id}_small" do %>
+  <div class="study_preview spacer">
+    <span class="right"><%= category_image_for study %></span>
+    <%= image_tag study.thumbnail_url, :style => 'float:left;margin-right: 1em', :class => 'bordered' %>
+    <h1><%= study.category %> - <%= link_to study.title, study %></h1>
+    <p style="color:gray">Region: <%= study.region.name %> | Partnership: <%= study.partnership.name %></p>
+
+    <% if study.tag_list.any? %>
+      <p style="color:gray">tagged with: <%= study.tags.map {|tag| tag_link_for tag }.join(', ') %></p>
+    <% end %>
+
+    <div class="clear"></div>
+  </div>
+<% end %>

@@ -184,6 +184,8 @@ $(document).ready(function() {
 		return false
 	})
 	
+	ThumbnailSelect.init()
+	
 	$('.attached_file_notes').hide()
 	$('.show_attached_file_notes').show()
 	
@@ -193,13 +195,6 @@ $(document).ready(function() {
 			$(this).parents('.fields').find('.attached_file_notes').toggle('fast')
 			return false
 		})
-	})
-	
-	$('#add_attachment_submit').click(function() {
-		if ($(this).attr(value).match(/ing/)) return false
-		value = $(this).attr('value').replace(/Save/, 'Saving') + '...'
-		$(this).attr('value', value)
-		return true
 	})
 	
 	$('.delete_attachment_link').click(function() {
@@ -241,13 +236,31 @@ $(document).ready(function() {
 			beforeSubmit: function() {
 				button.attr('value', 'Posting...')
 			},
-			success:  function() {
+			success: function() {
+				$('#comments .empty_message').hide()
 				button.attr('value', 'Post another comment')
 				fields.removeAttr('disabled')
 			}
 		})
 		
 		fields.attr('disabled', 'disabled')
+		return false
+	})
+	
+	$('#show_formatting_help').click(function() {
+		box = $('#formatting_help')
+		if (box.is(':hidden')) {
+			$(this).text($(this).text().replace(/show/, 'hide'))
+			box.fadeTo(0.001, 0.001).slideDown('fast', function() {
+				box.fadeTo('fast', 1)
+			})
+		} else {
+			$(this).text($(this).text().replace(/hide/, 'show'))
+			box.fadeTo('fast', 0.001, function() {
+				box.slideUp('fast')
+			})
+		}
+		
 		return false
 	})
 	

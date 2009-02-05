@@ -72,7 +72,6 @@ var TagList = {
 		this.field.focus(function() {
 			tagListTimeOut = setInterval(function() { 
 				TagList.manageLinks()
-				$('#footer').text( $('#footer').text() + '.' )
 			}, 100)
 			
 			return true
@@ -128,6 +127,38 @@ var TagList = {
 	
 	active: function(tag) {
 		return !!(TagList.list().indexOf(tag.toLowerCase()) >= 0)
+	}
+}
+
+var ThumbnailSelect = {
+	init: function() {
+		this.field = $('#study_thumbnail_id')
+		this.links = $('.thumbnail_select_link')
+		
+		this.links.click(function() {
+			id = $(this).attr('id').match(/\w+_(\d+)$/)[1]
+			ThumbnailSelect.value(id)
+
+			return false
+		})
+		
+		ThumbnailSelect.manageLinks()
+	},
+	
+	manageLinks: function() {
+		this.links.filter('.thumbnail').removeClass('thumbnail')
+			.updateThroughFade('fast', 'Use as thumbnail')
+		
+		$('#thumbnail_' + ThumbnailSelect.value()).addClass('thumbnail')
+			.updateThroughFade('fast', 'Used as thumbnail')
+	},
+	
+	value: function() {
+		if (arguments[0]) { 
+			this.field.val(arguments[0])
+			ThumbnailSelect.manageLinks()
+		}
+		return this.field.val()
 	}
 }
 

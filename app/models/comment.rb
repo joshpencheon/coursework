@@ -5,5 +5,7 @@ class Comment < ActiveRecord::Base
   has_many :events, :as => :news_item
   
   validates_presence_of :content
-
+  
+  after_save CommentEvent.new
+  
 end

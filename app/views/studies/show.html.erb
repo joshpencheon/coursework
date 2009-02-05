@@ -22,11 +22,16 @@
 <% end %>
 
 <% cache :action_suffix => "study_#{@study.id}" do %>
+  
   <%= render :partial => @study %>
+
+  <h3>Attachments:</h3>
 
   <div class="spacer">
     <%= render :partial => 'attached_files' %>
   </div>
+  
+  <h3>Comments:</h3>
 
   <div class="spacer">
     <%= render :partial => 'comments' %>

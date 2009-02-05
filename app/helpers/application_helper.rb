@@ -34,4 +34,12 @@ module ApplicationHelper
     defaults = { :title => time.getutc.iso8601, :style => 'display:none' }
     content_tag(:abbr, time.to_s, options.merge(defaults)) if time
   end
+  
+  def safe_textilize( string )
+    if string && string.respond_to?(:to_s)
+      doc = RedCloth.new( string.to_s )
+      doc.filter_html = true
+      doc.to_html
+    end
+  end
 end

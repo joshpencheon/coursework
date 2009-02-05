@@ -25,6 +25,8 @@ Rails::Initializer.run do |config|
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
   config.gem :authlogic, :version => '>=1.3.0'
+  
+  config.gem 'RedCloth'
 
   # Github namespacing removed whilst using manually cloned edge version...
   config.gem "paperclip", :lib => 'paperclip' , :version => '>=2.2.2'

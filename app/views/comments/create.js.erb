@@ -2,5 +2,6 @@
 	$.facebox('<%= escape_javascript error_messages_for(:comment) %>')
 <% else %>
 	$('#comments').append("<%= escape_javascript render(:partial => 'comments/comment.html.erb', :object => @comment) %>")
-	$('.comment:last').hide().slideDown('fast').effect('highlight', {}, 2000)
+	
+	$('.comment:last').hide().slideDown('fast').find('.body').effect('highlight', {}, 1000)
 <% end %>

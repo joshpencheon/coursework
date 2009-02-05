@@ -368,6 +368,15 @@ li#help_link a {
 	margin-bottom: 10px;
 }
 
+.notification .quote {
+	padding: 0.7em 1.5em;
+	font-size: 1.2em;
+	color: #555;
+	background-color: #FFF;
+	margin-top: 1em;
+	border: 1px solid #CCC;
+}
+
 .notification.read {
 	opacity: 0.6;
 }
@@ -442,13 +451,84 @@ a.read_link.in_progress:hover {
 	background-image: url(/images/spinner_white_orange.gif);
 }
 
+
+/*********** COMMENTS ************/
+
+.comment {
+	margin: 1em auto;
+}
+
+.comment .meta {
+	padding: 0.5em 1em;
+	background: url(/images/comment.png) 45px bottom no-repeat;
+}
+
+.comment a img {
+	vertical-align: middle;
+}
+
+.comment .body {
+	color: #444;
+	background-color: #E8F8E2;
+	padding: 1em;
+	-webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+}
+
+.comment .body ol,
+.comment .body ul {
+	padding: 0.3em;
+	list-style-position: inside;
+}
+
+#formatting_help {
+	border: 1px solid #AAA;
+	padding: 1em;
+}
+
+#formatting_help .example {
+	padding-left: 1em;
+}
+
+
 /********* VIEWING STUDY *********/
+
+.study {
+	margin-bottom: 2em;
+}
+
+#study_header {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	padding: 10px;
+	background-color: #E9E9E9;
+	margin-bottom: 12px;
+}
+
+#study_header img.bordered {
+	margin-right: 1em;
+}
+
+#study_header .details {
+	font-size: 0.8em;
+	color: gray;
+}
+
+#study_header .details.minor {
+	font-size: 0.6em;
+	padding: 0.2em 0;
+}
 
 #format_radio_group {
 	text-align: left;
 	margin: 0 auto; 
 	width: 50%;
 	line-height: 1.3em;
+}
+
+.empty_message {
+	color: #7F7F7F;
+	padding: 1em 2em;
 }
 
 #format_radio_group label {
@@ -458,7 +538,8 @@ a.read_link.in_progress:hover {
 .summary {
 	border: 1px solid #DDD;
 	background-color: #FCFCFC;
-	margin: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 	padding: 10px;
 	-webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -601,6 +682,11 @@ a.read_link.in_progress:hover {
 	border: 1px solid #D8CF67;
 	position: relative;
 	left: 2px;
+}
+
+a.thumbnail { 
+	text-decoration: none;
+	color: #836866;
 }
 
 div.new_attachment,

@@ -1,4 +1,7 @@
 <% div_for(comment) do %>
-  <p><%= link_to comment.user.name, comment.user %> said <%= time_later_for comment %>:</p>
-  <%= h comment.content %>
+  <p class="meta">
+    <%= link_to avatar_for(comment.user, :minute), comment.user %> 
+    <%= link_to comment.user.name, comment.user %> said <%= time_later_for comment %>:
+  </p>
+  <div class="body"><%= safe_textilize comment.content %></div>
 <% end %>

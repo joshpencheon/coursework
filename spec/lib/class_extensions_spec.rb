@@ -8,3 +8,10 @@ describe 'A String' do
     end
   end
 end 
+
+describe Symbol do
+  it 'should respond to the spaceship operator correctly' do
+    array = [:c, :b, :a]
+    array.sort.should == array.reverse
+  end
+end

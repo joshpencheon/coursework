@@ -2,6 +2,7 @@ log/*.log
 .DS_Store
 tmp/**/*
 */.DS_Store
+coverage/*
 public/avatars/**/*
 public/documents/**/*
 public/system/**/*

@@ -59,11 +59,20 @@ describe Study do
     end
     
     context 'and unsaved attachments' do
+      before(:each) do
+        @fixture = File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'text.txt'))
+      end
+      
       it 'should save them when saved' do
         length = @study.attached_files.length
-        @study.attached_files.build({ :document => File.open(File.join(RAILS_ROOT, 'spec', 'fixtures', 'text.txt')) })
+        @study.attached_files.build({ :document => @fixture })
         @study.save!
         @study.attached_files.length.should == length + 1
+      end
+      
+      it 'should save them via params hash when saved' do
+        params = {:new_attached_file_attributes => [{ :document => @fixture }]}
+        proc { @study.update_attributes!(params) }.should change(@study.attached_files, :length).by(1)
       end
       
       it 'should not save if they are not valid but have been changed' do
@@ -121,16 +130,30 @@ describe Study do
       @study = Study.valid.create
     end
     
-    context 'with already-save attached files' do
+    context 'with already-saved attached files' do
       before(:each) do
-        @study.attached_files.text.create
+        @attached_file = @study.attached_files.text.create
       end
       
       it 'should update them when it is saved' do
-        @study.attached_files.first.notes = 'some new notes'
+        @attached_file.notes = 'some new notes'
         @study.save!    
-        @study.attached_files(true).first.read_attribute(:notes).should == 'some new notes'
+        @attached_file.reload.notes.should == 'some new notes'
       end
+      
+      it 'should update them via params when it is saved' do
+        params = {:existing_attached_file_attributes => { @attached_file.id.to_s => {:notes => 'some new notes'} }}
+        @study.reload.update_attributes!(params)    
+        @attached_file.reload.notes.should == 'some new notes'
+      end
+      
+      it 'should remove them if they are not present in params' do
+        @study.attached_files << AttachedFile.text.new
+        @study.attached_files.first.should_not be_new_record
+        @study.reload.update_attributes!({:existing_attached_file_attributes => {} })
+        @study.attached_files.reload.should be_empty
+      end
+      
     end
     
     context 'when formatted for URLs' do

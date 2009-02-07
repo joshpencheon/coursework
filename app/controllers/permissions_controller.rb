@@ -8,7 +8,7 @@ class PermissionsController < ApplicationController
   end
   
   def new
-    if current_user.has_sent_request_to(@requestee)
+    if current_user.has_sent_request_to?(@requestee)
       flash[:notice] = "You've already sent a request to #{@requestee.name(:short)} - please be patient."
       redirect_to @requestee
     end
@@ -26,7 +26,7 @@ class PermissionsController < ApplicationController
     params[:permission][:granted] = false
     
     @permission = current_user.sent_requests.build(params[:permission])
-    if current_user.has_sent_request_to(@requestee) || @permission.save
+    if current_user.has_sent_request_to?(@requestee) || @permission.save
       flash[:notice] = "Your request has been sent. Please wait for a response."
       redirect_to session[:permission_redirect] || permissions_url
     else

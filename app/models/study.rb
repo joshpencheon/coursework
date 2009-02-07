@@ -72,12 +72,12 @@ class Study < ActiveRecord::Base
     @publish_event != false ? @publish_event = true : @publish_event
   end
   
-  def watchers_other_than(array)
-    watchers - [ array ].flatten
-  end
-  
   def publish_event?
     !!publish_event
+  end
+  
+  def watchers_other_than(array)
+    watchers - [ array ].flatten
   end
   
   def watched_by?(user)

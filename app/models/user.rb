@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
                     :default_url => '/images/avatars/:style_missing.png'
 
   attr_accessor :destroy_avatar  
-  attr_protected :avatar_content_type, :avatar_file_name, :avatar_size
+  attr_protected :avatar_content_type, :avatar_file_name, :avatar_file_size
   
   with_options :dependent => :destroy do |user|
     user.has_many :studies
@@ -27,8 +27,9 @@ class User < ActiveRecord::Base
   has_many :requestees, :through => :sent_requests
   
   has_many :watched_studies, :through => :watchings, :source => :study
-    
-  validates_length_of :bio, :maximum => 40
+  
+  validates_uniqueness_of :login
+  validates_length_of :bio, :maximum => 40, :unless => proc { |user| user.bio.blank? }
     
   attr_protected :admin
   attr_readonly :token
@@ -54,11 +55,11 @@ class User < ActiveRecord::Base
     watched_studies.include? study
   end
   
-  def find_request_from(requestee_id)
-    received_requests.find_by_requestee_id(requestee_id)    
+  def find_request_from(requester_id)
+    received_requests.find_by_requester_id(requester_id)    
   end
   
-  def has_sent_request_to(requestee_id)
+  def has_sent_request_to?(requestee_id)
     !!sent_requests.find_by_requestee_id(requestee_id)    
   end
   
@@ -71,8 +72,14 @@ class User < ActiveRecord::Base
   end
   
   def recent_events(limit = 5)
-    studies.map(&:events).flatten.sort { |a, b| 
-      b.created_at <=> a.created_at }.slice(0...limit)
+    query  = "SELECT * FROM events WHERE "
+    query << "news_item_type = 'Study' AND "
+    query << "news_item_id IN (?)"
+    query << "ORDER BY created_at DESC "
+    query << "LIMIT 0, ?"
+    
+    ids = studies.map(&:id).join(', ')
+    Event.find_by_sql([query, ids, limit])
   end
   
   def to_param

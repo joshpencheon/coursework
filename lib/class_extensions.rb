@@ -42,7 +42,6 @@ module ClassExtensions
       self.to_s <=> other.to_s
     end
   end
-  
 end
 
 class String; include ClassExtensions::String end

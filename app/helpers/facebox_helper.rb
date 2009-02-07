@@ -18,7 +18,7 @@ module FaceboxHelper
   #   # => <a href="/news" rel="facebox">click for latest news</a> 
   # 
   # link_to_facebox('click for message', :text => 'hello, world!', :class => 'simple')
-  #   # => <a href="#" onclick="jQuery.facebox('hello, world!', 'simple')">click for message</a>
+  #   # => <a href="javascript:void(0);" onclick="jQuery.facebox('hello, world!', 'simple')">click for message</a>
   #
   def link_to_facebox(text, options)
     if options.has_key?(:text)

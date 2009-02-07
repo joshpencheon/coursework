@@ -1,6 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Study do
+  context 'when making a filtered search' do
+    it 'should include filters if they are specified'
+    
+    it 'should ignore blank filters'
+  end
+  
   context 'freshly initialized' do
     before(:each) do
       @study = Study.new
@@ -145,6 +151,14 @@ describe Study do
         params = {:existing_attached_file_attributes => { @attached_file.id.to_s => {:notes => 'some new notes'} }}
         @study.reload.update_attributes!(params)    
         @attached_file.reload.notes.should == 'some new notes'
+      end
+      
+      it 'should not update the notes if they are blank in both object and params' do
+        blank_notes = { :notes => '' }
+        @attached_file.update_attributes!(blank_notes)
+        proc {
+          @study.existing_attached_file_attributes = { @attached_file.id.to_s => blank_notes }
+        }.should_not change(@attached_file, :notes_changed?).from(false).to(true)
       end
       
       it 'should remove them if they are not present in params' do

@@ -12,10 +12,13 @@ describe AttachedFile do
     
     context 'when dealing with the document' do
       
-      it 'should protect document attributes' do
-        @attached_file.update_attributes!({:document_file_name => 'my special name'})
-        @attached_file.document_file_name.should_not == 'my special name'
+      [ :document_file_name, :document_content_type, :document_file_size].each do |attr|
+        it "should protect the #{attr} attribute" do
+          @attached_file.update_attributes!({attr => '123456789'})
+          @attached_file.reload.send(attr).to_i.should_not == '123456789'
+        end        
       end
+      
       it 'should return its extension without the dot' do
         @attached_file.extension.should == 'txt'
       end
@@ -41,7 +44,7 @@ describe AttachedFile do
       end
       
       [
-         # Type        # Example                 # Image?  # Text?  # Inline?  # Hazard?  # Thumbnailable?
+       # Type          Example                   Image?    Text?    Inline?    Hazard?    Thumbnailable?
        [ 'textual',    AttachedFile.text.new,    false,    true,    true,      false,     false ],
        [ 'an image',   AttachedFile.image.new,   true,     false,   true,      false,     true  ],
        [ 'default',    AttachedFile.excel.new,   false,    false,   false,     false,     false ],
@@ -49,23 +52,23 @@ describe AttachedFile do
       
       ].each do |type, example, image, text, inline, hazard, thumbnailable| 
         context "when #{type}" do
-          it 'should respond to #image? correctly' do
+          it "should respond to #image? correctly (it should be #{image})" do
             example.image?.should equal(image)
           end
 
-          it 'should respond to #plain_text? correctly' do
+          it "should respond to #plain_text? correctly (it should be #{text})" do
             example.plain_text?.should equal(text)
           end
 
-          it 'should respond to #displayable_inline? correctly' do
+          it "should respond to #displayable_inline? correctly (it should be #{inline})" do
             example.displayable_inline?.should equal(inline)
           end
 
-          it 'should respond to #hazard? correctly' do
+          it "should respond to #hazard? correctly (it should be #{hazard})" do
             example.hazard?.should equal(hazard)
           end
 
-          it 'should respond to #thumbnailable? correctly' do
+          it "should respond to #thumbnailable? correctly (it should be #{thumbnailable})" do
             example.thumbnailable?.should equal(thumbnailable)
           end
         end
@@ -76,7 +79,7 @@ describe AttachedFile do
           @attached_file.icon_path.should == 'file_txt.png'
         end
         
-        it 'should return a default icon if a specific on cannot be found' do
+        it 'should return a default icon if a specific one cannot be found' do
           @attached_file.stubs(:document_file_name).returns('file.pxm')
           @attached_file.icon_path.should == 'file.png'          
         end

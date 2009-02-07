@@ -49,4 +49,11 @@ Foundry.setup_foundries do
       { :admin => true }
     end
   end
+  
+  model Event do
+    factory :valid do
+      { :news_item_id   => Study.valid.create!.id,
+        :news_item_type => 'Study' }
+    end
+  end
 end

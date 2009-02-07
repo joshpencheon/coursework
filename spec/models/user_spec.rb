@@ -106,7 +106,7 @@ describe User do
     end
   end
   
-  context ', once saved,' do
+  context 'that has been saved' do
     before(:each) do
       @user = User.valid.create!
     end
@@ -206,7 +206,7 @@ describe User do
           end
           
           [:revoke, :reject].each do |meth|
-            it "should add the requester to their blacklist if the request is #{meth}ed (alias)" do
+            it "should add the requester to their blacklist if the request is sent ##{meth} (alias)" do
               proc { @request.send(meth) }.should change(@user, :blacklist).from([]).to([@requester])
             end
           end

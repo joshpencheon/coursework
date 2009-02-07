@@ -9,7 +9,7 @@
         Your request was granted - you can <%= mail_to h(user.email), 'send an email' %>
       <% elsif user.blacklist.include?(current_user) %>
         Sorry, but your request to get in contact was declined.
-      <% elsif current_user.has_sent_request_to(user) %>
+      <% elsif current_user.has_sent_request_to?(user) %>
         Your request to get in contact is pending.
       <% else %>
         <em>Email kept private</em> - 

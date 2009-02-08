@@ -1,0 +1,156 @@
+= Foundry
+== by Jeremy McAnally and Nicolas Sanguinetti
+
+Foundry is YAFRP (Yet Another Fixture Replacement Plugin), but it takes an interesting approach.  It 
+dynamically creates named_scopes and builds objects off those.
+
+=== Usage
+
+To create factory scopes, you can either use the direct method:
+
+  Foundry.factory User, :valid_user, :name => "Jeremy", :login => "jeremy", :password => "1234"
+  Foundry.factory User, :valid_user, { {conditions => {:name => "Jeremy"}}}
+  
+...or the nifty little DSL:
+
+  model User do
+    factory :valid_user, :name => "Jeremy", :login => "jeremy"
+    factory :my_user do
+      {:name => "Mr. Awesome"}
+    end
+    
+    # Giving no name creates a factory with the name `valid`
+    factory do
+      {:login => "hello"}
+    end
+  end
+  
+To create a record using these scopes, just do it like normal:
+
+  User.valid_user.create
+  
+Voila!
+
+==== Parameters
+
+Just like in normal +named_scope+ usage, you can pass parameters to these scopes:
+
+  model User do
+    factory :paramd do |one, two|
+      {:name => "#{one} - #{two}"}
+    end
+  end
+  
+Then call it like so:
+
+  User.paramd("Mr.", "User").create
+
+==== More advanced usage
+
+Since they're just named_scope's you can actually chain them.  So if you had a user factory like this:
+
+  model User
+    factory do
+      {:name => "Jeremy", :login => "jeremy", :role => "user"}
+    end
+  end
+  
+You could add another...
+
+  model User
+    factory do
+      {:name => "Jeremy", :login => "jeremy", :role => "hello"}
+    end
+    
+    factory :with_role do |role|
+      {:role => role}
+    end
+  end
+  
+...and then chain them:
+
+  User.valid.with_role("admin").create
+
+You can chain as many as you want that way.  Each scope is also given a +with+ scope so you can change it at will
+for any arbitrary scope.  For example, if you wanted to remove the +with_role+ scope from above and use the +with+
+scope you could do:
+
+  User.valid.with(:role => "admin")
+  
+The +with+ scope with override any previous attribute definition with its own attributes.  This makes it dead simple
+to tweak a factory for just one test (f.e., testing permissions for a lot of roles).
+
+NOTE: If you are not on Edge Rails/Rails 2.3, you need to put your +with+ scopes *first* or they will not be merged
+right.  There was a bug in previous versions of Rails where previous scopes took precedent over later ones.
+
+But these are just the basic use cases, since we don't have any random data.  But, since it's implemented the way
+it is, you can do interesting things like this for random data:
+
+  model Page do
+    def unique
+      rand(Time.now.to_i)
+    end
+    
+    10.times do |i|
+      factory "valid_#{i}".to_sym, :title => "Page #{unique}"
+    end
+  end
+  
+  # In your tests
+  Page.valid_2.create
+  # => #<Page id: 3, title: "Page 123872138", created_at: ..., updated_at: ...>
+
+Or, if you're really serious about unique data...
+
+  # test_helper.rb / spec_helper.rb
+  require 'faker'
+  
+  module Unique 
+    def unique(attr)
+      if [:name, :first_name, :last_name].include?(attr)
+        return Faker::Name.send(attr)
+      elsif [:company_name, :company_bs, :company_catch_phrase].include?(attr)
+        return Faker::Company.send(attr.to_s.gsub(/company_/, '')) # name is in user and company
+      elsif [:email, :free_email, :user_name, :domain_name].include?(attr)
+        return Faker::Internet.send(attr)
+      else
+        raise ArgumentError, "I'm not sure what random data you want by specifying #{attr}!"
+      end
+    end
+  end
+  
+  module Foundry
+    class Runner
+      include Unique
+    end
+  end
+
+  # In your foundries.rb or whatever
+  model User do
+    10.times do |i|
+      factory "user_#{i}".to_sym, :name => unique(:name), :login => unique(:user_name), :password => "1234"
+    end
+  end
+  
+  # In your tests
+  User.user_3.create 
+  # => #<User id: 6, name: "Florian Schuppe", login: "kenneth", :password => "1234", created_at: ..., updated_at: ...>
+  
+OR, you could take that even one step further with a block...
+
+  # In your foundries.rb or whatever
+  model User do
+    factory :unique do
+     {:name => unique(:name), :login => unique(:user_name), :password => "1234"}
+    end
+  end
+  
+  # In your tests
+  User.unique.create 
+  # => #<User id: 12, name: "Wanda Sharp", login: "delia", :password => "1234", created_at: ..., updated_at: ...>
+  User.unique.create 
+  # => #<User id: 13, name: "Alec Eichmann", login: "adam", :password => "1234", created_at: ..., updated_at: ...>
+  User.unique.create 
+  # => #<User id: 14, name: "Derek Gleichner", login: "jared", :password => "1234", created_at: ..., updated_at: ...>
+
+Copyright (c) 2009 Jeremy McAnally, released under the MIT license

@@ -8,5 +8,5 @@ public/documents/**/*
 public/system/**/*
 public/study_downloads/**/*
 public/images/icons/*
-vendor/**/*
+vendor/rails/*
 db/sphinx/development/*

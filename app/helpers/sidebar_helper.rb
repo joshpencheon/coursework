@@ -6,7 +6,7 @@ module SidebarHelper
     options[:class] ||= ''
     options[:class] += title.gsub(/[^a-z]/, ' ').strip.gsub(/\s+/, '_')
     
-    Struct.new("SidebarBlock", :title, :contents, :styles)
+    Struct.new("SidebarBlock", :title, :contents, :styles) unless Struct.const_defined?(:SidebarBlock)
     @sidebar_blocks << Struct::SidebarBlock.new(title, capture(&block), options)
   end
 end

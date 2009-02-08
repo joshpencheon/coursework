@@ -1,0 +1,72 @@
+--- 
+studies_001: 
+  category: Procurement
+  updated_at: 2009-02-07 23:18:01
+  title: A Study in C that has a long title
+  thumbnail_id: "75"
+  partnership_id: "14"
+  id: "7"
+  region_id: "3"
+  description: Pretty cool, but not quite FaceBook. Getting there though. Make an event.
+  user_id: "1"
+  created_at: 2008-12-27 22:32:38
+studies_002: 
+  category: Energy
+  updated_at: 2009-02-07 22:39:50
+  title: Another study
+  thumbnail_id: 
+  partnership_id: "15"
+  id: "8"
+  region_id: "1"
+  description: |-
+    First one that has been posted for a while...
+    
+    I'm sure that this'll work... 
+    
+    NO update!
+  user_id: "1"
+  created_at: 2009-01-13 17:52:00
+studies_003: 
+  category: Travel
+  updated_at: 2009-02-03 16:53:51
+  title: Travelling by bus, shiver.
+  thumbnail_id: "73"
+  partnership_id: "14"
+  id: "9"
+  region_id: "5"
+  description: A really great idea, except buses make me feel sick. True story. None in London today - they've all been defeated by snow.
+  user_id: "1"
+  created_at: 2009-01-18 16:33:36
+studies_004: 
+  category: Energy
+  updated_at: 2009-02-01 21:45:17
+  title: loool
+  thumbnail_id: 
+  partnership_id: "12"
+  id: "10"
+  region_id: "5"
+  description: lol at the study.
+  user_id: "1"
+  created_at: 2009-01-31 16:28:11
+studies_005: 
+  category: Procurement
+  updated_at: 2009-02-07 14:04:34
+  title: Meat is right, right?
+  thumbnail_id: 
+  partnership_id: "12"
+  id: "11"
+  region_id: "5"
+  description: It's good that any user can contribute. An admin update should be silent, because I'm not the author.
+  user_id: "4"
+  created_at: 2009-02-02 12:47:30
+studies_006: 
+  category: Energy
+  updated_at: 2009-02-05 12:21:05
+  title: Basic
+  thumbnail_id: 
+  partnership_id: "12"
+  id: "12"
+  region_id: "2"
+  description: Tesco value
+  user_id: "1"
+  created_at: 2009-02-05 12:21:05

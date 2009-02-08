@@ -1,0 +1,31 @@
+--- 
+attached_files_001: 
+  updated_at: 2009-02-07 23:26:00
+  download_count: "0"
+  document_file_name: poloroid_stack.png
+  document_file_size: "216085"
+  notes: ""
+  id: "64"
+  study_id: "7"
+  document_content_type: image/png
+  created_at: 2009-01-31 16:21:48
+attached_files_002: 
+  updated_at: 2009-01-31 16:28:11
+  download_count: "0"
+  document_file_name: Photo_6.jpg
+  document_file_size: "75157"
+  notes: ""
+  id: "68"
+  study_id: "10"
+  document_content_type: image/jpeg
+  created_at: 2009-01-31 16:28:11
+attached_files_003: 
+  updated_at: 2009-02-02 12:47:30
+  download_count: "0"
+  document_file_name: draft_nhs_carbon_reduction_strategy.pdf
+  document_file_size: "381982"
+  notes: ""
+  id: "74"
+  study_id: "11"
+  document_content_type: application/pdf
+  created_at: 2009-02-02 12:47:30

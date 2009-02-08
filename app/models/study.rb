@@ -108,6 +108,7 @@ class Study < ActiveRecord::Base
         
         attached_file.attributes = attributes
       else
+        self.thumbnail_id = nil if thumbnail_id == attached_file.id
         attached_file.destroy
       end
     end

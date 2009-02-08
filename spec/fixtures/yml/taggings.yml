@@ -1,0 +1,85 @@
+--- 
+taggings_014: 
+  tag_id: "4"
+  id: "30"
+  taggable_type: Study
+  taggable_id: "11"
+  created_at: 2009-02-02 18:47:27
+taggings_003: 
+  tag_id: "12"
+  id: "10"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_004: 
+  tag_id: "4"
+  id: "11"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_005: 
+  tag_id: "37"
+  id: "12"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_006: 
+  tag_id: "3"
+  id: "13"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_007: 
+  tag_id: "10"
+  id: "14"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_008: 
+  tag_id: "6"
+  id: "15"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_009: 
+  tag_id: "8"
+  id: "16"
+  taggable_type: Study
+  taggable_id: "9"
+  created_at: 2009-02-02 09:32:35
+taggings_010: 
+  tag_id: "6"
+  id: "17"
+  taggable_type: Study
+  taggable_id: "7"
+  created_at: 2009-02-02 11:03:07
+taggings_011: 
+  tag_id: "4"
+  id: "18"
+  taggable_type: Study
+  taggable_id: "7"
+  created_at: 2009-02-02 11:03:07
+taggings_012: 
+  tag_id: "41"
+  id: "24"
+  taggable_type: Study
+  taggable_id: "11"
+  created_at: 2009-02-02 12:47:30
+taggings_001: 
+  tag_id: "18"
+  id: "6"
+  taggable_type: Study
+  taggable_id: "7"
+  created_at: 2009-02-01 16:54:25
+taggings_013: 
+  tag_id: "20"
+  id: "27"
+  taggable_type: Study
+  taggable_id: "11"
+  created_at: 2009-02-02 12:47:30
+taggings_002: 
+  tag_id: "8"
+  id: "9"
+  taggable_type: Study
+  taggable_id: "7"
+  created_at: 2009-02-01 21:42:45

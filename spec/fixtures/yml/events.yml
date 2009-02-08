@@ -1,0 +1,168 @@
+--- 
+events_008: 
+  updated_at: 2009-02-07 23:18:01
+  title: |
+    --- 
+    - edited their
+    - study
+    - A Study in C that has a long title
+
+  id: "412"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "7"
+  created_at: 2009-02-07 23:18:01
+  data: |
+    --- 
+    :attached_files: 
+      :deleted: 
+      - "'poloroid_stack.png' was deleted."
+      - "'poloroid_stack.png' was deleted."
+      - "'Photo_3.jpg' was deleted."
+      - "'test.pdf' was deleted."
+      - "'draft_nhs_carbon_reduction_strategy.pdf' was deleted."
+      - "'poloroid_stack.png' was deleted."
+      64: The notes changed from 'hihi' to 'hihihi'.
+
+events_001: 
+  updated_at: 2009-02-07 14:05:07
+  title: |
+    --- 
+    - edited their
+    - study
+    - A Study in C that has a long title
+
+  id: "405"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "7"
+  created_at: 2009-02-07 14:05:07
+  data: "--- \n\
+    :study: The description was updated.\n"
+events_002: 
+  updated_at: 2009-02-07 22:21:49
+  title: |
+    --- 
+    - edited their
+    - study
+    - A Study in C that has a long title
+
+  id: "406"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "7"
+  created_at: 2009-02-07 22:21:49
+  data: |
+    --- 
+    :attached_files: 
+      75: The notes changed from '' to 'This is being used as the thumbnail.'.
+
+events_003: 
+  updated_at: 2009-02-07 22:31:09
+  title: |
+    --- 
+    - edited their
+    - study
+    - Another study
+
+  id: "407"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "8"
+  created_at: 2009-02-07 22:31:09
+  data: |
+    --- 
+    :attached_files: 
+      :new: 
+      - "'text.txt' was added."
+
+events_004: 
+  updated_at: 2009-02-07 22:33:40
+  title: |
+    --- 
+    - edited their
+    - study
+    - Another study
+
+  id: "408"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "8"
+  created_at: 2009-02-07 22:33:40
+  data: |
+    --- 
+    :attached_files: 
+      :new: 
+      - "'text.txt' was added."
+
+events_005: 
+  updated_at: 2009-02-07 22:39:50
+  title: |
+    --- 
+    - edited their
+    - study
+    - Another study
+
+  id: "409"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "8"
+  created_at: 2009-02-07 22:39:50
+  data: |
+    --- 
+    :attached_files: 
+      :deleted: 
+      - "'poloroid_stack.png' was deleted."
+      - "'Photo_3.jpg' was deleted."
+      - "'text.txt' was deleted."
+      - "'text.txt' was deleted."
+
+events_006: 
+  updated_at: 2009-02-07 23:17:12
+  title: |
+    --- 
+    - edited their
+    - study
+    - A Study in C that has a long title
+
+  id: "410"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "7"
+  created_at: 2009-02-07 23:17:12
+  data: |
+    --- 
+    :attached_files: 
+      :deleted: 
+      - "'poloroid_stack.png' was deleted."
+      - "'poloroid_stack.png' was deleted."
+      - "'Photo_3.jpg' was deleted."
+      - "'test.pdf' was deleted."
+      - "'draft_nhs_carbon_reduction_strategy.pdf' was deleted."
+      - "'poloroid_stack.png' was deleted."
+
+events_007: 
+  updated_at: 2009-02-07 23:17:33
+  title: |
+    --- 
+    - edited their
+    - study
+    - A Study in C that has a long title
+
+  id: "411"
+  user_id: "1"
+  news_item_type: Study
+  news_item_id: "7"
+  created_at: 2009-02-07 23:17:33
+  data: |
+    --- 
+    :attached_files: 
+      :deleted: 
+      - "'poloroid_stack.png' was deleted."
+      - "'poloroid_stack.png' was deleted."
+      - "'Photo_3.jpg' was deleted."
+      - "'test.pdf' was deleted."
+      - "'draft_nhs_carbon_reduction_strategy.pdf' was deleted."
+      - "'poloroid_stack.png' was deleted."
+      64: The notes changed from '' to 'hihi'.
+

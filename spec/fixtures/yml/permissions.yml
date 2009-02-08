@@ -1,0 +1,37 @@
+--- 
+permissions_001: 
+  message: 
+  requestee_id: "1"
+  updated_at: 2009-01-16 19:12:23
+  read: "1"
+  id: "18"
+  requester_id: "4"
+  granted: "1"
+  created_at: 2009-01-16 19:12:18
+permissions_002: 
+  message: It would be cool if we could collaborate on a project.
+  requestee_id: "4"
+  updated_at: 2009-02-02 12:16:42
+  read: "1"
+  id: "19"
+  requester_id: "1"
+  granted: "0"
+  created_at: 2009-02-02 12:07:22
+permissions_003: 
+  message: Mr Hound, let's talk.
+  requestee_id: "3"
+  updated_at: 2009-02-02 12:12:25
+  read: "0"
+  id: "20"
+  requester_id: "4"
+  granted: "0"
+  created_at: 2009-02-02 12:12:25
+permissions_004: 
+  message: PLEASE
+  requestee_id: "2"
+  updated_at: 2009-02-02 12:30:45
+  read: "1"
+  id: "22"
+  requester_id: "4"
+  granted: "0"
+  created_at: 2009-02-02 12:30:18

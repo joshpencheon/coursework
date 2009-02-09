@@ -17,9 +17,15 @@ Spec::Runner.configure do |config|
   config.mock_with :mocha
   
   config.include(ControllerMacros, :type => :controller)
+  config.include(RspecResponseEnhancer)
+  
+  config.before(:each) do  
+    full_example_description = "#{self.class.description} #{@method_name}"  
+    Rails::logger.info("\n\n#{full_example_description}\n#{'-' * (full_example_description.length)}")  
+  end
   
   def current_user(stubs = {})
-    @current_user ||= User.valid.create!
+    @current_user ||= User.with(stubs).valid.create!
   end
 
   def user_session(stubs = {}, user_stubs = {})

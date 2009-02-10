@@ -32,10 +32,9 @@ describe DownloadsController do
     end
     
     it '#serve should return the file from the :id for downloading' do
-      file = Tempfile.open('my_file')
-      file.write('hhaha')
-      
-      StudyDownload.stubs(:serve).returns(file.path)
+      file = AttachedFile.image.new
+      file.save!
+      StudyDownload.stubs(:serve).returns(file.document.path)
       get 'serve', :id => "#{@study.id}-some_hex"
       response.should be_success
     end

@@ -13,7 +13,10 @@ class CommentsController < ApplicationController
   private
   
   def find_study
-    @study = Study.find(params[:study_id])
+    unless @study = Study.find_by_id(params[:study_id])
+      flash[:warn] = 'That study could not be found'
+      redirect_to studies_url
+    end
   end
 
 end

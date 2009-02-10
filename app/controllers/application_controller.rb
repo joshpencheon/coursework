@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   helper_method :can_edit?
   
   def add_delay_to_xhr_requests
-    sleep 1 if request.xhr? 
+    sleep 1 if request.xhr? && ENV['RAILS_ENV'] == 'development'
   end
 
 end

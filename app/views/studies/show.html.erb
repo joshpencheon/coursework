@@ -21,8 +21,7 @@
   <% end %>
 <% end %>
 
-<% cache :action_suffix => "study_#{@study.id}" do %>
-  
+<% cache :action_suffix => "study_#{@study.id}" do %> 
   <%= render :partial => @study %>
 
   <h3>Attachments:</h3>
@@ -30,14 +29,14 @@
   <div class="spacer">
     <%= render :partial => 'attached_files' %>
   </div>
-  
-  <h3>Comments:</h3>
-
-  <div class="spacer">
-    <%= render :partial => 'comments' %>
-  </div>
-
-  <div class="footnotes">
-    Added <%= @study.created_at.to_date %> ~ last update <%= relative_time(@study.updated_at) %>
-  </div>
 <% end %>
+  
+<h3>Comments:</h3>
+
+<div class="spacer">
+  <%= render :partial => 'comments' %>
+</div>
+
+<div class="footnotes">
+  Added <%= @study.created_at.to_date %> ~ last update <%= relative_time(@study.updated_at) %>
+</div>

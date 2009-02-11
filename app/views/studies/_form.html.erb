@@ -7,9 +7,9 @@
   </div>
   
   <div class="spacer block purple">
-    <span class="inline_spacer">Region: <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => 'Select a Region...', :no_label => true %></span>
+    <span>Region: <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => 'Select a Region...', :no_label => true %></span>
     <span class="inline_spacer">Partnership: <%= f.collection_select :partnership_id, Partnership.all, :id, :name, :prompt => 'Choose Partnership details...', :no_label => true %></span>
-    <span class="inline_spacer">Category: <%= f.select :category, Study::CATEGORIES, :prompt => 'Select a Category...', :no_label => true %></span>
+    <span>Category: <%= f.select :category, Study::CATEGORIES, :prompt => 'Select a Category...', :no_label => true %></span>
   </div>
 
   <div class="spacer block blue">

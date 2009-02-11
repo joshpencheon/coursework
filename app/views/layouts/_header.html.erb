@@ -44,7 +44,7 @@
     <%= link_to 'show filters', studies_path, :id => 'search_filters_link', :style => 'display: none' %>
 
     <span id="search_filters">
-      <span>Use these filters to narrow your search:</span>
+      <span>Narrow your search:</span>
       <%= select_tag :region_id, options_for_lookup(Region, :id, :name, 'Filter by Region...') %>
       <%= select_tag :partnership_id, options_for_lookup(Partnership, :id, :name, 'Filter by Partnership type...') %>
       <%= select_tag :category, options_for_select_with_prompt(Study::CATEGORIES, 'Filter by category...', params[:category]) %>

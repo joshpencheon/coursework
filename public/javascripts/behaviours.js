@@ -131,13 +131,13 @@ $(document).ready(function() {
 	
 	$('.attached_file').hover(function() {
 		$(this).find('.file_info').animate({marginTop: '1.1em'}, 100)
-		$(this).find('.file_size, .toggle_notes_link').fadeIn('fast')
+		$(this).find('.file_size').fadeIn('fast')
 	}, function() {
 		$(this).find('.file_info').animate({marginTop: '1.5em'}, 100)
-		$(this).find('.file_size, .toggle_notes_link').fadeOut('fast')
+		$(this).find('.file_size').fadeOut('fast')
 	})
 	
-	$('.toggle_notes_link').click(function() {
+	$('.preview_attachment').click(function() {
 		$.facebox($(this).parents('.attached_file').find('.notes').html())
 		return false
 	})

@@ -12,14 +12,9 @@ class SiteSweeper < ActionController::Caching::Sweeper
   
   private
   
-  def expire_cache_for(record)
-    if record.is_a?(Study)
-      study = record
-      # spawn { call_rake('ts:in:delta') }
-      spawn { call_rake('ts:in') }
-    else
-      study = record.study
-    end
+  def expire_cache_for(study)
+    # Re-index for sphinx
+    spawn { call_rake('ts:in') }
   
     # Expire the study
     with_options :controller => 'studies', :action => 'show', :id => study.to_param do |studies|

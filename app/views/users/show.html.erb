@@ -30,5 +30,7 @@
         </div>
       <% end %>   
     </div>
+  <% else %>
+    <strong class="empty_message"><%= h @user.name(:short) %> has no recent activity</strong>
   <% end %>
 <% end %> 

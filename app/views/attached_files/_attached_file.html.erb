@@ -4,20 +4,26 @@
     <%= clickable_thumbnail_for attached_file %>            
   </div>      
 
-  <div class="file_info">
-    <%= link_to 'show notes', @study, :class => 'toggle_notes_link right', :style => 'display: none' %>            
-  
+  <div class="file_info">  
     <p>
-      <%= facebox_enabled_link_for truncate_centrally(attached_file.title, 30), attached_file %>
+      <%= link_to truncate_centrally(attached_file.title, 30), attached_file, :class => 'preview_attachment' %>
       <span class="file_size" style="display:none"><%= attached_file.file_string %> <%= file_size_for attached_file %></span>
     </p>
   
     <div class="notes" style="display:none;">
-      <h4 class="title">Notes on '<%=h truncate_centrally(attached_file.title, 30) %>'</h4>
-      <% if attached_file.notes.blank? %>
-        <em><strong>Sorry</strong> - No notes available.</em>
-      <% else %>
-        <%= simple_format h(attached_file.notes) %>
+      <h4 class="title"><%=h truncate_centrally(attached_file.title, 30) %></h4>
+      <div class="center">
+        <% if attached_file.image? %>
+          <%= image_tag attached_file.document.url %>
+        <% else %>
+          <p class="attached_file_download">
+            <% img = image_tag 'download.png', :style => 'vertical-align:middle' %>
+            <%= link_to img+'Download this attachment', attached_file.document.url %>
+          </p>
+        <% end %>
+      </div>
+      <% unless attached_file.notes.blank? %>
+        <div class="center note"><%= safe_textilize h(attached_file.notes) %></div>
       <% end %>
     </div>
   </div>

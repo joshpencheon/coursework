@@ -71,15 +71,8 @@ class User < ActiveRecord::Base
     notifications.unread.count + received_requests.pending.count
   end
   
-  def recent_events(limit = 5)
-    query  = "SELECT * FROM events WHERE "
-    query << "news_item_type = 'Study' AND "
-    query << "news_item_id IN (?)"
-    query << "ORDER BY created_at DESC "
-    query << "LIMIT 0, ?"
-    
-    ids = studies.map(&:id).join(', ')
-    Event.find_by_sql([query, ids, limit])
+  def recent_events(limit = 5)    
+    events.all(:limit => limit, :order => 'created_at DESC')
   end
   
   def to_param

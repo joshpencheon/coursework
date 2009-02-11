@@ -15,16 +15,21 @@ class SiteSweeper < ActionController::Caching::Sweeper
   def expire_cache_for(record)
     if record.is_a?(Study)
       study = record
-      spawn { call_rake('ts:in:delta') }
+      # spawn { call_rake('ts:in:delta') }
+      spawn { call_rake('ts:in') }
     else
       study = record.study
     end
   
     # Expire the study
+    with_options :controller => 'studies', :action => 'show', :id => study.to_param do |studies|
+      studies.expire_fragment(:action_suffix => "#{study.id}_header") 
+      studies.expire_fragment(:action_suffix => "study_#{study.id}" )
+    end
+    
     with_options :controller => 'studies' do |studies|
-      studies.expire_fragment(:action_suffix => "#{study.id}_small") 
-      studies.expire_fragment(:action_suffix => "tags")
-      studies.expire_fragment(:action => 'show',  :id => study.to_param, :action_suffix => "study_#{study.id}" )
+     studies.expire_fragment(:action_suffix => "#{study.id}_header") 
+     studies.expire_fragment(:action_suffix => "tags")
     end
   
     # Expire the principle user's page

@@ -1,8 +1,8 @@
 module StudiesHelper
   
   def category_image_for(study)
-    link_to image_tag("/images/#{study.category.downcase}.png", :class => 'category'),
-      search_studies_path(:category => study.category.downcase)
+    link_to image_tag("/images/#{study.category}.png", :class => 'category'),
+      search_studies_path(:category => study.category)
   end
   
   def text_for_watch_link(study)

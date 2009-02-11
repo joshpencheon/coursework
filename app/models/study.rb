@@ -46,7 +46,7 @@ class Study < ActiveRecord::Base
     
     indexes tags(:name), :as => :tag_names
     
-    set_property :delta => :datetime, :threshold => 1.day
+    # set_property :delta => :datetime, :threshold => 1.day
   end
   
   def self.filtered_search(params)
@@ -105,10 +105,11 @@ class Study < ActiveRecord::Base
         if attached_file.notes.blank? && attributes[:notes].blank?
           attributes.delete(:notes)
         end
-        
         attached_file.attributes = attributes
       else
-        self.thumbnail_id = nil if thumbnail_id == attached_file.id
+        if self.thumbnail_id == attached_file.id
+          update_attribute(:thumbnail_id, nil)
+        end
         attached_file.destroy
       end
     end

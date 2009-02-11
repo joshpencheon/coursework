@@ -34,8 +34,8 @@
             <p class="message"><%= request.message %></p>
           <% end %>        
 
-          <%= link_to 'Accept', grant_permission_path(request.requestee_id), :method => :put, :style => 'color:green' %> |
-          <%= link_to 'Decline', reject_permission_path(request.requestee_id), :method => :put, :style => 'color:red' %>
+          <%= link_to 'Accept', grant_permission_path(request.requester_id), :method => :put, :style => 'color:green' %> |
+          <%= link_to 'Decline', reject_permission_path(request.requester_id), :method => :put, :style => 'color:red' %>
         </div>
     <% end %>
   </div>

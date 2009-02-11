@@ -58,6 +58,10 @@ class PermissionsController < ApplicationController
   def find_request
     requestee_id = params[:id]
     @request = current_user.find_request_from(requestee_id)
+    unless @request
+      flash[:warn] = 'Sorry, an error occured'
+      redirect_to permissions_url
+    end
   end
   
   def find_requestee

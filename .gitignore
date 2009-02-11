@@ -9,4 +9,4 @@ public/system/**/*
 public/study_downloads/**/*
 public/images/icons/*
 vendor/rails/*
-db/sphinx/development/*
+db/sphinx/development/**/*

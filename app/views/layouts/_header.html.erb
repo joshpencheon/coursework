@@ -1,10 +1,11 @@
 <div id="header">
-	<div id="login" class="right">	
+	<div id="login" class="right">
 	<% if logged_in? %>
     <%= image_tag current_user.avatar.url(:tiny) %>
     <div>
   	  <p><%= current_user.name %></p> 
-  		<p><%= link_to 'Settings', edit_user_path(current_user) %> | <%= link_to 'Sign out', signout_path %></p>      
+  		<p><%= link_to 'Settings', edit_user_path(current_user) %> |
+  	     <%= link_to 'Sign out', signout_path, :style=>'color:red' %></p>      
     </div>
 	<% else %>	
 		<%= link_to 'Sign in', signin_path %> /

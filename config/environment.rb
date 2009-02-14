@@ -24,7 +24,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
-  config.gem :authlogic, :version => '>=1.3.0'
+  config.gem 'authlogic', :version => '>=1.3.0'
   
   config.gem 'RedCloth'
 

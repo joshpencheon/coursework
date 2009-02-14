@@ -2,7 +2,9 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Permission do
   before(:each) do
-    @requester, @requestee = User.valid.create!, User.valid.create!
+    @requester, @requestee = User.valid.new, User.valid.new
+    @requester.save!
+    @requestee.save!
     @permission = @requester.sent_requests.build({:requestee_id => @requestee.id})
   end
   

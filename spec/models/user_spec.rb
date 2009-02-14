@@ -10,7 +10,7 @@ describe User do
       context "except a non-unique #{attr}" do
         it "should not be valid" do
           options = { attr => 'joe@bloggs.com' }
-          User.valid.with(options).create!
+          original = User.valid.with(options).new; original.save!
           lambda { @user.update_attributes!(options) }.should raise_error(ActiveRecord::RecordInvalid)
         end
       end
@@ -108,7 +108,7 @@ describe User do
   
   context 'that has been saved' do
     before(:each) do
-      @user = User.valid.create!
+      @user = User.valid.new; @user.save!
     end
     
     it 'should not be able to change the secure hex token' do
@@ -119,7 +119,7 @@ describe User do
     context 'who is watching a study' do
       before(:each) do
         @study = Study.valid.create!
-        @user  = User.valid.create!      
+        @user  = User.valid.new; @user.save!      
         Watching.toggle(@study, @user)
       end
 
@@ -151,7 +151,8 @@ describe User do
         it 'should list requestees through requests they have made' do
           requestees = []
           5.times do |i|
-            requestees << User.valid.create!
+            requestees << User.valid.new
+            requestees.map(&:save!)
             @user.sent_requests.create!({:granted => false, :requestee_id => requestees.last.id})
           end
 
@@ -160,7 +161,7 @@ describe User do
         end
 
         it 'should know whether it has sent a request to a particular user' do
-          another_user = User.valid.create!
+          another_user = User.valid.new; another_user.save!
           @user.sent_requests.create!({:granted => false, :requestee_id => another_user.id})      
           @user.has_sent_request_to?(another_user).should be_true
         end  
@@ -180,7 +181,8 @@ describe User do
         it 'should list requesters through the requests that have been made' do
           requesters = []
           5.times do |i|
-            requesters << User.valid.create!
+            requesters << User.valid.new
+            requesters.map(&:save!)
             requesters.last.sent_requests.create!({:granted => false, :requestee_id => @user.id})
           end
 
@@ -189,14 +191,14 @@ describe User do
         end
         
         it 'should know whether it has received a request from a particular user' do
-          another_user = User.valid.create!
+          another_user = User.valid.new; another_user.save!
           another_user.sent_requests.create!({:granted => false, :requestee_id => @user.id})      
           @user.find_request_from(another_user).should_not be_nil          
         end
         
         context 'which are then acted upon' do
           before(:each) do
-            @requester = User.valid.create!
+            @requester = User.valid.new; @requester.save!
             @requester.sent_requests.create!({:granted => false, :requestee_id => @user.id})
             @request = @user.find_request_from(@requester)
           end
@@ -238,7 +240,7 @@ describe User do
   
   context 'having edited studies' do
     before(:each) do
-      @user = User.valid.create!
+      @user = User.valid.new; @user.save!
       @study = @user.studies.valid.create!
       10.times do |i|
         @study.update_attributes!({:title => "study_#{i}"})

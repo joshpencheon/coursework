@@ -10,7 +10,7 @@ describe User do
       context "except a non-unique #{attr}" do
         it "should not be valid" do
           options = { attr => 'joe@bloggs.com' }
-          User.with(options).valid.create!
+          User.valid.with(options).create!
           lambda { @user.update_attributes!(options) }.should raise_error(ActiveRecord::RecordInvalid)
         end
       end

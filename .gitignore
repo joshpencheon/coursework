@@ -6,7 +6,6 @@ coverage/*
 public/avatars/**/*
 public/documents/**/*
 public/system/**/*
-public/study_downloads/**/*
-public/images/icons/*
+public/study_downloads/*
 vendor/rails/*
 db/sphinx/development/*

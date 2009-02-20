@@ -15,7 +15,7 @@ describe Event do
     
     context 'once saved from a news item with watchers' do
       before(:each) do
-        @user  = User.valid.create!
+        @user  = User.valid.new; @user.save!
         @event = Event.valid.build
         Watching.toggle(@event.news_item, @user)
       end

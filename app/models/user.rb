@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
   end
   
   def notification_count
-    @notification_count ||= notifications.unread.count + received_requests.pending.count
+    notifications.unread.count + received_requests.pending.count
   end
   
   def recent_events(limit = 5)    

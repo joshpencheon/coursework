@@ -5,7 +5,7 @@
     <div>
   	  <p><%= current_user.name %></p> 
   		<p><%= link_to 'Settings', edit_user_path(current_user) %> |
-  	     <%= link_to 'Sign out', signout_path, :style=>'color:red' %></p>      
+  	     <%= link_to 'Sign out', signout_path %></p>      
     </div>
 	<% else %>	
 		<%= link_to 'Sign in', signin_path %> /

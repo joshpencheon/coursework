@@ -69,7 +69,8 @@ module NotificationsHelper
   
   def build_comment_event(event)
     comment = Comment.find_by_id(event.data)
-    html = content_tag :p, "&#8220;#{truncate(comment.content, 50)}&#8221;", :class => 'quote'
+    string = "&#8220;#{truncate(comment.content, 50)}&#8221;" rescue 'This comment has since been deleted.'
+    html = content_tag :p, string, :class => 'quote'
   end
 
 end

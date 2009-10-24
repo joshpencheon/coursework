@@ -24,7 +24,10 @@ class ApplicationController < ActionController::Base
   helper_method :can_edit?
   
   def add_delay_to_xhr_requests
-    sleep 1 if request.xhr? && ENV['RAILS_ENV'] == 'development'
+    if request.xhr? && ENV['RAILS_ENV'] == 'development'
+      sleep 1 
+      RAILS_DEFAULT_LOGGER.debug("\n***   LOCAL AJAX REQUEST - SIMULATE DELAY\n\n")
+    end
   end
 
 end

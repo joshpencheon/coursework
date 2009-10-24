@@ -24,7 +24,7 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
-  config.gem 'authlogic', :version => '>=1.3.0'
+  config.gem 'authlogic', :version => '=1.4.3'
   
   config.gem 'RedCloth'
 
@@ -33,10 +33,6 @@ Rails::Initializer.run do |config|
   
   config.gem 'mislav-will_paginate', :lib => 'will_paginate'
   
-  # Gems required for testing
-  config.gem :ZenTest
-  config.gem :mocha
-
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
